@@ -11,13 +11,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Skladnik` DEFAULT CHARACTER SET utf8 ;
-USE `Skladnik` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Sklad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Skladnik`.`Sklad` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Sklad` (
   `id` INT NOT NULL,
   `Nazov` VARCHAR(45) NULL,
   `Adresa` VARCHAR(45) NULL,
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Pouzivatel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Skladnik`.`Pouzivatel` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Pouzivatel` (
   `id` INT NOT NULL,
   `Meno` VARCHAR(45) NULL,
   `Sklad_id` INT NOT NULL,
@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Material`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Skladnik`.`Material` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Material` (
   `id` INT NOT NULL,
   `Nazov` VARCHAR(45) NULL,
   `Stav` INT NULL,
@@ -64,7 +64,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Prijemka`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Skladnik`.`Prijemka` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Prijemka` (
   `id` INT NOT NULL,
   `Pocet` INT NULL,
   `cena` DOUBLE NULL,
@@ -89,11 +89,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Vydajka`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Skladnik`.`Vydajka` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Vydajka` (
   `id` INT NOT NULL,
   `Pocet` INT NULL,
   `Pouzivatel_id` INT NOT NULL,
   `Material_id` INT NOT NULL,
+  `cena` DOUBLE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Prijemka_Pouzivatel_idx` (`Pouzivatel_id` ASC),
   INDEX `fk_Vydajka_Material1_idx` (`Material_id` ASC),
