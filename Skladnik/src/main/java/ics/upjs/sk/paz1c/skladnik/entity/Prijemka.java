@@ -16,8 +16,8 @@ public class Prijemka {
     private long id;
     private int pocet;
     private double cena;
-    private Pouzivatel pouzivatel;
-    private Material material;
+    private long id_pouzivatel;
+    private long id_material;
 
     public long getId() {
         return id;
@@ -43,20 +43,21 @@ public class Prijemka {
         this.cena = cena;
     }
 
-    public Pouzivatel getPouzivatel() {
-        return pouzivatel;
+    public long getId_pouzivatel() {
+        return id_pouzivatel;
     }
 
-    public void setPouzivatel(Pouzivatel pouzivatel) {
-        this.pouzivatel = pouzivatel;
+    public void setId_pouzivatel(long id_pouzivatel) {
+        this.id_pouzivatel = id_pouzivatel;
     }
 
-    public Material getMaterial() {
-        return material;
+    public long getId_material() {
+        return id_material;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setId_material(long id_material) {
+        this.id_material = id_material;
     }
-    
+
+  
 }

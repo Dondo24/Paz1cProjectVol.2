@@ -17,7 +17,7 @@ public class Material {
     private String nazov;
     private int stav;
     private double cena;
-    private Sklad sklad;
+    private long id_sklad;
 
     public long getId() {
         return id;
@@ -51,11 +51,13 @@ public class Material {
         this.cena = cena;
     }
 
-    public Sklad getSklad() {
-        return sklad;
+    public long getId_sklad() {
+        return id_sklad;
     }
 
-    public void setSklad(Sklad sklad) {
-        this.sklad = sklad;
+    public void setId_sklad(long id_sklad) {
+        this.id_sklad = id_sklad;
     }
+
+    
 }

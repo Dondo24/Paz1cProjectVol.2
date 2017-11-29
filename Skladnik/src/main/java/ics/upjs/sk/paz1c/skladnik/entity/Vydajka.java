@@ -16,8 +16,9 @@ public class Vydajka {
     
     private long id;
     private int pocet;
-    private Pouzivatel pouzivat;
-    private Material material;
+    private long id_pouzivat;
+    private long id_material;
+    private double cena ;
 
     public long getId() {
         return id;
@@ -35,20 +36,29 @@ public class Vydajka {
         this.pocet = pocet;
     }
 
-    public Pouzivatel getPouzivat() {
-        return pouzivat;
+    public long getId_pouzivat() {
+        return id_pouzivat;
     }
 
-    public void setPouzivat(Pouzivatel pouzivat) {
-        this.pouzivat = pouzivat;
+    public void setId_pouzivat(long id_pouzivat) {
+        this.id_pouzivat = id_pouzivat;
     }
 
-    public Material getMaterial() {
-        return material;
+    public long getId_material() {
+        return id_material;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setId_material(long id_material) {
+        this.id_material = id_material;
     }
+
+    public double getCena() {
+        return cena;
+    }
+
+    public void setCena(double cena) {
+        this.cena = cena;
+    }
+   
     
 }
