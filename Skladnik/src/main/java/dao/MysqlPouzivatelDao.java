@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -20,17 +21,25 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public Pouzivatel dajHeslo(String meno) {
-        String sql = "SELECT heslo from pouzivatel where meno = ?";
+    public Pouzivatel dajHeslo(Long id) {
+        String sql = "SELECT heslo from pouzivatel where id = ?";
         //tu dajaky return takto sme to mali
-        /* BeanPropertyRowMapper<uzivatel> mapper = BeanPropertyRowMapper.newInstance(uzivatel.class);
-        return jdbcTemplate.queryForObject(sql, mapper, meno);*/
+         BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
+        return jdbcTemplate.queryForObject(sql, mapper, id);
     }
 
     @Override
-    public void nastavHeslo(String meno, String heslo) {
-       jdbcTemplate.update("update pouzivatel set heslo = ? where meno =?",heslo ,meno);
+    public void nastavHeslo(Long id, String heslo) {
+       jdbcTemplate.update("update pouzivatel set heslo = ? where id =?",heslo , id);
     }
+
+    @Override
+    public void pridajPouzivatela(Pouzivatel pouzivatel) {
+     String sql = "INSERT INTO Pouzivatel VALUES (?,?,?)";
+      jdbcTemplate.update(sql, null, pouzivatel.getId(), pouzivatel.getId_sklad(),pouzivatel.getMeno());
+    }
+
+   
     
     
 }

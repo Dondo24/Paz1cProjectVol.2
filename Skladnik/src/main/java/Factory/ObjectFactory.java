@@ -6,6 +6,12 @@
 package Factory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import dao.MaterialDao;
+import dao.MysqlMaterialDao;
+import dao.MysqlPouzivatelDao;
+import dao.MysqlSkladDao;
+import dao.PouzivatelDao;
+import dao.SkladDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -26,4 +32,19 @@ public enum ObjectFactory {
         }
         return jdbcTemplate;
     }
+    
+       
+    
+    public MaterialDao getMaterialDao(){
+    return new MysqlMaterialDao(getJdbcTemplate());
+    }
+    
+      public PouzivatelDao getPouzivatelDao(){
+    return new MysqlPouzivatelDao(getJdbcTemplate());
+    }
+        public SkladDao getSkladDao(){
+    return new MysqlSkladDao(getJdbcTemplate());
+    }
+    
+    
 }

@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Sklad;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -21,18 +22,20 @@ public class MysqlSkladDao implements SkladDao{
 
     @Override
     public void pridajSklad(Sklad sklad) {
-        jdbcTemplate.update("INSERT INTO sklad (nazov,adresa) VALUES (?,?)",sklad.getNazov(),sklad.getAdresa());
+        jdbcTemplate.update("INSERT INTO sklad (nazov,adresa) VALUES (?,?,?)",sklad.getId(),sklad.getNazov(),sklad.getAdresa());
     }
 
     @Override
     public Sklad dajSklad(Long id) {
        String sql = "Select id,nazov from sklad where id = ?";
+        BeanPropertyRowMapper<Sklad> mapper = BeanPropertyRowMapper.newInstance(Sklad.class);
+        return jdbcTemplate.queryForObject(sql, mapper,id);
     }
 
     @Override
     public void odstranSklad(Sklad sklad) {
         jdbcTemplate.update("delete from sklad where id=?");
-        sklad.getId();
+        
     }
     
 }

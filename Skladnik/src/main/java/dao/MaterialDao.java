@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,5 @@ public interface MaterialDao {
     void pridajMaterial(Material Material);
     public Material dajMaterialById (Long id);
     void odstranMaterial(Material material);
+    public List <Material> getAll();
 }

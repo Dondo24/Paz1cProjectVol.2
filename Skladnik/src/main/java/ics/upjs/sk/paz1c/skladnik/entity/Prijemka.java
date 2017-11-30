@@ -15,9 +15,9 @@ import ics.upjs.sk.paz1c.skladnik.entity.Material;
 public class Prijemka {
     private long id;
     private int pocet;
-    private double cena;
     private long id_pouzivatel;
     private long id_material;
+    private double cena;
 
     public long getId() {
         return id;
