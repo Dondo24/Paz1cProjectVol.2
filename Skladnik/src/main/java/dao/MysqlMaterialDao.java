@@ -6,6 +6,9 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -25,12 +28,22 @@ public class MysqlMaterialDao implements MaterialDao{
    }
    public Material dajMaterialById (Long id){
        String sql = "SELECT id , nazov FROM Material where id=?";
+        BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
+        return jdbcTemplate.queryForObject(sql, mapper, id);
+       
      
    }
    public void odstranMaterial(Material material){
        jdbcTemplate.update("DELETE FROM material where id = ?");
        material.getId();
    }
+
+    @Override
+    public List<Material> getAll() {
+        String sql = "SELECT * FROM MAterial";
+        BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
+        return jdbcTemplate.query(sql, mapper);
+    }
 
   
 }
