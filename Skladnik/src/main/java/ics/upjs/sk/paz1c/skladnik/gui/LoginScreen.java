@@ -5,7 +5,10 @@
  */
 package ics.upjs.sk.paz1c.skladnik.gui;
 
+import Factory.ObjectFactory;
+import dao.PouzivatelDao;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +16,11 @@ import java.util.Arrays;
  */
 public class LoginScreen extends javax.swing.JFrame {
     
-    private String name ="Samo";
-    private char[] correctPassword = {'1', '2', '3'};
+    private PouzivatelDao hesla = ObjectFactory.INSTANCE.getHesla();
+    
+    
+  //  private String name ="Samo";
+   // private char[] correctPassword = {'1', '2', '3'};
     
 
     /**
@@ -62,6 +68,11 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabel1.setText("Skladník");
 
         passwordField.setText("jPasswordField1");
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,30 +122,30 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
       String nameFromTextField = nameTextField.getText();  
-      char[] password = passwordField.getPassword();
-    
-      
-      
-      if( name.equals(nameFromTextField) && passwordIsCorrect(password)){
-          this.setVisible(false);
-          new MainScreen().setVisible(true);
+      String password = passwordField.getText();
+      passwordField.setText(null);
+      if(password ==null){
+          JOptionPane.showMessageDialog(null, "zadajheslo");
       }
+     if(hesla.dajHeslo(password).equals(password)){
+          MainScreen main = new MainScreen();
+          main.setVisible(true);
+          this.setVisible(false);
+          dispose();
+      }else{
+         JOptionPane.showMessageDialog(null, "nespravne heslo");
+     }
+      
+      
+    
       
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private boolean passwordIsCorrect(char[] input){
-     boolean isCorrect = false;
-     char[] correctPassword = this.correctPassword;
-     if(input.length != correctPassword.length){
-     return false;
-     } else {
-     isCorrect = Arrays.equals(input, correctPassword);
-     }
-     
-        
-     
-    return isCorrect;
-    }
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
+  
     /**
      * @param args the command line arguments
      */

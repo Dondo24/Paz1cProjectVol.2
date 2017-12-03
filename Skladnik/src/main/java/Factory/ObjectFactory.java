@@ -39,12 +39,14 @@ public enum ObjectFactory {
     return new MysqlMaterialDao(getJdbcTemplate());
     }
     
-      public PouzivatelDao getPouzivatelDao(){
+     public PouzivatelDao getPouzivatelDao(){
     return new MysqlPouzivatelDao(getJdbcTemplate());
     }
         public SkladDao getSkladDao(){
     return new MysqlSkladDao(getJdbcTemplate());
     }
-    
+    public PouzivatelDao getHesla(){
+        return new MysqlPouzivatelDao(getJdbcTemplate());
+    }
     
 }

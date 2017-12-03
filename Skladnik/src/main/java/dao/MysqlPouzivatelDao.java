@@ -21,22 +21,21 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public Pouzivatel dajHeslo(Long id) {
-        String sql = "SELECT heslo from pouzivatel where id = ?";
-        //tu dajaky return takto sme to mali
+    public Pouzivatel dajHeslo(String meno) {
+        String sql = "SELECT Heslo from pouzivatel where   Meno = ?";
          BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
-        return jdbcTemplate.queryForObject(sql, mapper, id);
+        return jdbcTemplate.queryForObject(sql, mapper, meno);
     }
 
     @Override
-    public void nastavHeslo(Long id, String heslo) {
-       jdbcTemplate.update("update pouzivatel set heslo = ? where id =?",heslo , id);
+    public void nastavHeslo(String meno, String heslo) {
+       jdbcTemplate.update("update pouzivatel set heslo = ? where id =?",heslo , meno);
     }
 
     @Override
     public void pridajPouzivatela(Pouzivatel pouzivatel) {
-     String sql = "INSERT INTO Pouzivatel VALUES (?,?,?)";
-      jdbcTemplate.update(sql, null, pouzivatel.getId(), pouzivatel.getId_sklad(),pouzivatel.getMeno());
+     String sql = "INSERT INTO Pouzivatel VALUES (?,?,?,?)";
+      jdbcTemplate.update(sql, null, pouzivatel.getId(), pouzivatel.getId_sklad(),pouzivatel.getMeno(),pouzivatel.getHeslo());
     }
 
    

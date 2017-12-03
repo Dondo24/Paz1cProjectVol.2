@@ -14,6 +14,7 @@ public class Pouzivatel {
  private long id;
  private String meno;
  private long id_sklad;
+ private String heslo;
 
     public long getId() {
         return id;
@@ -37,6 +38,14 @@ public class Pouzivatel {
 
     public void setId_sklad(long id_sklad) {
         this.id_sklad = id_sklad;
+    }
+
+    public String getHeslo() {
+        return heslo;
+    }
+
+    public void setHeslo(String heslo) {
+        this.heslo = heslo;
     }
 
  
