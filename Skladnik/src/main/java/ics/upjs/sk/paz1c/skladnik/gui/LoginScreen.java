@@ -61,6 +61,11 @@ public class LoginScreen extends javax.swing.JFrame {
         });
 
         registrateButton.setText("Zaregistrovat");
+        registrateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrateButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Skladník");
@@ -146,6 +151,14 @@ public class LoginScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void registrateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrateButtonActionPerformed
+       RegisterScreen register = new RegisterScreen();
+       register.setVisible(true);
+       this.setVisible(false);
+       dispose();
+    }//GEN-LAST:event_registrateButtonActionPerformed
+
+  
     /**
      * @param args the command line arguments
      */

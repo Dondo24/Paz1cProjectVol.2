@@ -36,8 +36,8 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
 
     @Override
     public void pridajPouzivatela(Pouzivatel pouzivatel) {
-     String sql = "INSERT INTO Pouzivatel VALUES (?,?,?,?)";
-      jdbcTemplate.update(sql, null, pouzivatel.getId(), pouzivatel.getId_sklad(),pouzivatel.getMeno(),pouzivatel.getHeslo());
+     String sql = "INSERT INTO Pouzivatel (meno,Sklad_id,heslo) VALUES (?,?,?)";
+      jdbcTemplate.update(sql,pouzivatel.getMeno(), pouzivatel.getId_sklad(),pouzivatel.getHeslo());
     }
 
     @Override

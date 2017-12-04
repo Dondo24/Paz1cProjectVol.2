@@ -16,4 +16,5 @@ public interface SkladDao {
     void pridajSklad(Sklad sklad);
     public Sklad dajSklad(Long id);
     void odstranSklad(Sklad sklad);
+    public Sklad dajIdSkladu(String nazov);
 }
