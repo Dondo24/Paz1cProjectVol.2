@@ -38,7 +38,7 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
     public void pridajPouzivatela(Pouzivatel pouzivatel) {
      String sql = "INSERT INTO Pouzivatel (meno,Sklad_id,heslo) VALUES (?,?,?)";
       jdbcTemplate.update(sql,pouzivatel.getMeno(), pouzivatel.getId_sklad(),pouzivatel.getHeslo());
-<<<<<<< HEAD
+
     }
 
     @Override
@@ -47,8 +47,8 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
          BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
          List<String> menaPouzivatelov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
         return menaPouzivatelov;
-=======
->>>>>>> origin/master
+
+
     }
 
    
