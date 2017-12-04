@@ -7,6 +7,7 @@ package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
 import dao.PouzivatelDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class LoginScreen extends javax.swing.JFrame {
     
-    private PouzivatelDao hesla = ObjectFactory.INSTANCE.getHesla();
+    private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
     
     
   //  private String name ="Samo";
@@ -68,11 +69,6 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabel1.setText("Skladník");
 
         passwordField.setText("jPasswordField1");
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,12 +118,19 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
       String nameFromTextField = nameTextField.getText();  
-      String password = passwordField.getText();
-      passwordField.setText(null);
-      if(password ==null){
-          JOptionPane.showMessageDialog(null, "zadajheslo");
+     char[] passwordFromField = passwordField.getPassword();
+     
+   
+     Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(nameFromTextField);
+
+     char [] correctPassword = pouzivatel.getHeslo().toCharArray();
+        System.out.println(correctPassword);
+        System.out.println(passwordFromField);
+    
+      if(passwordFromField == null){
+          JOptionPane.showMessageDialog(null, "zadaj heslo");
       }
-     if(hesla.dajHeslo(password).equals(password)){
+     if(Arrays.equals(correctPassword, passwordFromField)){
           MainScreen main = new MainScreen();
           main.setVisible(true);
           this.setVisible(false);
@@ -140,10 +143,6 @@ public class LoginScreen extends javax.swing.JFrame {
     
       
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
 
   
     /**
