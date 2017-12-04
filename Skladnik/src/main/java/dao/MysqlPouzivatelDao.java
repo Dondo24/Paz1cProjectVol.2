@@ -6,6 +6,8 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import java.sql.ResultSet;
+import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -36,6 +38,14 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
     public void pridajPouzivatela(Pouzivatel pouzivatel) {
      String sql = "INSERT INTO Pouzivatel VALUES (?,?,?,?)";
       jdbcTemplate.update(sql, null, pouzivatel.getId(), pouzivatel.getId_sklad(),pouzivatel.getMeno(),pouzivatel.getHeslo());
+    }
+
+    @Override
+    public List<String> dajVsetkychMena() {
+        String sql = "SELECT meno from pouzivatel";      
+         BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
+         List<String> menaPouzivatelov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
+        return menaPouzivatelov;
     }
 
    

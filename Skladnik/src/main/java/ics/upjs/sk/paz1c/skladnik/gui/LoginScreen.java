@@ -16,14 +16,11 @@ import javax.swing.JOptionPane;
  * @author Marcel
  */
 public class LoginScreen extends javax.swing.JFrame {
-    
-    private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
-    
-    
-  //  private String name ="Samo";
-   // private char[] correctPassword = {'1', '2', '3'};
-    
 
+    private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+
+    //  private String name ="Samo";
+    // private char[] correctPassword = {'1', '2', '3'};
     /**
      * Creates new form loginScreen
      */
@@ -117,34 +114,38 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-      String nameFromTextField = nameTextField.getText();  
-     char[] passwordFromField = passwordField.getPassword();
-     
-   
-     Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(nameFromTextField);
+        String nameFromTextField = nameTextField.getText();
+        char[] passwordFromField = passwordField.getPassword();
 
-     char [] correctPassword = pouzivatel.getHeslo().toCharArray();
-        System.out.println(correctPassword);
-        System.out.println(passwordFromField);
-    
-      if(passwordFromField == null){
-          JOptionPane.showMessageDialog(null, "zadaj heslo");
-      }
-     if(Arrays.equals(correctPassword, passwordFromField)){
-          MainScreen main = new MainScreen();
-          main.setVisible(true);
-          this.setVisible(false);
-          dispose();
-      }else{
-         JOptionPane.showMessageDialog(null, "nespravne heslo");
-     }
-      
-      
-    
-      
+        if (nameFromTextField.equals("")) {
+            JOptionPane.showMessageDialog(null, "zadaj meno");
+        } else {
+            if (!pouzivatelDao.dajVsetkychMena().contains(nameFromTextField)) {
+                JOptionPane.showMessageDialog(null, "Pouzivatel neexistuje!");
+
+            } else {
+
+                Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(nameFromTextField);
+                char[] correctPassword = pouzivatel.getHeslo().toCharArray();
+
+                if (passwordFromField == null) {
+                    JOptionPane.showMessageDialog(null, "zadaj heslo");
+                } else {
+                    if (Arrays.equals(correctPassword, passwordFromField)) {
+                        MainScreen main = new MainScreen();
+                        main.setVisible(true);
+                        this.setVisible(false);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "nespravne heslo");
+                    }
+                }
+            }
+        }
+
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
-  
     /**
      * @param args the command line arguments
      */

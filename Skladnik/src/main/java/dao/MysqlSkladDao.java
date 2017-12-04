@@ -22,7 +22,7 @@ public class MysqlSkladDao implements SkladDao{
 
     @Override
     public void pridajSklad(Sklad sklad) {
-        jdbcTemplate.update("INSERT INTO sklad (nazov,adresa) VALUES (?,?,?)",sklad.getId(),sklad.getNazov(),sklad.getAdresa());
+        jdbcTemplate.update("INSERT INTO sklad (nazov,adresa) VALUES (?,?)",sklad.getNazov(),sklad.getAdresa());
     }
 
     @Override
