@@ -48,6 +48,13 @@ public class Pouzivatel {
         this.heslo = heslo;
     }
 
+    @Override
+    public String toString() {
+        return "Pouzivatel{" + "id=" + id + ", meno=" + meno + ", id_sklad=" + id_sklad + ", heslo=" + heslo + '}';
+    }
+    
+   
+
  
  
 }

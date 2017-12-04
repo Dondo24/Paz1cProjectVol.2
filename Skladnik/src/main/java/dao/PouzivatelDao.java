@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface PouzivatelDao {
     void pridajPouzivatela(Pouzivatel pouzivatel);
     Pouzivatel dajPouzivatela(String meno);
     void nastavHeslo(String meno,String heslo);
+    List<String> dajVsetkychMena();
 }
