@@ -13,6 +13,6 @@ import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
  */
 public interface PouzivatelDao {
     void pridajPouzivatela(Pouzivatel pouzivatel);
-    Pouzivatel dajHeslo(String meno);
+    Pouzivatel dajPouzivatela(String meno);
     void nastavHeslo(String meno,String heslo);
 }

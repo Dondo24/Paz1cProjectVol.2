@@ -21,8 +21,8 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public Pouzivatel dajHeslo(String meno) {
-        String sql = "SELECT Heslo from pouzivatel where   Meno = ?";
+    public Pouzivatel dajPouzivatela(String meno) {
+        String sql = "SELECT * from pouzivatel where meno = ?";
          BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
         return jdbcTemplate.queryForObject(sql, mapper, meno);
     }

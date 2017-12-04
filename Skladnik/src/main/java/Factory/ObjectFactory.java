@@ -45,8 +45,6 @@ public enum ObjectFactory {
         public SkladDao getSkladDao(){
     return new MysqlSkladDao(getJdbcTemplate());
     }
-    public PouzivatelDao getHesla(){
-        return new MysqlPouzivatelDao(getJdbcTemplate());
-    }
+   
     
 }
