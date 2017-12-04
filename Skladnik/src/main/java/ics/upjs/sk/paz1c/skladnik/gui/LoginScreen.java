@@ -19,8 +19,11 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
 
+    
     //  private String name ="Samo";
     // private char[] correctPassword = {'1', '2', '3'};
+    
+
     /**
      * Creates new form loginScreen
      */
