@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`Sklad`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Sklad` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Nazov` VARCHAR(45) NULL,
   `Adresa` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -29,11 +29,13 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Pouzivatel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Pouzivatel` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Meno` VARCHAR(45) NULL,
+  `heslo` VARCHAR(45) NULL,
   `Sklad_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Pouzivatel_Sklad1_idx` (`Sklad_id` ASC),
+  UNIQUE INDEX `Meno_UNIQUE` (`Meno` ASC),
   CONSTRAINT `fk_Pouzivatel_Sklad1`
     FOREIGN KEY (`Sklad_id`)
     REFERENCES `mydb`.`Sklad` (`id`)
@@ -46,7 +48,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Material`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Material` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Nazov` VARCHAR(45) NULL,
   `Stav` INT NULL,
   `Cena` DOUBLE NULL,
@@ -65,7 +67,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Prijemka`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Prijemka` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Pocet` INT NULL,
   `cena` DOUBLE NULL,
   `Pouzivatel_id` INT NOT NULL,
@@ -90,7 +92,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Vydajka`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Vydajka` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Pocet` INT NULL,
   `Pouzivatel_id` INT NOT NULL,
   `Material_id` INT NOT NULL,
