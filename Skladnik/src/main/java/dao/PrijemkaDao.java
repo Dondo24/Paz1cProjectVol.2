@@ -21,6 +21,7 @@ public interface PrijemkaDao  {
     public Prijemka dajPrijemkuById (Long id);
     void odstranPrijemku(Prijemka prijemka);
     public List <Prijemka> getAll();
+    public int getLastId();
 
     
 }

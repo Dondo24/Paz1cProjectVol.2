@@ -31,7 +31,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public Prijemka dajPrijemkuById(Long id) {
-         String sql = "select * from Prijemky where id = ?";
+         String sql = "select * from Prijemka where id = ?";
         BeanPropertyRowMapper<Prijemka> mapper = BeanPropertyRowMapper.newInstance(Prijemka.class);
         return jdbcTemplate.queryForObject(sql, mapper, id);
     }
@@ -44,9 +44,15 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public List<Prijemka> getAll() {
-          String sql = "select * from Prijemky";
+          String sql = "select * from Prijemka";
         BeanPropertyRowMapper<Prijemka> mapper = BeanPropertyRowMapper.newInstance(Prijemka.class);
         return jdbcTemplate.query(sql, mapper);
+    }
+
+    @Override
+    public int getLastId() {
+       String sql = "select max(id) from Prijemka";   
+        return jdbcTemplate.queryForObject(sql,Integer.class);
     }
     
     
