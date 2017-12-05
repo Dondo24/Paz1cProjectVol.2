@@ -31,7 +31,7 @@ public enum ObjectFactory {
     private JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
             MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUrl("jdbc:mysql://localhost/mydb?serverTimezone=UTC");
+            dataSource.setUrl("jdbc:mysql://localhost/skladnik?serverTimezone=UTC");
             dataSource.setUser("skladnik");
             dataSource.setPassword("sklad");
             jdbcTemplate = new JdbcTemplate(dataSource);
