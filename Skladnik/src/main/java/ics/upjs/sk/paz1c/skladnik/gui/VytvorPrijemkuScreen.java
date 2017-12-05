@@ -7,7 +7,9 @@ package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
 import dao.MysqlPrijemkaDao;
+import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 
 /**
  *
@@ -16,13 +18,16 @@ import dao.PrijemkaDao;
 public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     
        PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
-    
+       PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
+       public int idPrijemky =prijemkaDao.getLastId()+1;
+       public  int typPohybu = 1;
     /**
      * Creates new form VytvorPrijemkuScreen
      */
     public VytvorPrijemkuScreen() {
-        initComponents();
-        idTextField.setText((prijemkaDao.getLastId()+1)+"");
+        initComponents();       
+        idTextField.setText(idPrijemky+"");
+  
     }
 
     /**
@@ -187,6 +192,10 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
+        int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
+        int pocet = Integer.parseInt(pocetTextField.getText());
+        int idPrijemky = this.idPrijemky;
+        int cena = Integer.parseInt(cenaTextField.getText());
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
