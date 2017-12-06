@@ -22,7 +22,8 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
 
     @Override
     public void pridajPohybMaterialu(PohybMaterialu pohybMaterialu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = "insert into PohybMaterialu values(?,?,?,?,?,?,?)";
+       jdbcTemplate.update(sql,null,pohybMaterialu.getTypPohybu(),pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),null);
     }
 
     @Override

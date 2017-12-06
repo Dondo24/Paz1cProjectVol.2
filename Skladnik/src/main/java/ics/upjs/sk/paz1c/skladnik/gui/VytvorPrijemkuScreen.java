@@ -6,10 +6,12 @@
 package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
+import dao.MaterialDao;
 import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,7 +21,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     
        PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
        PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
-       public int idPrijemky =prijemkaDao.getLastId()+1;
+       MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
+       public int idPrijemky =prijemkaDao.getLastId();
        public  int typPohybu = 1;
     /**
      * Creates new form VytvorPrijemkuScreen
@@ -75,10 +78,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
 
         materialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID materialu", "Nazov materialu", "Cena", "Pocet"
@@ -196,6 +196,17 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         int pocet = Integer.parseInt(pocetTextField.getText());
         int idPrijemky = this.idPrijemky;
         int cena = Integer.parseInt(cenaTextField.getText());
+        PohybMaterialu pohybMaterialu = new PohybMaterialu();
+        pohybMaterialu.setId_materialu(idMaterialu);
+        pohybMaterialu.setPocet(pocet);
+        pohybMaterialu.setPrijemka_id(idPrijemky);
+        pohybMaterialu.setCena(cena);
+        pohybMaterialu.setTypPohybu(typPohybu);
+        pohybMaterialuDao.pridajPohybMaterialu(pohybMaterialu);
+        
+        DefaultTableModel model= (DefaultTableModel) materialTable.getModel();
+        
+        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 

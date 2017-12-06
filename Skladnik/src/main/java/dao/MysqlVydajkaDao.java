@@ -25,8 +25,8 @@ public class MysqlVydajkaDao implements VydajkaDao{
 
     @Override
     public void pridajVydajku(Vydajka vydajka) {
-       String sql = "instert into  Vydajky values(?,?,?,?,?)";
-       jdbcTemplate.update(sql, null, vydajka.getId(),vydajka.getPocet(),vydajka.getId_pouzivat(),vydajka.getId_material(),vydajka.getCena());
+       String sql = "insert into  Vydajky values(?,?,?,?)";
+       jdbcTemplate.update(sql, null, vydajka.getId(),vydajka.getId_pouzivat(),vydajka.getCena(),vydajka.getDatum());
     }
 
     @Override

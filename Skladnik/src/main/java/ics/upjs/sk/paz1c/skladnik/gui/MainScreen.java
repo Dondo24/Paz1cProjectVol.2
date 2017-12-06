@@ -5,15 +5,21 @@
  */
 package ics.upjs.sk.paz1c.skladnik.gui;
 
+import Factory.ObjectFactory;
+import dao.PouzivatelDao;
+import dao.PrijemkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
+
 /**
  *
  * @author Marcel
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form mainScreen
-     */
+    PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
+    PouzivatelDao pouzivatelDao =ObjectFactory.INSTANCE.getPouzivatelDao();
+    
     public MainScreen() {
         initComponents();
     }
@@ -34,7 +40,7 @@ public class MainScreen extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        vytvorPrijemkuButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -63,7 +69,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton5.setText("Pridat kartu materialu");
 
-        jButton6.setText("Vytvorit prijemku");
+        vytvorPrijemkuButton.setText("Vytvorit prijemku");
+        vytvorPrijemkuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vytvorPrijemkuButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -79,7 +90,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(118, 118, 118)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -121,12 +132,20 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
+        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela("pista");
+        Prijemka prijemka = new Prijemka();
+        
+        prijemka.setId_pouzivatel(pouzivatel.getId());
+        prijemkaDao.pridajPrijemka(prijemka);
+    }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,10 +189,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton vytvorPrijemkuButton;
     // End of variables declaration//GEN-END:variables
 }

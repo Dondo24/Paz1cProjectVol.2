@@ -138,6 +138,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 } else {
                     if (Arrays.equals(correctPassword, passwordFromField)) {
                         MainScreen main = new MainScreen();
+                       
                         main.setVisible(true);
                         this.setVisible(false);
                         dispose();

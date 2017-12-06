@@ -26,7 +26,7 @@ public class MysqlMaterialDao implements MaterialDao{
        jdbcTemplate.update("INSERT INTO Material (nazov,stav,cena,sklad_id) VALUES(?,?,?,?)",
                material.getNazov(),material.getStav(),material.getCena(),material.getId_sklad());
    }
-   public Material dajMaterialById (Long id){
+   public Material dajMaterialById (int id){
        String sql = "SELECT id , nazov FROM Material where id=?";
         BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
         return jdbcTemplate.queryForObject(sql, mapper, id);

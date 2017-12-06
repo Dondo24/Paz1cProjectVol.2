@@ -14,10 +14,9 @@ import ics.upjs.sk.paz1c.skladnik.entity.Material;
  */
 public class Prijemka {
     private long id;
-    private int pocet;
-    private long id_pouzivatel;
-    private long id_material;
+    private long id_pouzivatel; 
     private double cena;
+    private String datum;
 
     public long getId() {
         return id;
@@ -27,13 +26,6 @@ public class Prijemka {
         this.id = id;
     }
 
-    public int getPocet() {
-        return pocet;
-    }
-
-    public void setPocet(int pocet) {
-        this.pocet = pocet;
-    }
 
     public double getCena() {
         return cena;
@@ -51,13 +43,15 @@ public class Prijemka {
         this.id_pouzivatel = id_pouzivatel;
     }
 
-    public long getId_material() {
-        return id_material;
+    public String getDatum() {
+        return datum;
     }
 
-    public void setId_material(long id_material) {
-        this.id_material = id_material;
+    public void setDatum(String datum) {
+        this.datum = datum;
     }
+
+    
 
   
 }
