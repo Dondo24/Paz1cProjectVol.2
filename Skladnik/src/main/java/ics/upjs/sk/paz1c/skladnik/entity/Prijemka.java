@@ -13,9 +13,9 @@ import ics.upjs.sk.paz1c.skladnik.entity.Material;
  * @author Daniel
  */
 public class Prijemka {
-    private long id;
-    private long id_pouzivatel; 
+    private long id; 
     private double cena;
+    private long id_pouzivatel; 
     private String datum;
 
     public long getId() {
@@ -50,6 +50,12 @@ public class Prijemka {
     public void setDatum(String datum) {
         this.datum = datum;
     }
+
+    @Override
+    public String toString() {
+        return "Prijemka{" + "id=" + id + ", cena=" + cena + ", id_pouzivatel=" + id_pouzivatel + ", datum=" + datum + '}';
+    }
+
 
     
 

@@ -7,9 +7,13 @@ package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import javax.sql.RowSet;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -25,7 +29,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public void pridajPrijemka(Prijemka prijemka) {
-        String sql = "insert into  Prijemka values(?,?,?,?)";
+        String sql = "insert into  Prijemka values(?,?,?,?)";       
        jdbcTemplate.update(sql,null,prijemka.getCena(),prijemka.getId_pouzivatel(),prijemka.getDatum());
     }
 
@@ -44,15 +48,33 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public List<Prijemka> getAll() {
-          String sql = "select * from Prijemka";
-        BeanPropertyRowMapper<Prijemka> mapper = BeanPropertyRowMapper.newInstance(Prijemka.class);
-        return jdbcTemplate.query(sql, mapper);
+        String sql = "select * from Prijemka";
+        
+        List<Prijemka> prijemky = jdbcTemplate.query(sql, new RowMapper<Prijemka>() {
+            @Override
+            public Prijemka mapRow(ResultSet rs, int i) throws SQLException {
+               Prijemka p = new Prijemka();
+               p.setId(rs.getLong("id"));
+               p.setCena(rs.getDouble("cena"));
+               p.setId_pouzivatel(rs.getLong("pouzivatel_id"));
+               p.setDatum(rs.getString("datum"));
+               return p;
+            }
+        });   
+        return prijemky;
     }
 
     @Override
     public int getLastId() {
        String sql = "select max(id) from Prijemka";   
         return jdbcTemplate.queryForObject(sql,Integer.class);
+    }
+    
+    @Override
+    public void upravCenu(double cena, long id){
+        String sql = " update prijemka set cena = ? where id = ?";
+       jdbcTemplate.update(sql, cena, id);
+    
     }
     
     

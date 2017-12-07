@@ -5,10 +5,14 @@
  */
 package dao;
 
+import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -25,13 +29,13 @@ public class MysqlVydajkaDao implements VydajkaDao{
 
     @Override
     public void pridajVydajku(Vydajka vydajka) {
-       String sql = "insert into  Vydajky values(?,?,?,?)";
-       jdbcTemplate.update(sql, null, vydajka.getId(),vydajka.getId_pouzivat(),vydajka.getCena(),vydajka.getDatum());
+       String sql = "insert into  Vydajka values(?,?,?,?)";
+       jdbcTemplate.update(sql, null,vydajka.getId_pouzivatel(),vydajka.getCena(),vydajka.getDatum());
     }
 
     @Override
     public Vydajka dajVydajkaById(Long id) {
-        String sql = "select * from Vydajky where id = ?";
+        String sql = "select * from Vydajka where id = ?";
         BeanPropertyRowMapper<Vydajka> mapper = BeanPropertyRowMapper.newInstance(Vydajka.class);
         return jdbcTemplate.queryForObject(sql, mapper, id);
                 
@@ -44,10 +48,36 @@ public class MysqlVydajkaDao implements VydajkaDao{
     }
 
     @Override
-    public List<Vydajka> getAll() {
-         String sql = "select * from Vydajky";
-        BeanPropertyRowMapper<Vydajka> mapper = BeanPropertyRowMapper.newInstance(Vydajka.class);
-        return jdbcTemplate.query(sql, mapper);
+     public List<Vydajka> getAll() {
+        String sql = "select * from Vydajka";
+        
+        List<Vydajka> vydajky = jdbcTemplate.query(sql, new RowMapper<Vydajka>() {
+            @Override
+            public Vydajka mapRow(ResultSet rs, int i) throws SQLException {
+              Vydajka v = new Vydajka();
+               v.setId(rs.getLong("id"));
+               v.setCena(rs.getDouble("cena"));
+               v.setId_pouzivatel(rs.getLong("pouzivatel_id"));
+               v.setDatum(rs.getString("datum"));
+               return v;
+            }
+        });   
+        return vydajky;
     }
+
+    
+    @Override
+    public int getLastId() {
+       String sql = "select max(id) from vydajka";   
+        return jdbcTemplate.queryForObject(sql,Integer.class);
+    }
+    
+    @Override
+    public void upravCenu(double cena, long id){
+        String sql = " update vydajka set cena = ? where id = ?";
+       jdbcTemplate.update(sql, cena, id);
+    
+    }
+
     
 }

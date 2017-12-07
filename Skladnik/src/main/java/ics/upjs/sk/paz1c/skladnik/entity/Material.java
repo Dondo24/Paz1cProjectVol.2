@@ -15,7 +15,7 @@ public class Material {
         
     private long id;
     private String nazov;
-    private int stav;
+    private long stav;
     private double cena;
     private long id_sklad;
 
@@ -35,11 +35,11 @@ public class Material {
         this.nazov = nazov;
     }
 
-    public int getStav() {
+    public long getStav() {
         return stav;
     }
 
-    public void setStav(int stav) {
+    public void setStav(long stav) {
         this.stav = stav;
     }
 

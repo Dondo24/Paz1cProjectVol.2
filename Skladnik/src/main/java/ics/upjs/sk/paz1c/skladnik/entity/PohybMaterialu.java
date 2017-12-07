@@ -13,12 +13,12 @@ public class PohybMaterialu {
     
     
     private long id;
-    private int typPohybu;
-    private int id_materialu;
-    private int pocet;
+    private long typPohybu;
+    private long id_materialu;
+    private long pocet;
     private double cena;
-    private int prijemka_id;
-    private int vydajka_id;
+    private long prijemka_id;
+    private long vydajka_id;
 
     public long getId() {
         return id;
@@ -28,27 +28,27 @@ public class PohybMaterialu {
         this.id = id;
     }
 
-    public int getTypPohybu() {
+    public long getTypPohybu() {
         return typPohybu;
     }
 
-    public void setTypPohybu(int typPohybu) {
+    public void setTypPohybu(long typPohybu) {
         this.typPohybu = typPohybu;
     }
 
-    public int getId_materialu() {
+    public long getId_materialu() {
         return id_materialu;
     }
 
-    public void setId_materialu(int id_materialu) {
+    public void setId_materialu(long id_materialu) {
         this.id_materialu = id_materialu;
     }
 
-    public int getPocet() {
+    public long getPocet() {
         return pocet;
     }
 
-    public void setPocet(int pocet) {
+    public void setPocet(long pocet) {
         this.pocet = pocet;
     }
 
@@ -60,19 +60,19 @@ public class PohybMaterialu {
         this.cena = cena;
     }
 
-    public int getPrijemka_id() {
+    public long getPrijemka_id() {
         return prijemka_id;
     }
 
-    public void setPrijemka_id(int prijemka_id) {
+    public void setPrijemka_id(long prijemka_id) {
         this.prijemka_id = prijemka_id;
     }
 
-    public int getVydajka_id() {
+    public long getVydajka_id() {
         return vydajka_id;
     }
 
-    public void setVydajka_id(int vydajka_id) {
+    public void setVydajka_id(long vydajka_id) {
         this.vydajka_id = vydajka_id;
     }
     

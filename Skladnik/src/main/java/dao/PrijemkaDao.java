@@ -22,6 +22,7 @@ public interface PrijemkaDao  {
     void odstranPrijemku(Prijemka prijemka);
     public List <Prijemka> getAll();
     public int getLastId();
+    void upravCenu(double cena, long id);
 
     
 }

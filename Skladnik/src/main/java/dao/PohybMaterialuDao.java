@@ -16,7 +16,8 @@ import java.util.List;
 public interface PohybMaterialuDao {
     
      
-    void pridajPohybMaterialu(PohybMaterialu pohybMaterialu);
+    void pridajPohybMaterialuPrijem(PohybMaterialu pohybMaterialu);
+    void pridajPohybMaterialuVydaj(PohybMaterialu pohybMaterialu);
     public PohybMaterialu dajPohybMaterialuById (Long id);
     void odstranPrijemku(PohybMaterialu pohybMaterialu);
     public List <PohybMaterialu> getAll();

@@ -10,6 +10,7 @@ import dao.MaterialDao;
 import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
+import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,19 +18,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Marcel
  */
-public class VytvorPrijemkuScreen extends javax.swing.JFrame {
+public class VytvorVydajkuScreen extends javax.swing.JFrame {
     
-       PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
+       VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
        PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
        MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
-       public int idPrijemky =prijemkaDao.getLastId();
-       public  int typPohybu = 1;
+       public int idVydajky =vydajkaDao.getLastId();
+       public  int typPohybu = 2;
     /**
      * Creates new form VytvorPrijemkuScreen
      */
-    public VytvorPrijemkuScreen() {
+    public VytvorVydajkuScreen() {
         initComponents();       
-        idTextField.setText(idPrijemky+"");
+        idTextField.setText(idVydajky+"");
+        
+        System.out.println(idVydajky);
   
     }
 
@@ -199,15 +202,15 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
         int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         int pocet = Integer.parseInt(pocetTextField.getText());
-        int idPrijemky = this.idPrijemky;
+        int idVydajky = this.idVydajky;
         int cena = Integer.parseInt(cenaTextField.getText());
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
         pohybMaterialu.setId_materialu(idMaterialu);
         pohybMaterialu.setPocet(pocet);
-        pohybMaterialu.setPrijemka_id(idPrijemky);
+        pohybMaterialu.setVydajka_id(idVydajky);
         pohybMaterialu.setCena(cena);
         pohybMaterialu.setTypPohybu(typPohybu);
-        pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
+        pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
         cenaSpoluTextField.setText(sumaSpolu(model,2,3)+"");
@@ -215,7 +218,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
     private void potvrdVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdVydajkuButtonActionPerformed
-        prijemkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idPrijemky);
+        vydajkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idVydajky);
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
         this.setVisible(false);
@@ -251,20 +254,21 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VytvorPrijemkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VytvorVydajkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VytvorPrijemkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VytvorVydajkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VytvorPrijemkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VytvorVydajkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VytvorPrijemkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VytvorVydajkuScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VytvorPrijemkuScreen().setVisible(true);
+                new VytvorVydajkuScreen().setVisible(true);
             }
         });
     }

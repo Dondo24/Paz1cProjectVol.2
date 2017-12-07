@@ -21,9 +21,14 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
    }
 
     @Override
-    public void pridajPohybMaterialu(PohybMaterialu pohybMaterialu) {
+    public void pridajPohybMaterialuPrijem(PohybMaterialu pohybMaterialu) {
          String sql = "insert into PohybMaterialu values(?,?,?,?,?,?,?)";
        jdbcTemplate.update(sql,null,pohybMaterialu.getTypPohybu(),pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),null);
+    }
+     @Override
+    public void pridajPohybMaterialuVydaj(PohybMaterialu pohybMaterialu) {
+         String sql = "insert into PohybMaterialu values(?,?,?,?,?,?,?)";
+       jdbcTemplate.update(sql,null,pohybMaterialu.getTypPohybu(),pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),null,pohybMaterialu.getVydajka_id());
     }
 
     @Override

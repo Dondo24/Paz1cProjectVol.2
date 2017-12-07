@@ -27,7 +27,7 @@
               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
               <Component id="vytvorPrijemkuButton" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-              <Component id="jButton4" min="-2" pref="148" max="-2" attributes="0"/>
+              <Component id="vytvorVydajkuButton" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton5" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
               </Group>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton4" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="vytvorVydajkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="jButton5" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="vytvorPrijemkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
@@ -146,10 +146,13 @@
         <Property name="text" type="java.lang.String" value="Vydaje"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="vytvorVydajkuButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vytvorit vydajku"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vytvorVydajkuButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>

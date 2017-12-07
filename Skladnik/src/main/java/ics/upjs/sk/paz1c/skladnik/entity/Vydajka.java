@@ -15,7 +15,7 @@ import ics.upjs.sk.paz1c.skladnik.entity.Material;
 public class Vydajka {
     
     private long id;
-    private long id_pouzivat; 
+    private long id_pouzivatel; 
     private double cena ;
     private String datum;
 
@@ -29,12 +29,12 @@ public class Vydajka {
 
   
 
-    public long getId_pouzivat() {
-        return id_pouzivat;
+    public long getId_pouzivatel() {
+        return id_pouzivatel;
     }
 
-    public void setId_pouzivat(long id_pouzivat) {
-        this.id_pouzivat = id_pouzivat;
+    public void setId_pouzivatel(long id_pouzivatel) {
+        this.id_pouzivatel = id_pouzivatel;
     }
    
 
@@ -52,6 +52,11 @@ public class Vydajka {
 
     public void setDatum(String datum) {
         this.datum = datum;
+    }
+
+    @Override
+    public String toString() {
+        return "Vydajka{" + "id=" + id + ", id_pouzivatel=" + id_pouzivatel + ", cena=" + cena + ", datum=" + datum + '}';
     }
     
     
