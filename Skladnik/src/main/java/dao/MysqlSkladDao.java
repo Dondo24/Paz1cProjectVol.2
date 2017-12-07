@@ -7,6 +7,7 @@ package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Sklad;
+import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -44,6 +45,14 @@ public class MysqlSkladDao implements SkladDao{
         String sql = "Select id from sklad where  nazov = ?";
            BeanPropertyRowMapper<Sklad> mapper = BeanPropertyRowMapper.newInstance(Sklad.class);
         return jdbcTemplate.queryForObject(sql, mapper, nazov);
+    }
+
+    @Override
+    public List<String> dajVsetkySklady() {
+       String sql = "SELECT nazov from sklad";      
+         BeanPropertyRowMapper<Sklad> mapper = BeanPropertyRowMapper.newInstance(Sklad.class);
+         List<String> nazovSkladov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
+        return nazovSkladov;
     }
     
 }

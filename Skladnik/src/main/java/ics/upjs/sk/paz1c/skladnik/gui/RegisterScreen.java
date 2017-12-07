@@ -10,7 +10,9 @@ import dao.PouzivatelDao;
 import dao.SkladDao;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Sklad;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +22,24 @@ import javax.swing.JOptionPane;
 public class RegisterScreen extends javax.swing.JFrame {
     private SkladDao skladDao = ObjectFactory.INSTANCE.getSkladDao();
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+    private List <String> pouzivatelia = new ArrayList<>();
+    private List <String> vsetkySklady = new ArrayList<>();
+    private boolean menojeok = false;
+    private boolean menoniejenull = false;
+    private boolean dlzkamena = false;
+    private boolean menosanepouziva = false ;
+    private boolean heslojeok = false;
+    private boolean heslasazhoduju = false;
+    private boolean dlzkahesla = false;
+   
+    private boolean skladjeok = false;
     /**
      * Creates new form RegisterScreen
      */
     public RegisterScreen() {
         initComponents();
+       // jHesloPasswordField2.setText("");
+        //jHesloZnovuPasswordField1.setText("");
     }
 
     /**
@@ -45,6 +60,7 @@ public class RegisterScreen extends javax.swing.JFrame {
         jHesloPasswordField2 = new javax.swing.JPasswordField();
         jMenoTextField1 = new javax.swing.JTextField();
         jNazovSkladuTextField2 = new javax.swing.JTextField();
+        jspatButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,36 +89,44 @@ public class RegisterScreen extends javax.swing.JFrame {
             }
         });
 
+        jspatButton2.setText("Späť");
+        jspatButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jspatButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jMenoTextField1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jNazovSkladuTextField2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jHesloPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jHesloZnovuPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jMenoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jNazovSkladuTextField2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jHesloPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jHesloZnovuPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 15, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jspatButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,9 +147,11 @@ public class RegisterScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jNazovSkladuTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jspatButton2))
+                .addContainerGap())
         );
 
         pack();
@@ -138,46 +164,112 @@ public class RegisterScreen extends javax.swing.JFrame {
         char[] heslo = jHesloPasswordField2.getPassword();
         char[] hesloznovu  = jHesloZnovuPasswordField1.getPassword();
         String nazovSkladu = jNazovSkladuTextField2.getText();
-        Sklad sklad =skladDao.dajIdSkladu(nazovSkladu);
-        long idskladu = sklad.getId();
+       
+       
+        pouzivatelia = pouzivatelDao.dajVsetkychMena();
+        vsetkySklady = skladDao.dajVsetkySklady();
+        
+        if(meno == null){
+           JOptionPane.showMessageDialog(null, "zadaj meno");
+           menoniejenull = false;
+      }else{
+            menoniejenull = true;
+        }
+        if(pouzivatelia.contains(meno)){
+            JOptionPane.showMessageDialog(null, "Použivatelske meno je už obsadene");
+            menosanepouziva=false;
+        }else{
+        menosanepouziva=true;
+    }
+        if(meno.length()<4){
+            JOptionPane.showMessageDialog(null,"pouzivatelske meno musi byt dlhsie ako 4 znaky");
+            dlzkamena =false;
+        }else{
+            dlzkamena = true;
+        }
+        if(meno.length()>15){
+            JOptionPane.showMessageDialog(null,"Pouzivatelske meno musi byť kratšie ako 15 znakov");
+            dlzkamena= false;
+        }else{
+        dlzkamena = true;
+        }
+        if(dlzkamena && menosanepouziva&&menoniejenull){
+            menojeok = true;
+            
+        }else{
+            menojeok= false;
+        }
+        
       if(heslo == null && hesloznovu == null){
             JOptionPane.showMessageDialog(null, "zadaj heslo");
-        }
+            dlzkahesla= false;
+        }else{
+          dlzkahesla= true;
+      }
       if(!Arrays.equals(heslo, hesloznovu)){
           JOptionPane.showMessageDialog(null, "Hesla sa nezhoduju");
+          heslasazhoduju= false;
+      }else{
+          heslasazhoduju= true;
       }
-      if(meno == null){
-           JOptionPane.showMessageDialog(null, "zadaj meno");
+      if(heslo.length<4){
+          JOptionPane.showMessageDialog(null, "heslo musi byť dlhsie ako 4 ");
+          dlzkahesla = false;
+      }else{
+          dlzkahesla = true;
       }
-      if(meno.length()<4){
-          JOptionPane.showMessageDialog(null, "meno musi mat dlzku najmenej 4 znakov");
-      }
-      if(meno.length()>15){
-          JOptionPane.showMessageDialog(null, "meno nemoze byt dlhsie ako 15 znakov");
+      if(heslo.length >15){
+          JOptionPane.showMessageDialog(null, "heslo nemože byť dlhsie ako 15 znakov");
+            dlzkahesla = false;
+      }else{
+          dlzkahesla = true;
       }
       
+      if(dlzkahesla&&heslasazhoduju ){
+      heslojeok=true;
+      }else{
+          heslojeok=false;
+      }
+      
+      
+      if(vsetkySklady.contains(nazovSkladu)){
+          skladjeok=true;
+          
+      }else{
+          skladjeok=false;
+          JOptionPane.showMessageDialog(null, "Sklad neexistuje");
+      }
+      
+      
+       if(menojeok &&heslojeok&&skladjeok){
       String heslozcharov = "";
         for (int i = 0; i < heslo.length; i++) {
             heslozcharov = heslozcharov + heslo[i];
         }
+         Sklad sklad =skladDao.dajIdSkladu(nazovSkladu);
+      long idskladu = sklad.getId();
       Pouzivatel p = new Pouzivatel();
-     //p.setId(2);
        p.setId_sklad(idskladu);
        p.setMeno(meno);
       p.setHeslo(heslozcharov);
-     
-     
       pouzivatelDao.pridajPouzivatela(p);
       
       LoginScreen login = new LoginScreen();
       login.setVisible(true);
       this.setVisible(false);
-      
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jNazovSkladuTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNazovSkladuTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jNazovSkladuTextField2ActionPerformed
+
+    private void jspatButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton2ActionPerformed
+       LoginScreen lc = new LoginScreen();
+       lc.setVisible(true);
+       this.setVisible(false);
+       dispose();
+    }//GEN-LAST:event_jspatButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,5 +316,6 @@ public class RegisterScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jMenoTextField1;
     private javax.swing.JTextField jNazovSkladuTextField2;
+    private javax.swing.JButton jspatButton2;
     // End of variables declaration//GEN-END:variables
 }

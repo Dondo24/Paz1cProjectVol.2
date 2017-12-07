@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Sklad;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,5 @@ public interface SkladDao {
     public Sklad dajSklad(Long id);
     void odstranSklad(Sklad sklad);
     public Sklad dajIdSkladu(String nazov);
+    List<String> dajVsetkySklady();
 }

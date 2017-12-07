@@ -44,6 +44,7 @@ public class LoginScreen extends javax.swing.JFrame {
         registrateButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        jZmenaHeslaButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,13 +73,20 @@ public class LoginScreen extends javax.swing.JFrame {
 
         passwordField.setText("jPasswordField1");
 
+        jZmenaHeslaButton1.setText("Zmena HESLA");
+        jZmenaHeslaButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jZmenaHeslaButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -92,7 +100,8 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(registrateButton)
                         .addGap(18, 18, 18)
-                        .addComponent(loginButton)))
+                        .addComponent(loginButton))
+                    .addComponent(jZmenaHeslaButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +121,9 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(registrateButton))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jZmenaHeslaButton1)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,6 +170,14 @@ public class LoginScreen extends javax.swing.JFrame {
        dispose();
     }//GEN-LAST:event_registrateButtonActionPerformed
 
+    private void jZmenaHeslaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZmenaHeslaButton1ActionPerformed
+        ZmenaHeslaScreen ZHC = new ZmenaHeslaScreen();
+        ZHC.setVisible(true);
+        this.setVisible(false);
+        dispose();
+        
+    }//GEN-LAST:event_jZmenaHeslaButton1ActionPerformed
+
   
     /**
      * @param args the command line arguments
@@ -198,6 +217,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jZmenaHeslaButton1;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
