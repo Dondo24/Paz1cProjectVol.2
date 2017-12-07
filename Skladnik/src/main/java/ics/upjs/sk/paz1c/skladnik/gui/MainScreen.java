@@ -6,15 +6,20 @@
 package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
+import dao.MaterialDao;
 import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
+import ics.upjs.sk.paz1c.skladnik.entity.Material;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,9 +30,16 @@ public class MainScreen extends javax.swing.JFrame {
     PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
     PouzivatelDao pouzivatelDao =ObjectFactory.INSTANCE.getPouzivatelDao();
     VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
+    MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
+    DefaultTableModel tableModel; 
+
     
     public MainScreen() {
-        initComponents();
+        initComponents(); 
+        tableModel = (DefaultTableModel) mainTable.getModel();           
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAll());
+    
+        
     }
 
     /**
@@ -39,11 +51,11 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        ukazPrijmiButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        mainTable = new javax.swing.JTable();
+        ukazMaterialButton = new javax.swing.JButton();
+        ukazVydajebutton = new javax.swing.JButton();
         vytvorVydajkuButton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         vytvorPrijemkuButton = new javax.swing.JButton();
@@ -52,24 +64,36 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Prijmy");
+        ukazPrijmiButton.setText("Prijmy");
+        ukazPrijmiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukazPrijmiButtonActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "cena", "id_pouzivatela", "datum"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(mainTable);
 
-        jButton2.setText("Material");
+        ukazMaterialButton.setText("Material");
+        ukazMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukazMaterialButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Vydaje");
+        ukazVydajebutton.setText("Vydaje");
+        ukazVydajebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukazVydajebuttonActionPerformed(evt);
+            }
+        });
 
         vytvorVydajkuButton.setText("Vytvorit vydajku");
         vytvorVydajkuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,24 +128,25 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114)
                 .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(297, 297, 297)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addGap(297, 297, 297)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ukazPrijmiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ukazVydajebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ukazMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,11 +158,11 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ukazPrijmiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ukazVydajebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ukazMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,6 +208,67 @@ public class MainScreen extends javax.swing.JFrame {
         System.out.println(vydajkaDao.getAll());
     }//GEN-LAST:event_vytvorVydajkuButtonActionPerformed
 
+    private void ukazPrijmiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazPrijmiButtonActionPerformed
+        nastavModelDefault();
+        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAll());
+    }//GEN-LAST:event_ukazPrijmiButtonActionPerformed
+
+    private void ukazVydajebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazVydajebuttonActionPerformed
+        nastavModelDefault();
+        tableModel = (DefaultTableModel) mainTable.getModel();         
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        naplnTabulkuVydaje(tableModel, vydajkaDao.getAll());
+    }//GEN-LAST:event_ukazVydajebuttonActionPerformed
+
+    private void ukazMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazMaterialButtonActionPerformed
+        nastavModelMaterial();
+        tableModel = (DefaultTableModel) mainTable.getModel();         
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        naplnTabulkuMaterial(tableModel, materialDao.getAll());
+    }//GEN-LAST:event_ukazMaterialButtonActionPerformed
+
+    private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijemky){
+    for(Prijemka prijemka : prijemky){
+       model.addRow(new Object[]{prijemka.getId(),prijemka.getCena(),prijemka.getId_pouzivatel(),prijemka.getDatum()});
+    }
+    }
+    
+      private void naplnTabulkuVydaje(DefaultTableModel model, List<Vydajka> vydajky){
+    for(Vydajka vydajka : vydajky){
+       model.addRow(new Object[]{vydajka.getId(),vydajka.getCena(),vydajka.getId_pouzivatel(),vydajka.getDatum()});
+    }
+    }
+  
+       private void naplnTabulkuMaterial(DefaultTableModel model, List<Material> materials){
+          
+        for(Material material : materials){
+      model.addRow(new Object[]{material.getId(),material.getNazov(),material.getStav(),material.getCena(),material.getId_sklad()});
+    }
+    }
+      
+     
+      private void nastavModelMaterial(){
+          String[] columns = {"id","nazov","stav","cena","id_sklad"};
+          DefaultTableModel model = new DefaultTableModel(columns,0);
+            mainTable.setModel(model); 
+         
+
+      }
+      
+      private void nastavModelDefault(){
+          String[] columns = {"id","cena","id_pouzivatela","datum"};
+          DefaultTableModel model = new DefaultTableModel(columns,0);
+            mainTable.setModel(model); 
+            
+           
+
+      }
+    
     /**
      * @param args the command line arguments
      */
@@ -220,14 +306,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable mainTable;
+    private javax.swing.JButton ukazMaterialButton;
+    private javax.swing.JButton ukazPrijmiButton;
+    private javax.swing.JButton ukazVydajebutton;
     private javax.swing.JButton vytvorPrijemkuButton;
     private javax.swing.JButton vytvorVydajkuButton;
     // End of variables declaration//GEN-END:variables
