@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class LoginScreen extends javax.swing.JFrame {
 
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
-
+    private Pouzivatel prihlaseny = new Pouzivatel();
     //  private String name ="Samo";
     // private char[] correctPassword = {'1', '2', '3'};
     /**
@@ -152,7 +152,7 @@ public class LoginScreen extends javax.swing.JFrame {
                        
                         main.setVisible(true);
                         this.setVisible(false);
-                        dispose();
+                        //dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "nespravne heslo");
                     }

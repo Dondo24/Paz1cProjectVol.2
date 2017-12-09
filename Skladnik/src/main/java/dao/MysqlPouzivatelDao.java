@@ -31,7 +31,7 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
 
     @Override
     public void nastavHeslo(String meno, String heslo) {
-       jdbcTemplate.update("update pouzivatel set heslo = ? where id =?",heslo , meno);
+       jdbcTemplate.update("update pouzivatel set heslo = ? where meno =?",heslo , meno);
     }
 
     @Override

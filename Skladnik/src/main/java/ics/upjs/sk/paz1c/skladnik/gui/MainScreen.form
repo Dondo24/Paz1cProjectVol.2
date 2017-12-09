@@ -29,7 +29,7 @@
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
               <Component id="vytvorVydajkuButton" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace pref="132" max="32767" attributes="0"/>
-              <Component id="jButton5" min="-2" pref="148" max="-2" attributes="0"/>
+              <Component id="jPridajKartuMaterialuButton5" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -77,7 +77,7 @@
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="vytvorVydajkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="jButton5" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="jPridajKartuMaterialuButton5" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="vytvorPrijemkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="55" max="32767" attributes="0"/>
@@ -166,10 +166,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vytvorVydajkuButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="jPridajKartuMaterialuButton5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pridat kartu materialu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPridajKartuMaterialuButton5ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="vytvorPrijemkuButton">
       <Properties>

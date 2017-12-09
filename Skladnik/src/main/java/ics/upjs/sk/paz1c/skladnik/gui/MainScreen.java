@@ -57,7 +57,7 @@ public class MainScreen extends javax.swing.JFrame {
         ukazMaterialButton = new javax.swing.JButton();
         ukazVydajebutton = new javax.swing.JButton();
         vytvorVydajkuButton = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jPridajKartuMaterialuButton5 = new javax.swing.JButton();
         vytvorPrijemkuButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -102,7 +102,12 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Pridat kartu materialu");
+        jPridajKartuMaterialuButton5.setText("Pridat kartu materialu");
+        jPridajKartuMaterialuButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPridajKartuMaterialuButton5ActionPerformed(evt);
+            }
+        });
 
         vytvorPrijemkuButton.setText("Vytvorit prijemku");
         vytvorPrijemkuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +134,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +172,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -231,6 +236,14 @@ public class MainScreen extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
         naplnTabulkuMaterial(tableModel, materialDao.getAll());
     }//GEN-LAST:event_ukazMaterialButtonActionPerformed
+
+    private void jPridajKartuMaterialuButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPridajKartuMaterialuButton5ActionPerformed
+        PridajKartuMaterialuScreen PKMS = new PridajKartuMaterialuScreen();
+        PKMS.setVisible(true);
+        this.setVisible(false);
+        //tu asi dispose netreba nie ? 
+      //  dispose();
+    }//GEN-LAST:event_jPridajKartuMaterialuButton5ActionPerformed
 
     private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijemky){
     for(Prijemka prijemka : prijemky){
@@ -306,9 +319,9 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jPridajKartuMaterialuButton5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable mainTable;
     private javax.swing.JButton ukazMaterialButton;

@@ -18,4 +18,5 @@ public interface MaterialDao {
     public Material dajMaterialById (int id);
     void odstranMaterial(Material material);
     public List <Material> getAll();
+    List<String> dajNazovVsetkychMaterialov();
 }

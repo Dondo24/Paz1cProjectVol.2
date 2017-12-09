@@ -45,5 +45,14 @@ public class MysqlMaterialDao implements MaterialDao{
         return jdbcTemplate.query(sql, mapper);
     }
 
+    @Override
+    public List<String> dajNazovVsetkychMaterialov() {
+      String sql = "Select nazov from material ";
+      BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
+         List<String> nazvyMaterialov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
+        return nazvyMaterialov;
+    }
+   
+
   
 }

@@ -143,8 +143,10 @@ private char[] heslopouzivatela;
     private void jZmenitHesloButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZmenitHesloButton1ActionPerformed
     String meno = jPouzivatelskeMenoTextField1.getText();
     char[] stareHeslo = jStareHesloPasswordField1.getPassword();
-    char[] noveHeslo = jNoveHesloPasswordField1.getPassword();
-    char[] noveHesloZnovu = jNoveHesloZnovuPasswordField1.getPassword();
+    //musel som to hodit na string lebo inac som to nevedel hodit normalne do db to heslo blbotinky mi to hadzalo
+    
+    String noveHeslo = jNoveHesloPasswordField1.getText().toString();
+    String noveHesloZnovu = jNoveHesloZnovuPasswordField1.getText().toString();
     Pouzivatel p = new Pouzivatel();
     
     if(pouzivatelia.contains(meno)){
@@ -165,18 +167,26 @@ private char[] heslopouzivatela;
             
         }
         if(heslojeok){
-            if(Arrays.equals(noveHeslo, noveHesloZnovu)){
+            if(noveHeslo.equals(noveHesloZnovu)){
                 noveheslasazhoduju= true;
             }else{
                 noveheslasazhoduju= false;
                 JOptionPane.showMessageDialog(null, "Nove hesla sa nezhoduju");
                 
             }if(noveheslasazhoduju){
-                if(noveHeslo.length>4 && noveHeslo.length<4){
+                if(noveHeslo.length()>4 && noveHeslo.length()<15){
                     dlzkanovehoheslajeok=true;
                 }else{
                     dlzkanovehoheslajeok = false;
                     JOptionPane.showMessageDialog(null, "Heslo musi mat viac ako 4 znakov a menej ako 15");
+                }
+                if(dlzkanovehoheslajeok){
+                    pouzivateldao.nastavHeslo(meno,noveHeslo);
+                    JOptionPane.showMessageDialog(null, "Heslo je uspesne zmenene");
+                    LoginScreen lc = new LoginScreen();
+                    lc.setVisible(true);
+                    this.setVisible(false);
+                    dispose();
                 }
             }
         }
