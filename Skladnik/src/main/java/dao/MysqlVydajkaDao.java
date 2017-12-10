@@ -29,8 +29,8 @@ public class MysqlVydajkaDao implements VydajkaDao{
 
     @Override
     public void pridajVydajku(Vydajka vydajka) {
-       String sql = "insert into  Vydajka values(?,?,?,?)";
-       jdbcTemplate.update(sql, null,vydajka.getId_pouzivatel(),vydajka.getCena(),vydajka.getDatum());
+       String sql = "insert into  Vydajka values(?,?,?,?,?)";
+       jdbcTemplate.update(sql, null,vydajka.getId_pouzivatel(),vydajka.getCena(),vydajka.getDatum(),vydajka.getTyp_pohybu());
     }
 
     @Override
@@ -59,6 +59,7 @@ public class MysqlVydajkaDao implements VydajkaDao{
                v.setCena(rs.getDouble("cena"));
                v.setId_pouzivatel(rs.getLong("pouzivatel_id"));
                v.setDatum(rs.getString("datum"));
+               v.setTyp_pohybu(rs.getLong("typ_pohybu"));
                return v;
             }
         });   

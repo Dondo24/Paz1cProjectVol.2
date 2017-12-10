@@ -24,7 +24,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
        PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
        MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
        public int idVydajky =vydajkaDao.getLastId();
-       public  int typPohybu = 2;
+     
     /**
      * Creates new form VytvorPrijemkuScreen
      */
@@ -209,7 +209,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setVydajka_id(idVydajky);
         pohybMaterialu.setCena(cena);
-        pohybMaterialu.setTypPohybu(typPohybu);
+       
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});

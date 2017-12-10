@@ -18,6 +18,16 @@ public class Vydajka {
     private long id_pouzivatel; 
     private double cena ;
     private String datum;
+    private Long typ_pohybu;
+
+    public Long getTyp_pohybu() {
+        return typ_pohybu;
+    }
+
+    public void setTyp_pohybu(Long typ_pohybu) {
+        this.typ_pohybu = typ_pohybu;
+    }
+    
 
     public long getId() {
         return id;

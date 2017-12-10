@@ -13,7 +13,6 @@ public class PohybMaterialu {
     
     
     private long id;
-    private long typPohybu;
     private long id_materialu;
     private long pocet;
     private double cena;
@@ -28,13 +27,6 @@ public class PohybMaterialu {
         this.id = id;
     }
 
-    public long getTypPohybu() {
-        return typPohybu;
-    }
-
-    public void setTypPohybu(long typPohybu) {
-        this.typPohybu = typPohybu;
-    }
 
     public long getId_materialu() {
         return id_materialu;

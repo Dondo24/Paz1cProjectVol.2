@@ -29,8 +29,8 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public void pridajPrijemka(Prijemka prijemka) {
-        String sql = "insert into  Prijemka values(?,?,?,?)";       
-       jdbcTemplate.update(sql,null,prijemka.getCena(),prijemka.getId_pouzivatel(),prijemka.getDatum());
+        String sql = "insert into  Prijemka values(?,?,?,?,?)";       
+       jdbcTemplate.update(sql,null,prijemka.getCena(),prijemka.getId_pouzivatel(),prijemka.getDatum(),prijemka.getTypPohybu());
     }
 
     @Override
@@ -58,6 +58,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
                p.setCena(rs.getDouble("cena"));
                p.setId_pouzivatel(rs.getLong("pouzivatel_id"));
                p.setDatum(rs.getString("datum"));
+               p.setTypPohybu(rs.getLong("typ_pohybu"));
                return p;
             }
         });   

@@ -15,7 +15,7 @@ import java.util.List;
 public interface MaterialDao {
     
     void pridajMaterial(Material Material);
-    public Material dajMaterialById (int id);
+    public Material dajMaterialById (long id);
     void odstranMaterial(Material material);
     public List <Material> getAll();
     List<String> dajNazovVsetkychMaterialov();

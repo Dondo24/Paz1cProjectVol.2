@@ -17,9 +17,18 @@ public class Prijemka {
     private double cena;
     private long id_pouzivatel; 
     private String datum;
+    private long typPohybu;
 
     public long getId() {
         return id;
+    }
+
+    public long getTypPohybu() {
+        return typPohybu;
+    }
+
+    public void setTypPohybu(long typPohybu) {
+        this.typPohybu = typPohybu;
     }
 
     public void setId(long id) {

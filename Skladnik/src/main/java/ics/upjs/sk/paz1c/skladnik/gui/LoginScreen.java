@@ -148,11 +148,12 @@ public class LoginScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "zadaj heslo");
                 } else {
                     if (Arrays.equals(correctPassword, passwordFromField)) {
-                        MainScreen main = new MainScreen();
-                       
+                        MainScreen main = new MainScreen();                       
                         main.setVisible(true);
                         this.setVisible(false);
-                        //dispose();
+                        main.uzivatelLable.setText(nameFromTextField);
+                        dispose();
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "nespravne heslo");
                     }
