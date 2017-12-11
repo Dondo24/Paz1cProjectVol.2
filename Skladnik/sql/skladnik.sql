@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `skladnik`.`Prijemka` (
   `cena` DOUBLE NULL,
   `Pouzivatel_id` INT NOT NULL,
   `datum` DATETIME NULL,
+  `typ_pohybu` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Prijemka_Pouzivatel_idx` (`Pouzivatel_id` ASC),
   CONSTRAINT `fk_Prijemka_Pouzivatel`
@@ -70,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `skladnik`.`Vydajka` (
   `Pouzivatel_id` INT NOT NULL,
   `cena` DOUBLE NULL,
   `datum` DATETIME NULL,
+  `typ_pohybu` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Prijemka_Pouzivatel_idx` (`Pouzivatel_id` ASC),
   CONSTRAINT `fk_Prijemka_Pouzivatel0`
@@ -104,7 +106,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `skladnik`.`pohybMaterialu` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `typPohybu` INT NULL,
   `id_materialu` INT NULL,
   `pocet` INT NULL,
   `cena` DOUBLE NULL,
