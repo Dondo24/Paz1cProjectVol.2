@@ -80,5 +80,44 @@ public class MysqlVydajkaDao implements VydajkaDao{
     
     }
 
+    @Override
+    public List<Vydajka> dajDnesneVydajky() {
+         String sql = "Select id ,cena , datum from Vydajka WHERE DATE(datum) = DATE(NOW()) ORDER BY id DESC";
+       
+       return (jdbcTemplate.query(sql,new VydajkaRowMapper()));
+    }
+
+    @Override
+    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok) {
+        String sql = "Select id,cena ,datum from Vydajka where month(datum) = " + mesiac + " and year(datum)= " + rok + " order by id desc";
+       
+       return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
+    }
+
+    @Override
+    public List<Vydajka> dajVydajkyNaRok(int rok) {
+       String sql = "Select id,cena ,datum from Vydajka where year(datum)= " + rok + " order by id desc";
+       
+       return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
+    }
+
+    @Override
+    public List<Vydajka> dajVydajkuNaDatum(int rok, int mesiac, int den) {
+         String sql = "Select id,cena ,datum from Vydajka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" order by id desc";
+       return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
+    }
+private class VydajkaRowMapper implements RowMapper<Vydajka> {
+
+        @Override
+        public Vydajka mapRow(ResultSet rs, int i) throws SQLException {
+            Vydajka vydajka = new Vydajka();
+            vydajka.setId(rs.getLong("id"));
+            vydajka.setCena(rs.getDouble("cena"));
+            vydajka.setDatum(rs.getString("datum"));
+            
+            return vydajka;
+        }
+
+    }
     
 }

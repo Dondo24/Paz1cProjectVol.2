@@ -77,7 +77,47 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
        jdbcTemplate.update(sql, cena, id);
     
     }
-    
+
+    @Override
+    public List<Prijemka> dajDnesneOPrijemky() {
+       String sql = "Select id ,cena , datum from Prijemka WHERE DATE(datum) = DATE(NOW()) ORDER BY id DESC";
+       
+       return (jdbcTemplate.query(sql,new PrijemkyRowMapper()));
+    }
+
+     @Override
+    public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok) {
+       String sql = "Select id,cena ,datum from Prijemka where month(datum) = " + mesiac + " and year(datum)= " + rok + " order by id desc";
+       
+       return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
+    }
+
+    @Override
+    public List<Prijemka> dajPrijemkyNaRok(int rok) {
+       String sql = "Select id,cena ,datum from Prijemka where year(datum)= " + rok + " order by id desc";
+       
+       return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
+    }
+
+    @Override
+    public List<Prijemka> dajPrijemkuNaDatum(int rok, int mesiac, int den) {
+           String sql = "Select id,cena ,datum from Prijemka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" order by id desc";
+       
+       return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
+    }
+      private class PrijemkyRowMapper implements RowMapper<Prijemka> {
+
+        @Override
+        public Prijemka mapRow(ResultSet rs, int i) throws SQLException {
+            Prijemka prijemka = new Prijemka();
+            prijemka.setId(rs.getLong("id"));
+            prijemka.setCena(rs.getDouble("cena"));
+            prijemka.setDatum(rs.getString("datum"));
+            
+            return prijemka;
+        }
+
+    }
     
     
 }

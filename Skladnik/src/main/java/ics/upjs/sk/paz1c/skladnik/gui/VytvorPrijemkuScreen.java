@@ -94,6 +94,11 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         });
 
         stornoButton.setText("Storno");
+        stornoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stornoButtonActionPerformed(evt);
+            }
+        });
 
         pridajMaterialuButton.setText("Pridaj material");
         pridajMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +227,13 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_potvrdVydajkuButtonActionPerformed
+
+    private void stornoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stornoButtonActionPerformed
+        MainScreen ms = new MainScreen();
+        ms.setVisible(true);
+        this.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_stornoButtonActionPerformed
 
     public int sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     int total = 0;

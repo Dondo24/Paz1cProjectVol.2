@@ -24,7 +24,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jVypisyButton1" min="-2" pref="98" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="vytvorPrijemkuButton" min="-2" pref="148" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
               <Component id="vytvorVydajkuButton" min="-2" pref="148" max="-2" attributes="0"/>
@@ -33,25 +35,22 @@
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="uzivatelLable" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="297" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="187" max="-2" attributes="0"/>
+              <EmptySpace pref="372" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="uzivatelLable" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="297" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="187" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ukazPrijmiButton" min="-2" pref="97" max="-2" attributes="0"/>
-                          <Component id="ukazVydajebutton" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                          <Component id="ukazMaterialButton" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="780" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="ukazPrijmiButton" min="-2" pref="97" max="-2" attributes="0"/>
+                  <Component id="ukazVydajebutton" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                  <Component id="ukazMaterialButton" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="780" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,13 +73,21 @@
                   </Group>
                   <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="vytvorVydajkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="jPridajKartuMaterialuButton5" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="vytvorPrijemkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="vytvorVydajkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="jPridajKartuMaterialuButton5" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="vytvorPrijemkuButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="jVypisyButton1" min="-2" pref="74" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="55" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,6 +221,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jVypisyButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vypisy"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jVypisyButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
