@@ -22,6 +22,9 @@ void pridajVydajku(Vydajka vydajka);
     public List <Vydajka> getAll();
     public int getLastId();
     void upravCenu(double cena, long id);
-
+public List<Vydajka> dajDnesneVydajky();
+    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok);
+    public List<Vydajka> dajVydajkyNaRok(int rok );
+    public List<Vydajka> dajVydajkuNaDatum(int rok , int mesiac , int den);
     
 }
