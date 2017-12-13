@@ -11,6 +11,7 @@ import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,7 +53,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         cenaTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         materialTable = new javax.swing.JTable();
-        potvrdVydajkuButton = new javax.swing.JButton();
+        potvrdPrijemkuButton = new javax.swing.JButton();
         stornoButton = new javax.swing.JButton();
         pridajMaterialuButton = new javax.swing.JButton();
         vymazPoliaButton = new javax.swing.JButton();
@@ -86,10 +87,10 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(materialTable);
 
-        potvrdVydajkuButton.setText("Potvrdit");
-        potvrdVydajkuButton.addActionListener(new java.awt.event.ActionListener() {
+        potvrdPrijemkuButton.setText("Potvrdit");
+        potvrdPrijemkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                potvrdVydajkuButtonActionPerformed(evt);
+                potvrdPrijemkuButtonActionPerformed(evt);
             }
         });
 
@@ -145,7 +146,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(potvrdVydajkuButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                        .addComponent(potvrdPrijemkuButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                         .addComponent(stornoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel5)
                                     .addComponent(idTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
@@ -168,7 +169,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                        .addComponent(potvrdVydajkuButton)
+                        .addComponent(potvrdPrijemkuButton)
                         .addGap(18, 18, 18)
                         .addComponent(stornoButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,7 +207,11 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setPrijemka_id(idPrijemky);
         pohybMaterialu.setCena(cena);
-       
+        
+        materialDao.upravStavMaterial(idMaterialu, pocet, 1);
+        double cenaUpravena = upravCenuMaterialu(idMaterialu, cena, pocet);
+        materialDao.upravCenuMaterialu(idMaterialu, cenaUpravena);
+               
         pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
@@ -214,14 +219,14 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
-    private void potvrdVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdVydajkuButtonActionPerformed
+    private void potvrdPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdPrijemkuButtonActionPerformed
         prijemkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idPrijemky);
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
         this.setVisible(false);
         dispose();
         
-    }//GEN-LAST:event_potvrdVydajkuButtonActionPerformed
+    }//GEN-LAST:event_potvrdPrijemkuButtonActionPerformed
 
     public int sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     int total = 0;
@@ -233,6 +238,24 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     return total;
 }
     
+    public double upravCenuMaterialu(long idMaterialu, double cena, long pocet){    
+    double cenaPoUprave =0;
+    double sucetCien = 0;
+    double sucetSucinov = 0;
+    List<PohybMaterialu> pohyby = pohybMaterialuDao.getPohybyByMaterialId(idMaterialu);
+    for(PohybMaterialu pohyb : pohyby){
+       sucetSucinov += pohyb.getCena()*pohyb.getPocet();
+       sucetCien += pohyb.getCena();    
+    }
+    sucetSucinov += cena*pocet;
+    sucetCien +=cena;
+    
+    cenaPoUprave=sucetSucinov/sucetCien;
+    
+    
+    return cenaPoUprave;
+    
+    }
     
     /**
      * @param args the command line arguments
@@ -282,7 +305,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private javax.swing.JTable materialTable;
     private javax.swing.JLabel pocetLabel;
     private javax.swing.JTextField pocetTextField;
-    private javax.swing.JButton potvrdVydajkuButton;
+    private javax.swing.JButton potvrdPrijemkuButton;
     private javax.swing.JButton pridajMaterialuButton;
     private javax.swing.JButton stornoButton;
     private javax.swing.JButton vymazPoliaButton;

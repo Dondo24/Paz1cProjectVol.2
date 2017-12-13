@@ -12,6 +12,7 @@ import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -78,6 +79,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
         cenaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cenaLabel.setText("Cena:");
+
+        cenaTextField.setEditable(false);
 
         materialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -203,17 +206,26 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         int pocet = Integer.parseInt(pocetTextField.getText());
         int idVydajky = this.idVydajky;
-        int cena = Integer.parseInt(cenaTextField.getText());
+        double cena = materialDao.dajMaterialById(idMaterialu).getCena();
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
         pohybMaterialu.setId_materialu(idMaterialu);
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setVydajka_id(idVydajky);
         pohybMaterialu.setCena(cena);
-       
+        
+        
+        if(pohybMaterialu.getPocet() > materialDao.dajMaterialById(idMaterialu).getStav()){
+         JOptionPane.showMessageDialog(null, "Nie je dostatok materiálu na sklade!");
+        }else{
+         
+        materialDao.upravStavMaterial(idMaterialu, pocet, 2);
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
         cenaSpoluTextField.setText(sumaSpolu(model,2,3)+"");
+        }
+       
+        
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
