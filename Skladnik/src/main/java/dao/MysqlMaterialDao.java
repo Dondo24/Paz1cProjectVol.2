@@ -23,11 +23,11 @@ public class MysqlMaterialDao implements MaterialDao{
    }
    
    public void pridajMaterial(Material material){
-       jdbcTemplate.update("INSERT INTO Material (nazov,stav,cena,sklad_id) VALUES(?,?,?,?)",
-               material.getNazov(),material.getStav(),material.getCena(),material.getId_sklad());
+       jdbcTemplate.update("INSERT INTO Material (id,nazov,stav,cena,sklad_id) VALUES(?,?,?,?,?)",
+               null,material.getNazov(),material.getStav(),material.getCena(),material.getId_sklad());
    }
    public Material dajMaterialById (long id){
-       String sql = "SELECT id , nazov FROM Material where id=?";
+       String sql = "SELECT * FROM Material where id=?";
         BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
         return jdbcTemplate.queryForObject(sql, mapper, id);
        
@@ -51,6 +51,28 @@ public class MysqlMaterialDao implements MaterialDao{
       BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
          List<String> nazvyMaterialov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
         return nazvyMaterialov;
+    }
+
+    @Override
+    public void upravStavMaterial(long idMaterialu, long pocet,long typPohybu) {
+        long upravaMaterialu = 0;
+       
+        
+        if(typPohybu == 1){
+        upravaMaterialu = dajMaterialById(idMaterialu).getStav() + pocet;
+          
+        }
+         if(typPohybu == 2){
+        upravaMaterialu = dajMaterialById(idMaterialu).getStav() - pocet;
+        }
+        String sql = "update material set stav = ? where id = ?";
+        jdbcTemplate.update(sql,upravaMaterialu,idMaterialu);
+    }
+
+    @Override
+    public void upravCenuMaterialu(long idMaterialu, double cena) {
+       String sql = "update material set cena = ? where id = ?";
+        jdbcTemplate.update(sql,cena,idMaterialu);
     }
    
 

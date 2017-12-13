@@ -43,7 +43,7 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
     }
 
     @Override
-    public void odstranPrijemku(PohybMaterialu pohybMaterialu) {
+    public void odstranPohybMaterialu(PohybMaterialu pohybMaterialu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -93,6 +93,29 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
             }
         }, id);   
         return pohyby;
+    }
+
+    @Override
+    public List<PohybMaterialu> getPohybyByMaterialId(long id) {
+        
+          String sql = "select * from pohybmaterialu where id_materialu = ?";
+        
+        List<PohybMaterialu> pohyby = jdbcTemplate.query(sql, new RowMapper<PohybMaterialu>() {
+            @Override
+            public PohybMaterialu mapRow(ResultSet rs, int i) throws SQLException {
+               PohybMaterialu p = new PohybMaterialu();
+               p.setId(rs.getLong("id"));
+               p.setCena(rs.getDouble("cena"));
+               p.setId_materialu(rs.getLong("id_materialu"));
+               p.setVydajka_id(rs.getLong("vydajka_id"));
+               p.setPocet(rs.getLong("pocet"));
+               
+               
+               return p;
+            }
+        }, id);   
+        return pohyby;
+        
     }
     
 }

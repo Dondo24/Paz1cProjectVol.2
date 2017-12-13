@@ -19,4 +19,6 @@ public interface MaterialDao {
     void odstranMaterial(Material material);
     public List <Material> getAll();
     List<String> dajNazovVsetkychMaterialov();
+    void upravStavMaterial(long idMaterialu, long pocet,long typPohybu);
+    void upravCenuMaterialu(long idMaterialu, double cena);
 }
