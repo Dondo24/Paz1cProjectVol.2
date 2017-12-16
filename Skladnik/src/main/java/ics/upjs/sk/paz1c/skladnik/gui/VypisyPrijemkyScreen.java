@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -54,6 +55,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jZobrazPrijenkyNaDenButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
+        jspatButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,7 +135,19 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        mainTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(mainTable);
+
+        jspatButton1.setText("Spat");
+        jspatButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jspatButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,12 +155,14 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jROKComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jROKComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspatButton1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -218,7 +234,9 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jROKComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jspatButton1)
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addComponent(jZobrazPrijemkyRokButton1)
@@ -231,7 +249,9 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+                                    
+       
+    
     private void jZobrazPrijemkyRokButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazPrijemkyRokButton1ActionPerformed
           int rok = Integer.parseInt(jROKComboBox1.getSelectedItem().toString());
         
@@ -284,6 +304,30 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
         naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaMesiac(mesiac,rok));
     }//GEN-LAST:event_jZobrazPrijemkyZamesiacButton1ActionPerformed
+
+    private void jspatButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton1ActionPerformed
+       MainScreen ms = new MainScreen();
+       ms.setVisible(true);
+       this.setVisible(false);
+       dispose();
+    }//GEN-LAST:event_jspatButton1ActionPerformed
+
+    private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
+       if(evt.getClickCount()==2){
+       int row = mainTable.getSelectedRow();      
+       TableModel model = mainTable.getModel();
+       String id = model.getValueAt(row, 0).toString();         
+       
+       
+       ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
+       zobrazPrijemkuScreen.idScreenTextField.setText(id);
+       zobrazPrijemkuScreen.naplnTabulkuPrijmi();
+       zobrazPrijemkuScreen.setVisible(true);
+       this.setVisible(false);
+       dispose();
+       }
+       
+    }//GEN-LAST:event_mainTableMouseClicked
 
      private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi){
     for(Prijemka prijemka : prijmi){
@@ -359,6 +403,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
     private javax.swing.JButton jZobrazPrijemkyZamesiacButton1;
     private javax.swing.JButton jZobrazPrijenkyNaDenButton1;
     private javax.swing.JButton jZobrazdnesneprijemkyButton1;
+    private javax.swing.JButton jspatButton1;
     private javax.swing.JTable mainTable;
     // End of variables declaration//GEN-END:variables
 }
