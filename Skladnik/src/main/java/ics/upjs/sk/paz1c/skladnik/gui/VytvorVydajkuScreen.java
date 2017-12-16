@@ -59,25 +59,31 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         potvrdVydajkuButton = new javax.swing.JButton();
         stornoButton = new javax.swing.JButton();
         pridajMaterialuButton = new javax.swing.JButton();
-        vymazPoliaButton = new javax.swing.JButton();
         cenaSpoluTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        idLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        idLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        idLabel.setForeground(new java.awt.Color(51, 51, 51));
         idLabel.setText("ID:");
 
         idTextField.setEditable(false);
         idTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        pocetLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pocetLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        pocetLabel.setForeground(new java.awt.Color(51, 51, 51));
         pocetLabel.setText("Pocet:");
 
-        idMaterialuLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        idMaterialuLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        idMaterialuLabel.setForeground(new java.awt.Color(51, 51, 51));
         idMaterialuLabel.setText("ID materialu:");
 
-        cenaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
         cenaLabel.setText("Cena:");
 
         cenaTextField.setEditable(false);
@@ -92,6 +98,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(materialTable);
 
+        potvrdVydajkuButton.setBackground(new java.awt.Color(0, 102, 0));
         potvrdVydajkuButton.setText("Potvrdit");
         potvrdVydajkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +106,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             }
         });
 
+        stornoButton.setBackground(new java.awt.Color(0, 102, 0));
         stornoButton.setText("Storno");
         stornoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +114,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             }
         });
 
+        pridajMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
         pridajMaterialuButton.setText("Pridaj material");
         pridajMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,37 +122,40 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             }
         });
 
-        vymazPoliaButton.setText("Vymaz polia");
-
         cenaSpoluTextField.setEditable(false);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Cena spolu:");
+
+        jSeparator1.setBackground(new java.awt.Color(51, 51, 51));
+
+        jSeparator2.setBackground(new java.awt.Color(51, 51, 51));
+
+        jSeparator3.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cenaLabel)
                             .addComponent(pocetLabel)
                             .addComponent(idMaterialuLabel))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cenaTextField)
+                            .addComponent(cenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                             .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vymazPoliaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)))
+                            .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -159,7 +171,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                                         .addComponent(potvrdVydajkuButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                         .addComponent(stornoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel5)
-                                    .addComponent(idTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                                    .addComponent(idTextField)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -189,18 +201,22 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idMaterualuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idMaterialuLabel))
-                .addGap(37, 37, 37)
+                .addGap(9, 9, 9)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pocetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pocetLabel))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cenaLabel)
                     .addComponent(cenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pridajMaterialuButton)
-                    .addComponent(vymazPoliaButton))
+                .addGap(4, 4, 4)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -307,12 +323,14 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable materialTable;
     private javax.swing.JLabel pocetLabel;
     private javax.swing.JTextField pocetTextField;
     private javax.swing.JButton potvrdVydajkuButton;
     private javax.swing.JButton pridajMaterialuButton;
     private javax.swing.JButton stornoButton;
-    private javax.swing.JButton vymazPoliaButton;
     // End of variables declaration//GEN-END:variables
 }

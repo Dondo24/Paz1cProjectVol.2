@@ -34,8 +34,10 @@ public class VypisyScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Zobrazenie vypisov pre :");
 
+        jVydajkyButton1.setBackground(new java.awt.Color(0, 102, 0));
         jVydajkyButton1.setText("Vydajky");
         jVydajkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +45,7 @@ public class VypisyScreen extends javax.swing.JFrame {
             }
         });
 
+        jPrijemkyButton2.setBackground(new java.awt.Color(0, 102, 0));
         jPrijemkyButton2.setText("Prijemky");
         jPrijemkyButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,6 +53,7 @@ public class VypisyScreen extends javax.swing.JFrame {
             }
         });
 
+        jSpatButton3.setBackground(new java.awt.Color(0, 102, 0));
         jSpatButton3.setText("Spat");
         jSpatButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,14 +73,14 @@ public class VypisyScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                         .addComponent(jPrijemkyButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel1)
+                        .addGap(171, 171, 171)
+                        .addComponent(jSpatButton3)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jSpatButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
