@@ -284,13 +284,6 @@ public class MainScreen extends javax.swing.JFrame {
     
     //TO DO pouzivatel ktory je prihlaseny
     private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
-        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
-        Prijemka prijemka = new Prijemka();        
-        prijemka.setId_pouzivatel(pouzivatel.getId());     
-        prijemka.setDatum(timeStamp);
-        prijemka.setTypPohybu(1L);
-        prijemkaDao.pridajPrijemka(prijemka);       
         VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();  
         vytvorPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorPrijemkuScreen.setVisible(true);
@@ -303,13 +296,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
 
     private void vytvorVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorVydajkuButtonActionPerformed
-       String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
-        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
-        Vydajka vydajka = new Vydajka();        
-        vydajka.setId_pouzivatel(pouzivatel.getId());     
-        vydajka.setDatum(timeStamp);  
-        vydajka.setTyp_pohybu(2L);        
-        vydajkaDao.pridajVydajku(vydajka);       
         VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();    
         vytvorVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorVydajkuScreen.setVisible(true);
@@ -368,7 +354,7 @@ public class MainScreen extends javax.swing.JFrame {
        zobrazPrijemkuScreen.naplnTabulkuPrijmi();
        zobrazPrijemkuScreen.setVisible(true);
        this.setVisible(false);
-       dispose();
+      
        }
 
        
@@ -379,7 +365,7 @@ public class MainScreen extends javax.swing.JFrame {
        zobrazVydajkuScreen.naplnTabulkuVydaje();
        zobrazVydajkuScreen.setVisible(true);
        this.setVisible(false);
-       dispose();
+     
        }
 
        

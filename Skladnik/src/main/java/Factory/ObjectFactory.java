@@ -18,6 +18,7 @@ import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import dao.SkladDao;
 import dao.VydajkaDao;
+import java.sql.Connection;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -33,7 +34,7 @@ public enum ObjectFactory {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUrl("jdbc:mysql://localhost/skladnik?serverTimezone=UTC");
             dataSource.setUser("skladnik");
-            dataSource.setPassword("sklad");
+            dataSource.setPassword("sklad");           
             jdbcTemplate = new JdbcTemplate(dataSource);
         }
         return jdbcTemplate;

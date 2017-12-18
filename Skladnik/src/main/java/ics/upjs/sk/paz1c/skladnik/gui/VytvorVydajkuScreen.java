@@ -9,10 +9,15 @@ import Factory.ObjectFactory;
 import dao.MaterialDao;
 import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
+import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,15 +30,17 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
        VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
        PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
        MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
-       public int idVydajky =vydajkaDao.getLastId();
+       PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+        private int idVydajky = vydajkaDao.getLastId()+1;
+        Pouzivatel pouzivatel;
      
     /**
      * Creates new form VytvorPrijemkuScreen
      */
     public VytvorVydajkuScreen() {
         initComponents();       
-        idTextField.setText(Integer.toString(idVydajky));
         
+        idTextField.setText(Integer.toString(idVydajky));      
       
   
     }
@@ -253,8 +260,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         materialDao.upravStavMaterial(idMaterialu, pocet, 2);
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
-        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});        
-        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)).replace(',', '.'));
+        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),new DecimalFormat("##.##").format(cena).replace(',','.'),pocet});        
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)).replace(',','.'));
         
         }
        
@@ -263,7 +270,17 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
     private void potvrdVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdVydajkuButtonActionPerformed
-        vydajkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idVydajky);
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
+        pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+        Vydajka vydajka = new Vydajka();        
+        vydajka.setId_pouzivatel(pouzivatel.getId());     
+        vydajka.setDatum(timeStamp);  
+        vydajka.setTyp_pohybu(2L);
+        vydajka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
+        vydajkaDao.pridajVydajku(vydajka); 
+        int idVydajky =vydajkaDao.getLastId();
+       
+        
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
         main.uzivatelLable.setText(this.uzivatelLabel.getText());
@@ -290,7 +307,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
         // null or not Integer will throw exception
         
-        total += Double.parseDouble(new DecimalFormat("##.##").format((Double) mdl.getValueAt(i, columnCena)).replace(",", ".")) * (Double) mdl.getValueAt(i, columnPocet);
+        total += Double.parseDouble((String) mdl.getValueAt(i, columnCena)) * (Double) mdl.getValueAt(i, columnPocet);
     }
     return total;
 }

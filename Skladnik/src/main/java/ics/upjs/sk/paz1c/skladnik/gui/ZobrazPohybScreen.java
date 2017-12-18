@@ -13,6 +13,7 @@ import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +54,7 @@ public VydajkaDao vydajkaDao;
         typPohybuTextField.setText("1");
         List<PohybMaterialu> pohyby = pohybMaterialuDao.getAllPohybyByPrijemkaId(Long.parseLong(idScreenTextField.getText()));        
         for(PohybMaterialu pohybMaterialu : pohyby){
-       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getPocet(),pohybMaterialu.getCena()});
+       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getPocet(),new DecimalFormat("##.##").format(pohybMaterialu.getCena())});
     }
     }
     
@@ -63,7 +64,7 @@ public VydajkaDao vydajkaDao;
         typPohybuTextField.setText("2");
         List<PohybMaterialu> pohyby = pohybMaterialuDao.getAllPohybyByVydajkaId(Long.parseLong(idScreenTextField.getText()));        
         for(PohybMaterialu pohybMaterialu : pohyby){
-       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getCena(),pohybMaterialu.getPocet()});
+       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getPocet(),new DecimalFormat("##.##").format(pohybMaterialu.getCena())});
     }
     }
     

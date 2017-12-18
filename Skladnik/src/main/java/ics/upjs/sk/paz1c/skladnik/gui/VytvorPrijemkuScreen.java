@@ -9,9 +9,14 @@ import Factory.ObjectFactory;
 import dao.MaterialDao;
 import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
+import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,14 +29,18 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
        PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
        PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
        MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
-       public int idPrijemky =prijemkaDao.getLastId();
+       PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+       private int idPrijemky=prijemkaDao.getLastId()+1;
+       private Pouzivatel pouzivatel;
+    
       
       
     /**
      * Creates new form VytvorPrijemkuScreen
      */
     public VytvorPrijemkuScreen() {
-        initComponents();       
+               
+        initComponents();                
         idTextField.setText(Integer.toString(idPrijemky));
   
     }
@@ -238,6 +247,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
+       pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());  
         int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         double pocet = Double.parseDouble(pocetTextField.getText());
         int idPrijemky = this.idPrijemky;
@@ -260,7 +270,13 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
     private void potvrdPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdPrijemkuButtonActionPerformed
-        prijemkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idPrijemky);
+        Prijemka prijemka = new Prijemka();   
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        prijemka.setId_pouzivatel(pouzivatel.getId());     
+        prijemka.setDatum(timeStamp);
+        prijemka.setTypPohybu(1L);
+        prijemka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
+        prijemkaDao.pridajPrijemka(prijemka);         
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
         main.uzivatelLable.setText(this.uzivatelLabel.getText());
