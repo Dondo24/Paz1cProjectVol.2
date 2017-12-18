@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
  *
  * @author Marcel
  */
-public class LoginScreen extends javax.swing.JFrame {
+public class LoginScreen extends javax.swing.JFrame {  
+   
 
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
     private Pouzivatel prihlaseny = new Pouzivatel();
@@ -175,7 +176,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "zadaj heslo");
                 } else {
                     if (Arrays.equals(correctPassword, passwordFromField)) {
-                        MainScreen main = new MainScreen();
+                 MainScreen  main = new MainScreen();
                         main.setVisible(true);
                         this.setVisible(false);
                         main.uzivatelLable.setText(nameFromTextField);

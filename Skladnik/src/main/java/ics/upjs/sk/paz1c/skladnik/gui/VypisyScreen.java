@@ -31,6 +31,7 @@ public class VypisyScreen extends javax.swing.JFrame {
         jVydajkyButton1 = new javax.swing.JButton();
         jPrijemkyButton2 = new javax.swing.JButton();
         jSpatButton3 = new javax.swing.JButton();
+        uzivatelLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,10 @@ public class VypisyScreen extends javax.swing.JFrame {
             }
         });
 
+        uzivatelLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
+        uzivatelLabel.setText("Uzivatel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,18 +85,23 @@ public class VypisyScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(114, 114, 114))
+                .addGap(113, 113, 113))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(uzivatelLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(uzivatelLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jVydajkyButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jPrijemkyButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jVydajkyButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPrijemkyButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(jSpatButton3))
         );
 
@@ -100,6 +110,7 @@ public class VypisyScreen extends javax.swing.JFrame {
 
     private void jSpatButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSpatButton3ActionPerformed
        MainScreen MS =new MainScreen();
+       MS.uzivatelLable.setText(this.uzivatelLabel.getText());
        MS.setVisible(true);
        this.setVisible(false);
        dispose();
@@ -107,6 +118,7 @@ public class VypisyScreen extends javax.swing.JFrame {
 
     private void jVydajkyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVydajkyButton1ActionPerformed
      VypisyVydajkyScreen VVS = new VypisyVydajkyScreen();
+     VVS.uzivatelLabel.setText(this.uzivatelLabel.getText());
      VVS.setVisible(true);
      this.setVisible(false);
      dispose();
@@ -114,6 +126,7 @@ public class VypisyScreen extends javax.swing.JFrame {
 
     private void jPrijemkyButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrijemkyButton2ActionPerformed
         VypisyPrijemkyScreen VPS = new VypisyPrijemkyScreen();
+        VPS.uzivatelLabel.setText(this.uzivatelLabel.getText());
         VPS.setVisible(true);
         this.setVisible(false);
         dispose();
@@ -160,5 +173,6 @@ public class VypisyScreen extends javax.swing.JFrame {
     private javax.swing.JButton jPrijemkyButton2;
     private javax.swing.JButton jSpatButton3;
     private javax.swing.JButton jVydajkyButton1;
+    public javax.swing.JLabel uzivatelLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -61,6 +61,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        uzivatelLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,14 +206,18 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jSeparator3.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator3.setForeground(new java.awt.Color(51, 51, 51));
 
+        uzivatelLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
+        uzivatelLabel.setText("Uzivatel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,11 +264,10 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(232, 232, 232)
+                                .addComponent(uzivatelLabel)
+                                .addGap(176, 176, 176)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jspatButton1)))
+                            .addComponent(jspatButton1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -317,7 +321,9 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(uzivatelLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,6 +391,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
 
     private void jspatButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton1ActionPerformed
        MainScreen ms = new MainScreen();
+       ms.uzivatelLable.setText(this.uzivatelLabel.getText());
        ms.setVisible(true);
        this.setVisible(false);
        dispose();
@@ -488,5 +495,6 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
     private javax.swing.JButton jZobrazdnesneprijemkyButton1;
     private javax.swing.JButton jspatButton1;
     private javax.swing.JTable mainTable;
+    public javax.swing.JLabel uzivatelLabel;
     // End of variables declaration//GEN-END:variables
 }

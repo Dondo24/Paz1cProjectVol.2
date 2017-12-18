@@ -64,6 +64,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        uzivatelLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +124,11 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         });
 
         cenaSpoluTextField.setEditable(false);
+        cenaSpoluTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cenaSpoluTextFieldActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -133,6 +139,10 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(51, 51, 51));
 
         jSeparator3.setBackground(new java.awt.Color(51, 51, 51));
+
+        uzivatelLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
+        uzivatelLabel.setText("Uzivatel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +161,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                             .addComponent(idMaterialuLabel))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(cenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -167,21 +177,33 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(potvrdVydajkuButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                        .addComponent(stornoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel5)
-                                    .addComponent(idTextField)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(idTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(potvrdVydajkuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(stornoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(13, 13, 13))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(uzivatelLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(idLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,14 +212,15 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(potvrdVydajkuButton)
                         .addGap(18, 18, 18)
-                        .addComponent(stornoButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                        .addComponent(stornoButton)
+                        .addGap(22, 22, 22))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(uzivatelLabel)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idMaterualuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idMaterialuLabel))
@@ -217,7 +240,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,24 +277,31 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         vydajkaDao.upravCenu(Double.parseDouble(cenaSpoluTextField.getText()), idVydajky);
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
+        main.uzivatelLable.setText(this.uzivatelLabel.getText());
         this.setVisible(false);
         dispose();
         
     }//GEN-LAST:event_potvrdVydajkuButtonActionPerformed
 
     private void stornoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stornoButtonActionPerformed
-        MainScreen ms = new MainScreen();
-        ms.setVisible(true);
+        MainScreen main = new MainScreen();
+        main.setVisible(true);
+        main.uzivatelLable.setText(this.uzivatelLabel.getText());
         this.setVisible(false);
         dispose();
     }//GEN-LAST:event_stornoButtonActionPerformed
 
-    public int sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
-    int total = 0;
+    private void cenaSpoluTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenaSpoluTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cenaSpoluTextFieldActionPerformed
+
+    public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
+    double total = 0;
     // iterate over all columns
     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
         // null or not Integer will throw exception
-        total += (Integer) mdl.getValueAt(i, columnCena) * (Integer) mdl.getValueAt(i, columnPocet);
+        
+        total += (Double) mdl.getValueAt(i, columnCena) * (Double) mdl.getValueAt(i, columnPocet);
     }
     return total;
 }
@@ -332,5 +362,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private javax.swing.JButton potvrdVydajkuButton;
     private javax.swing.JButton pridajMaterialuButton;
     private javax.swing.JButton stornoButton;
+    public javax.swing.JLabel uzivatelLabel;
     // End of variables declaration//GEN-END:variables
 }

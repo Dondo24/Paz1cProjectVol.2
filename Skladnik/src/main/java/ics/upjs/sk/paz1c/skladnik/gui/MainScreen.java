@@ -283,18 +283,19 @@ public class MainScreen extends javax.swing.JFrame {
     //TO DO pouzivatel ktory je prihlaseny
     private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
-        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela("pista");
+        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
         Prijemka prijemka = new Prijemka();        
         prijemka.setId_pouzivatel(pouzivatel.getId());     
         prijemka.setDatum(timeStamp);
         prijemka.setTypPohybu(1L);
         prijemkaDao.pridajPrijemka(prijemka);       
-        VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();                       
+        VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();  
+        vytvorPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorPrijemkuScreen.setVisible(true);
         this.setVisible(false);
-        dispose();
-        System.out.println(prijemkaDao.getAll()
-        );
+       
+       
+        
       
         
     }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
@@ -307,11 +308,12 @@ public class MainScreen extends javax.swing.JFrame {
         vydajka.setDatum(timeStamp);  
         vydajka.setTyp_pohybu(2L);        
         vydajkaDao.pridajVydajku(vydajka);       
-        VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();                       
+        VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();    
+        vytvorVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorVydajkuScreen.setVisible(true);
         this.setVisible(false);
-        dispose();
-        System.out.println(vydajkaDao.getAll());
+     
+       
     }//GEN-LAST:event_vytvorVydajkuButtonActionPerformed
 
     private void ukazPrijmiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazPrijmiButtonActionPerformed
@@ -340,6 +342,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jPridajKartuMaterialuButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPridajKartuMaterialuButton5ActionPerformed
         PridajKartuMaterialuScreen PKMS = new PridajKartuMaterialuScreen();
+        PKMS.uzivatelLabel.setText(this.uzivatelLable.getText());
         PKMS.setVisible(true);
         this.setVisible(false);
         //tu asi dispose netreba nie ? 
@@ -355,6 +358,7 @@ public class MainScreen extends javax.swing.JFrame {
        
        if(typPohybu.equals("1")){
        ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
+       zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
        zobrazPrijemkuScreen.idScreenTextField.setText(id);
        zobrazPrijemkuScreen.naplnTabulkuPrijmi();
        zobrazPrijemkuScreen.setVisible(true);
@@ -364,10 +368,11 @@ public class MainScreen extends javax.swing.JFrame {
 
        
          if(typPohybu.equals("2")){
-       ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
-       zobrazPrijemkuScreen.idScreenTextField.setText(id);
-       zobrazPrijemkuScreen.naplnTabulkuVydaje();
-       zobrazPrijemkuScreen.setVisible(true);
+       ZobrazPohybScreen zobrazVydajkuScreen = new ZobrazPohybScreen();
+       zobrazVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
+       zobrazVydajkuScreen.idScreenTextField.setText(id);
+       zobrazVydajkuScreen.naplnTabulkuVydaje();
+       zobrazVydajkuScreen.setVisible(true);
        this.setVisible(false);
        dispose();
        }
@@ -378,6 +383,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jVypisyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVypisyButton1ActionPerformed
         VypisyScreen VS = new VypisyScreen();
+        VS.uzivatelLabel.setText(this.uzivatelLable.getText());
         VS.setVisible(true);
        this.setVisible(false);
        dispose();
