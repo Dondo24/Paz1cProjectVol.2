@@ -128,11 +128,6 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
 
         jPrijemkyNaDenMesiacComboBox3.setBackground(new java.awt.Color(51, 51, 51));
         jPrijemkyNaDenMesiacComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        jPrijemkyNaDenMesiacComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPrijemkyNaDenMesiacComboBox3ActionPerformed(evt);
-            }
-        });
 
         jPrijemkyNaDenDenComboBox1.setBackground(new java.awt.Color(51, 51, 51));
         jPrijemkyNaDenDenComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
@@ -145,7 +140,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
             }
         });
 
-        mainTable.setBackground(new java.awt.Color(0, 102, 0));
+        mainTable.setBackground(new java.awt.Color(0, 204, 102));
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -345,14 +340,6 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
         naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaRok(rok));
     }//GEN-LAST:event_jZobrazPrijemkyRokButton1ActionPerformed
-
-    private void jPrijemkyNaDenMesiacComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrijemkyNaDenMesiacComboBox3ActionPerformed
-        nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
-        tableModel.getDataVector().removeAllElements();
-        tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajDnesneOPrijemky());
-    }//GEN-LAST:event_jPrijemkyNaDenMesiacComboBox3ActionPerformed
 
     private void jZobrazdnesneprijemkyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazdnesneprijemkyButton1ActionPerformed
          nastavModelDefault();

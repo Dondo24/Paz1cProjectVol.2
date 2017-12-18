@@ -88,7 +88,7 @@ public VydajkaDao vydajkaDao;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        zobrazPohybyTable.setBackground(new java.awt.Color(0, 102, 0));
+        zobrazPohybyTable.setBackground(new java.awt.Color(0, 204, 102));
         zobrazPohybyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

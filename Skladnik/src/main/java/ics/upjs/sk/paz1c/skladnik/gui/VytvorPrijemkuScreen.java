@@ -95,6 +95,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
         cenaLabel.setText("Cena:");
 
+        materialTable.setBackground(new java.awt.Color(0, 204, 102));
         materialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

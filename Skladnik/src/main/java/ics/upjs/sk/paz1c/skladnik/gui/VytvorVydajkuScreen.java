@@ -92,6 +92,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
 
+        materialTable.setBackground(new java.awt.Color(0, 204, 102));
         materialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
