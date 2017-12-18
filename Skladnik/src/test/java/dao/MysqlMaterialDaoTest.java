@@ -86,7 +86,7 @@ public class MysqlMaterialDaoTest {
     test.pridajMaterial(testMaterial);
      List<Material> vsetky = test.getAll();
        long id = vsetky.get(0).getId();
-    long aktualnystav = test.dajMaterialById(id).getStav();
+    double aktualnystav = test.dajMaterialById(id).getStav();
     long UpravaStavu = 9;
     test.upravStavMaterial(id, UpravaStavu, 1);
         assertEquals(test.dajMaterialById(id).getStav(), aktualnystav+UpravaStavu);

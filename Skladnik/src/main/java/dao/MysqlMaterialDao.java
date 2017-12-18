@@ -54,8 +54,8 @@ public class MysqlMaterialDao implements MaterialDao{
     }
 
     @Override
-    public void upravStavMaterial(long idMaterialu, long pocet,long typPohybu) {
-        long upravaMaterialu = 0;
+    public void upravStavMaterial(long idMaterialu, double pocet,long typPohybu) {
+        double upravaMaterialu = 0;
        
         
         if(typPohybu == 1){

@@ -12,6 +12,7 @@ import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -248,7 +249,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
         int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
-        int pocet = Integer.parseInt(pocetTextField.getText());
+        double pocet = Double.parseDouble(pocetTextField.getText());
         int idVydajky = this.idVydajky;
         double cena = materialDao.dajMaterialById(idMaterialu).getCena();
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
@@ -266,7 +267,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
-        cenaSpoluTextField.setText(sumaSpolu(model,2,3)+"");
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)));
         }
        
         

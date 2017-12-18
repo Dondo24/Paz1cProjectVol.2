@@ -316,6 +316,9 @@ public class MainScreen extends javax.swing.JFrame {
        
     }//GEN-LAST:event_vytvorVydajkuButtonActionPerformed
 
+    
+    
+   
     private void ukazPrijmiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazPrijmiButtonActionPerformed
         nastavModelDefault();
         tableModel = (DefaultTableModel) mainTable.getModel(); 

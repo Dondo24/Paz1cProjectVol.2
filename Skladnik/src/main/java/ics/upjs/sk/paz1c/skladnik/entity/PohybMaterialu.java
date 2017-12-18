@@ -14,7 +14,7 @@ public class PohybMaterialu {
     
     private long id;
     private long id_materialu;
-    private long pocet;
+    private double pocet;
     private double cena;
     private long prijemka_id;
     private long vydajka_id;
@@ -36,11 +36,11 @@ public class PohybMaterialu {
         this.id_materialu = id_materialu;
     }
 
-    public long getPocet() {
+    public double getPocet() {
         return pocet;
     }
 
-    public void setPocet(long pocet) {
+    public void setPocet(double pocet) {
         this.pocet = pocet;
     }
 

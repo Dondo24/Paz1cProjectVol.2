@@ -11,6 +11,7 @@ import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
 import dao.PrijemkaDao;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -143,8 +144,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(uzivatelLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(uzivatelLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +239,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
         int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
-        int pocet = Integer.parseInt(pocetTextField.getText());
+        double pocet = Double.parseDouble(pocetTextField.getText());
         int idPrijemky = this.idPrijemky;
         double cena = Double.parseDouble(cenaTextField.getText());
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
@@ -255,7 +255,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
-        cenaSpoluTextField.setText(sumaSpolu(model,2,3)+"");
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)));
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
@@ -282,12 +282,12 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     // iterate over all columns
     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
         // null or not Integer will throw exception
-        total += (Double) mdl.getValueAt(i, columnCena) * (Double) mdl.getValueAt(i, columnPocet);
+         total += (Double) mdl.getValueAt(i, columnCena) * (Double) mdl.getValueAt(i, columnPocet);
     }
     return total;
 }
     
-    public double upravCenuMaterialu(long idMaterialu, double cena, long pocet){    
+    public double upravCenuMaterialu(long idMaterialu, double cena, double pocet){    
     double cenaPoUprave =0;
     double sucetCien = 0;
     double sucetSucinov = 0;
@@ -362,4 +362,6 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private javax.swing.JButton stornoButton;
     public javax.swing.JLabel uzivatelLabel;
     // End of variables declaration//GEN-END:variables
+
+  
 }
