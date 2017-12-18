@@ -18,7 +18,7 @@ public class Vydajka {
     private long id;
     private long id_pouzivatel; 
     private double cena ;
-    private Date datum;
+    private String datum;
     private Long typ_pohybu;
 
     public Long getTyp_pohybu() {
@@ -57,15 +57,13 @@ public class Vydajka {
         this.cena = cena;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
-
-   
 
     @Override
     public String toString() {

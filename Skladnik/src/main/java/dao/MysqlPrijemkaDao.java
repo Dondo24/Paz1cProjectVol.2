@@ -57,7 +57,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
                p.setId(rs.getLong("id"));
                p.setCena(rs.getDouble("cena"));
                p.setId_pouzivatel(rs.getLong("pouzivatel_id"));
-               p.setDatum(rs.getDate("datum"));
+               p.setDatum(rs.getString("datum"));
                p.setTypPohybu(rs.getLong("typ_pohybu"));
                return p;
             }
@@ -117,7 +117,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
             Prijemka prijemka = new Prijemka();
             prijemka.setId(rs.getLong("id"));
             prijemka.setCena(rs.getDouble("cena"));
-            prijemka.setDatum(rs.getDate("datum"));
+            prijemka.setDatum(rs.getString("datum"));
             
             return prijemka;
         }

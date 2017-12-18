@@ -283,11 +283,11 @@ public class MainScreen extends javax.swing.JFrame {
     
     //TO DO pouzivatel ktory je prihlaseny
     private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
-      //  String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
         Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
         Prijemka prijemka = new Prijemka();        
         prijemka.setId_pouzivatel(pouzivatel.getId());     
-        prijemka.setDatum(new Date(System.currentTimeMillis()));
+        prijemka.setDatum(timeStamp);
         prijemka.setTypPohybu(1L);
         prijemkaDao.pridajPrijemka(prijemka);       
         VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();  
@@ -302,11 +302,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
 
     private void vytvorVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorVydajkuButtonActionPerformed
-       //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
+       String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
         Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
         Vydajka vydajka = new Vydajka();        
         vydajka.setId_pouzivatel(pouzivatel.getId());     
-        vydajka.setDatum(new Date(System.currentTimeMillis()));  
+        vydajka.setDatum(timeStamp);  
         vydajka.setTyp_pohybu(2L);        
         vydajkaDao.pridajVydajku(vydajka);       
         VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();    
