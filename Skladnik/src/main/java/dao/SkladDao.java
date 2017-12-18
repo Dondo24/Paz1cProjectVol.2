@@ -19,4 +19,5 @@ public interface SkladDao {
     void odstranSklad(Sklad sklad);
     public Sklad dajIdSkladu(String nazov);
     List<String> dajVsetkySklady();
+    void odstranVsetky();
 }

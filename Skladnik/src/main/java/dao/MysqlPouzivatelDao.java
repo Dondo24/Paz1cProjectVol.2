@@ -51,6 +51,11 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
 
     }
 
+    @Override
+    public void vymazKazdeho() {
+        jdbcTemplate.update("truncate pouzivatel");
+    }
+
    
     
     

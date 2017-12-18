@@ -36,7 +36,7 @@ public class MysqlSkladDao implements SkladDao{
 
     @Override
     public void odstranSklad(Sklad sklad) {
-        jdbcTemplate.update("delete from sklad where id=?");
+        jdbcTemplate.update("delete from sklad where id=?",sklad.getId());
         
     }
 
@@ -53,6 +53,11 @@ public class MysqlSkladDao implements SkladDao{
          BeanPropertyRowMapper<Sklad> mapper = BeanPropertyRowMapper.newInstance(Sklad.class);
          List<String> nazovSkladov = (List<String>) jdbcTemplate.queryForList(sql,String.class);
         return nazovSkladov;
+    }
+
+    @Override
+    public void odstranVsetky() {
+     jdbcTemplate.update("truncate sklad");
     }
     
 }

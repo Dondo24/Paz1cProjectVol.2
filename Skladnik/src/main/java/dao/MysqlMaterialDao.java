@@ -34,8 +34,8 @@ public class MysqlMaterialDao implements MaterialDao{
      
    }
    public void odstranMaterial(Material material){
-       jdbcTemplate.update("DELETE FROM material where id = ?");
-       material.getId();
+       jdbcTemplate.update("DELETE FROM material where id = ?",material.getId());
+       
    }
 
     @Override

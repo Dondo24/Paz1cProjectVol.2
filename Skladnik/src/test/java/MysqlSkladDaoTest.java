@@ -1,5 +1,6 @@
 
 import Factory.ObjectFactory;
+import Factory.TestObjectFactory;
 import dao.MysqlSkladDao;
 import dao.SkladDao;
 import ics.upjs.sk.paz1c.skladnik.entity.Sklad;
@@ -20,7 +21,7 @@ public class MysqlSkladDaoTest {
     
     @Test
     public void testPridajSklad(){
-        SkladDao skladDao = ObjectFactory.INSTANCE.getSkladDao();
+        SkladDao skladDao = TestObjectFactory.INSTANCE.getSkladDao();
         Sklad sklad = new Sklad();
         sklad.setNazov("materialovy");
         sklad.setAdresa("komenskeho");

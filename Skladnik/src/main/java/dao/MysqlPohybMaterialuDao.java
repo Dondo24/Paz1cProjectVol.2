@@ -28,7 +28,7 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
 
     @Override
     public void pridajPohybMaterialuPrijem(PohybMaterialu pohybMaterialu) {
-         String sql = "insert into PohybMaterialu values(?,?,?,?,?,?)";
+         String sql = "insert into PohybMaterialu(id,id_materialu,pocet,cena,prijemka_id,vydajka_id) values(?,?,?,?,?,?)";
        jdbcTemplate.update(sql,null,pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),null);
     }
      @Override
@@ -49,7 +49,9 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
 
     @Override
     public List<PohybMaterialu> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     String sql = "SELECT * FROM pohybmaterialu";
+        BeanPropertyRowMapper<PohybMaterialu> mapper = BeanPropertyRowMapper.newInstance(PohybMaterialu.class);
+        return jdbcTemplate.query(sql, mapper);   
     }
 
     @Override

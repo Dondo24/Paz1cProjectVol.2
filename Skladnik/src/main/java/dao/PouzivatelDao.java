@@ -17,4 +17,5 @@ public interface PouzivatelDao {
     Pouzivatel dajPouzivatela(String meno);
     void nastavHeslo(String meno,String heslo);
     List<String> dajVsetkychMena();
+    void vymazKazdeho();
 }
