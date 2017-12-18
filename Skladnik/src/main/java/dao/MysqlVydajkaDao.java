@@ -58,7 +58,7 @@ public class MysqlVydajkaDao implements VydajkaDao{
                v.setId(rs.getLong("id"));
                v.setCena(rs.getDouble("cena"));
                v.setId_pouzivatel(rs.getLong("pouzivatel_id"));
-               v.setDatum(rs.getString("datum"));
+               v.setDatum(rs.getDate("datum"));
                v.setTyp_pohybu(rs.getLong("typ_pohybu"));
                return v;
             }
@@ -113,7 +113,7 @@ private class VydajkaRowMapper implements RowMapper<Vydajka> {
             Vydajka vydajka = new Vydajka();
             vydajka.setId(rs.getLong("id"));
             vydajka.setCena(rs.getDouble("cena"));
-            vydajka.setDatum(rs.getString("datum"));
+            vydajka.setDatum(rs.getDate("datum"));
             
             return vydajka;
         }
