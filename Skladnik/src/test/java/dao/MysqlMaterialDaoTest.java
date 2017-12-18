@@ -30,7 +30,7 @@ public class MysqlMaterialDaoTest {
         testMaterial.setId((long)1);
         testMaterial.setId_sklad(1);
         testMaterial.setNazov("Test");
-        testMaterial.setStav(10);
+        testMaterial.setStav((double)10);
     }
 
     @Test
@@ -87,9 +87,13 @@ public class MysqlMaterialDaoTest {
      List<Material> vsetky = test.getAll();
        long id = vsetky.get(0).getId();
     double aktualnystav = test.dajMaterialById(id).getStav();
-    long UpravaStavu = 9;
+    double UpravaStavu = 9;
+    double ocakavanyStav = aktualnystav+UpravaStavu;
+   
     test.upravStavMaterial(id, UpravaStavu, 1);
-        assertEquals(test.dajMaterialById(id).getStav(), aktualnystav+UpravaStavu);
+     double stavpouprave = test.dajMaterialById(id).getStav();
+    Assert.assertEquals(stavpouprave, ocakavanyStav);
+        
     }
 
     @Test

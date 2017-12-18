@@ -42,7 +42,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public void odstranPrijemku(Prijemka prijemka) {
-        String sql = "deleter from Prijemka where id = ?";
+        String sql = "delete from Prijemka where id = ?";
         jdbcTemplate.update(sql,prijemka.getId());
     }
 

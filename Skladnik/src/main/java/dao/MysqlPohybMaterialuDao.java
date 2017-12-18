@@ -50,8 +50,20 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
     @Override
     public List<PohybMaterialu> getAll() {
      String sql = "SELECT * FROM pohybmaterialu";
-        BeanPropertyRowMapper<PohybMaterialu> mapper = BeanPropertyRowMapper.newInstance(PohybMaterialu.class);
-        return jdbcTemplate.query(sql, mapper);   
+        List<PohybMaterialu> pohyb = jdbcTemplate.query(sql, new RowMapper<PohybMaterialu>() {
+         @Override
+         public PohybMaterialu mapRow(ResultSet rs, int i) throws SQLException {
+           PohybMaterialu pm = new PohybMaterialu();
+           pm.setId(rs.getLong("id"));
+           pm.setCena(rs.getLong("cena"));
+           pm.setId_materialu(rs.getLong("id_materialu"));
+           pm.setPocet(rs.getDouble("pocet"));
+           pm.setPrijemka_id(rs.getLong("prijemka_id"));
+           pm.setVydajka_id(rs.getLong("vydajka_id"));
+           return pm;
+         }
+     });
+        return pohyb;
     }
 
     @Override
@@ -118,6 +130,11 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
         }, id);   
         return pohyby;
         
+    }
+
+    @Override
+    public void zmazVsetko() {
+       jdbcTemplate.update("truncate pohybmaterialu");
     }
     
 }

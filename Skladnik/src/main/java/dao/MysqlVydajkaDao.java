@@ -43,7 +43,7 @@ public class MysqlVydajkaDao implements VydajkaDao{
 
     @Override
     public void odstranVydajku(Vydajka vydajka) {
-        String sql = "deleter from Vydajka where id = ?";
+        String sql = "delete from Vydajka where id = ?";
         jdbcTemplate.update(sql,vydajka.getId());
     }
 
@@ -105,6 +105,11 @@ public class MysqlVydajkaDao implements VydajkaDao{
     public List<Vydajka> dajVydajkuNaDatum(int rok, int mesiac, int den) {
          String sql = "Select id,cena ,datum from Vydajka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" order by id desc";
        return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
+    }
+
+    @Override
+    public void zmazVsetko() {
+        jdbcTemplate.update("truncate vydajka");
     }
 private class VydajkaRowMapper implements RowMapper<Vydajka> {
 

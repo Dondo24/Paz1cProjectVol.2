@@ -19,56 +19,74 @@ import static org.junit.Assert.*;
 public class MysqlPohybMaterialuDaoTest {
     
     private MysqlPohybMaterialuDao test = new MysqlPohybMaterialuDao(TestObjectFactory.INSTANCE.getJdbcTemplate());
-    private PohybMaterialu testpohyb = new PohybMaterialu();
-    
+    private PohybMaterialu testpohybV = new PohybMaterialu();
+    private PohybMaterialu testpohybP = new PohybMaterialu();
     public MysqlPohybMaterialuDaoTest() {
-        
+        testpohybP.setCena(1);
+        testpohybP.setId_materialu(1);
+        testpohybP.setPocet(1);
+        testpohybP.setPrijemka_id(1);
+        testpohybP.setVydajka_id(0);
+        System.out.println("ahojjjjj");
+        testpohybV.setCena(1);
+        testpohybV.setId_materialu(1);
+        testpohybV.setPocet(1);
+       // testpohybV.setPrijemka_id(0);
+        testpohybV.setVydajka_id(1);
        
         
     }
 
     @Test
     public void testPridajPohybMaterialuPrijem() {
-        PohybMaterialu test2 = new PohybMaterialu();
-        test2.setPrijemka_id(2);
         
-          System.out.println("Ahoj");
-        test.pridajPohybMaterialuPrijem(test2);
         List<PohybMaterialu> vsetky = test.getAll();
-         System.out.println("Ahoj");
-        int pocitadlopred = 0;
-        int pocitadlopo= 0;
-        for (PohybMaterialu pohybMaterialu : vsetky) {
-            if(pohybMaterialu.getPrijemka_id()!=0){
-                pocitadlopred++;            
-        } 
-          
-        }
-          System.out.println(pocitadlopo);
-        testpohyb.setPrijemka_id(1);
-        test.pridajPohybMaterialuPrijem(testpohyb);
-         for (PohybMaterialu pohybMaterialu : vsetky) {
-            if(pohybMaterialu.getPrijemka_id()!=0){
-                pocitadlopo++;            
-        }     
-        }
-         Assert.assertEquals(pocitadlopo, pocitadlopred+1);
+        test.pridajPohybMaterialuPrijem(testpohybP);
+        Assert.assertEquals(vsetky.size(), test.getAll().size()-1);
+        
+      
     }
 
     @Test
     public void testPridajPohybMaterialuVydaj() {
+         List<PohybMaterialu> vsetky = test.getAll();
+        test.pridajPohybMaterialuVydaj(testpohybV);
+        Assert.assertEquals(vsetky.size(), test.getAll().size()-1);
+        
     }
+    
 
     @Test
     public void testGetAllPohybyByPrijemkaId() {
+        test.zmazVsetko();
+        test.pridajPohybMaterialuPrijem(testpohybP);
+        List<PohybMaterialu> vsetky = test.getAll();
+        PohybMaterialu prve = vsetky.get(0);
+        long id = prve.getPrijemka_id();
+        List<PohybMaterialu>  prijem = test.getAllPohybyByPrijemkaId(id);
+        Assert.assertEquals(prijem.size(), 1);
     }
 
     @Test
     public void testGetAllPohybyByVydajkaId() {
+        test.zmazVsetko();
+        test.pridajPohybMaterialuVydaj(testpohybV);
+        List<PohybMaterialu> vsetky = test.getAll();
+        PohybMaterialu prve = vsetky.get(0);
+        long id = prve.getVydajka_id();
+        List<PohybMaterialu> vydaj = test.getAllPohybyByVydajkaId(id);
+        Assert.assertEquals(vydaj.size(), 1);
     }
 
     @Test
     public void testGetPohybyByMaterialId() {
+         test.zmazVsetko();
+         test.pridajPohybMaterialuPrijem(testpohybP);
+         List<PohybMaterialu> vsetky = test.getAll();
+         PohybMaterialu prve = vsetky.get(0);
+         long idmaterialu = prve.getId_materialu();
+         List<PohybMaterialu> materialid = test.getPohybyByMaterialId(idmaterialu);
+         Assert.assertEquals(materialid.size(), 1);
     }
     
 }
