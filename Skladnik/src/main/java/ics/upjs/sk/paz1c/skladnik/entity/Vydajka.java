@@ -7,6 +7,7 @@ package ics.upjs.sk.paz1c.skladnik.entity;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
+import java.util.Date;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Vydajka {
     private long id;
     private long id_pouzivatel; 
     private double cena ;
-    private String datum;
+    private Date datum;
     private Long typ_pohybu;
 
     public Long getTyp_pohybu() {
@@ -56,13 +57,15 @@ public class Vydajka {
         this.cena = cena;
     }
 
-    public String getDatum() {
+    public Date getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
+
+   
 
     @Override
     public String toString() {

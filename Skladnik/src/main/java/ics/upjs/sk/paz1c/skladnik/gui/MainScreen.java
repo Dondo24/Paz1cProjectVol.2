@@ -20,6 +20,7 @@ import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -282,11 +283,11 @@ public class MainScreen extends javax.swing.JFrame {
     
     //TO DO pouzivatel ktory je prihlaseny
     private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
+      //  String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
         Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
         Prijemka prijemka = new Prijemka();        
         prijemka.setId_pouzivatel(pouzivatel.getId());     
-        prijemka.setDatum(timeStamp);
+        prijemka.setDatum(new Date(System.currentTimeMillis()));
         prijemka.setTypPohybu(1L);
         prijemkaDao.pridajPrijemka(prijemka);       
         VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();  
@@ -301,11 +302,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
 
     private void vytvorVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorVydajkuButtonActionPerformed
-       String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
-        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela("pista");
+       //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
+        Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
         Vydajka vydajka = new Vydajka();        
         vydajka.setId_pouzivatel(pouzivatel.getId());     
-        vydajka.setDatum(timeStamp);  
+        vydajka.setDatum(new Date(System.currentTimeMillis()));  
         vydajka.setTyp_pohybu(2L);        
         vydajkaDao.pridajVydajku(vydajka);       
         VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();    
