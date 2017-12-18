@@ -5,14 +5,13 @@
  */
 package dao;
 
+import Factory.TestObjectFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Daniel
- */
+
 public class MysqlPrijemkaDaoTest {
+    private MysqlPrijemkaDao test = new MysqlPrijemkaDao(TestObjectFactory.INSTANCE.getJdbcTemplate());
     
     public MysqlPrijemkaDaoTest() {
     }
@@ -55,6 +54,10 @@ public class MysqlPrijemkaDaoTest {
 
     @Test
     public void testDajPrijemkuNaDatum() {
+    }
+
+    @Test
+    public void testZmazVsetko() {
     }
     
 }

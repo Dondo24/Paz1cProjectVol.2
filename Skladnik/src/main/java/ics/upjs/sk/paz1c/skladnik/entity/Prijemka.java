@@ -17,7 +17,7 @@ public class Prijemka {
     private long id; 
     private double cena;
     private long id_pouzivatel; 
-    private Date datum;
+    private String datum;
     private long typPohybu;
 
     public long getId() {
@@ -53,13 +53,15 @@ public class Prijemka {
         this.id_pouzivatel = id_pouzivatel;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
+
+ 
 
 
     @Override
