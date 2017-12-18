@@ -32,7 +32,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
      */
     public VytvorPrijemkuScreen() {
         initComponents();       
-        idTextField.setText(idPrijemky+"");
+        idTextField.setText(Integer.toString(idPrijemky));
   
     }
 

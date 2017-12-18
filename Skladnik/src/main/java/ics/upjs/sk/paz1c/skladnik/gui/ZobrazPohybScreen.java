@@ -53,7 +53,7 @@ public VydajkaDao vydajkaDao;
         typPohybuTextField.setText("1");
         List<PohybMaterialu> pohyby = pohybMaterialuDao.getAllPohybyByPrijemkaId(Long.parseLong(idScreenTextField.getText()));        
         for(PohybMaterialu pohybMaterialu : pohyby){
-       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getCena(),pohybMaterialu.getPocet()});
+       model.addRow(new Object[]{materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getId(), materialDao.dajMaterialById(pohybMaterialu.getId_materialu()).getNazov(),pohybMaterialu.getPocet(),pohybMaterialu.getCena()});
     }
     }
     

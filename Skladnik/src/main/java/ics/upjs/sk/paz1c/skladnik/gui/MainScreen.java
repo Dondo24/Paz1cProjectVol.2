@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -413,7 +414,7 @@ public class MainScreen extends javax.swing.JFrame {
        private void naplnTabulkuMaterial(DefaultTableModel model, List<Material> materials){
           
         for(Material material : materials){
-      model.addRow(new Object[]{material.getId(),material.getNazov(),material.getStav(),material.getCena(),material.getId_sklad()});
+      model.addRow(new Object[]{material.getId(),material.getNazov(),material.getStav(),new DecimalFormat("##.##").format(material.getCena()),material.getId_sklad()});
     }
     }
       

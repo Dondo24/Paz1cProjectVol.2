@@ -32,9 +32,9 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
      */
     public VytvorVydajkuScreen() {
         initComponents();       
-        idTextField.setText(idVydajky+"");
+        idTextField.setText(Integer.toString(idVydajky));
         
-        System.out.println(idVydajky);
+      
   
     }
 
@@ -54,7 +54,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         idMaterualuTextField = new javax.swing.JTextField();
         pocetTextField = new javax.swing.JTextField();
         cenaLabel = new javax.swing.JLabel();
-        cenaTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         materialTable = new javax.swing.JTable();
         potvrdVydajkuButton = new javax.swing.JButton();
@@ -64,7 +63,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         uzivatelLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,9 +84,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
         cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
-        cenaLabel.setText("Cena:");
-
-        cenaTextField.setEditable(false);
 
         materialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,8 +134,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(51, 51, 51));
 
-        jSeparator3.setBackground(new java.awt.Color(51, 51, 51));
-
         uzivatelLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("Uzivatel");
@@ -152,7 +145,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
@@ -162,8 +154,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                             .addComponent(idMaterialuLabel))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -189,7 +180,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                                             .addComponent(stornoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(13, 13, 13))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addComponent(cenaSpoluTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
@@ -234,12 +225,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cenaLabel)
-                    .addComponent(cenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cenaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -266,8 +253,9 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         materialDao.upravStavMaterial(idMaterialu, pocet, 2);
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
-        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
-        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)));
+        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});        
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)).replace(',', '.'));
+        
         }
        
         
@@ -302,7 +290,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
         // null or not Integer will throw exception
         
-        total += (Double) mdl.getValueAt(i, columnCena) * (Double) mdl.getValueAt(i, columnPocet);
+        total += Double.parseDouble(new DecimalFormat("##.##").format((Double) mdl.getValueAt(i, columnCena)).replace(",", ".")) * (Double) mdl.getValueAt(i, columnPocet);
     }
     return total;
 }
@@ -347,7 +335,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cenaLabel;
     private javax.swing.JTextField cenaSpoluTextField;
-    private javax.swing.JTextField cenaTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idMaterialuLabel;
     private javax.swing.JTextField idMaterualuTextField;
@@ -356,7 +343,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable materialTable;
     private javax.swing.JLabel pocetLabel;
     private javax.swing.JTextField pocetTextField;
