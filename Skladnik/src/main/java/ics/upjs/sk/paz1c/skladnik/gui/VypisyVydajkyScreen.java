@@ -383,10 +383,11 @@ DefaultTableModel tableModel;
        String id = model.getValueAt(row, 0).toString();         
        
        
-       ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
-       zobrazPrijemkuScreen.idScreenTextField.setText(id);
-       zobrazPrijemkuScreen.naplnTabulkuVydaje();
-       zobrazPrijemkuScreen.setVisible(true);
+       ZobrazPohybScreen zobrazVydajkuScreen = new ZobrazPohybScreen();
+       zobrazVydajkuScreen.uzivatelLabel.setText(this.uzivatelLabel.getText());
+       zobrazVydajkuScreen.idScreenTextField.setText(id);
+       zobrazVydajkuScreen.naplnTabulkuVydaje();
+       zobrazVydajkuScreen.setVisible(true);
        this.setVisible(false);
        dispose();
        }

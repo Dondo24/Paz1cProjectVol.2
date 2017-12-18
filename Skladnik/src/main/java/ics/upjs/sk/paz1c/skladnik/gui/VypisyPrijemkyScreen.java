@@ -405,6 +405,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
        
        
        ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
+       zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLabel.getText());
        zobrazPrijemkuScreen.idScreenTextField.setText(id);
        zobrazPrijemkuScreen.naplnTabulkuPrijmi();
        zobrazPrijemkuScreen.setVisible(true);
