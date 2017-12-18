@@ -17,14 +17,16 @@ import javax.swing.JOptionPane;
  * @author Daniel
  */
 public class ZmenaHeslaScreen extends javax.swing.JFrame {
-private PouzivatelDao pouzivateldao = ObjectFactory.INSTANCE.getPouzivatelDao();
-private List<String> pouzivatelia = pouzivateldao.dajVsetkychMena();
-private boolean pouzivateljeok =false;
-private boolean heslojeok = false;
-private boolean noveheslasazhoduju = false;
-private boolean dlzkanovehoheslajeok = false;
-private char[] heslopouzivatela;
-/**
+
+    private PouzivatelDao pouzivateldao = ObjectFactory.INSTANCE.getPouzivatelDao();
+    private List<String> pouzivatelia = pouzivateldao.dajVsetkychMena();
+    private boolean pouzivateljeok = false;
+    private boolean heslojeok = false;
+    private boolean noveheslasazhoduju = false;
+    private boolean dlzkanovehoheslajeok = false;
+    private char[] heslopouzivatela;
+
+    /**
      * Creates new form ZmenaHeslaScreen
      */
     public ZmenaHeslaScreen() {
@@ -188,63 +190,64 @@ private char[] heslopouzivatela;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSpatButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSpatButton1ActionPerformed
-       LoginScreen LC = new LoginScreen();
-       LC.setVisible(true);
-       this.setVisible(false);
-       dispose();
+        LoginScreen LC = new LoginScreen();
+        LC.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jSpatButton1ActionPerformed
 
     private void jZmenitHesloButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZmenitHesloButton1ActionPerformed
-    String meno = jPouzivatelskeMenoTextField1.getText();
-    char[] stareHeslo = jStareHesloPasswordField1.getPassword();
-    //musel som to hodit na string lebo inac som to nevedel hodit normalne do db to heslo blbotinky mi to hadzalo
-    
-    String noveHeslo = jNoveHesloPasswordField1.getText().toString();
-    String noveHesloZnovu = jNoveHesloZnovuPasswordField1.getText().toString();
-    Pouzivatel p = new Pouzivatel();
-    
-    if(pouzivatelia.contains(meno)){
-        p =pouzivateldao.dajPouzivatela(meno);
-        heslopouzivatela = p.getHeslo().toCharArray();
-        pouzivateljeok=true;
-    }else{
-        pouzivateljeok=false;
-        JOptionPane.showMessageDialog(null, "Pouzivatel neexistuje");
-        
-    }
-    if(pouzivateljeok){
-        if(Arrays.equals(heslopouzivatela, stareHeslo)){
-            heslojeok=true;
-        }else{
-            heslojeok=false;
-            JOptionPane.showMessageDialog(null, "Heslo nie je správne");
-            
+        String meno = jPouzivatelskeMenoTextField1.getText();
+        char[] stareHeslo = jStareHesloPasswordField1.getPassword();
+        //musel som to hodit na string lebo inac som to nevedel hodit normalne do db to heslo blbotinky mi to hadzalo
+
+        String noveHeslo = jNoveHesloPasswordField1.getText().toString();
+        String noveHesloZnovu = jNoveHesloZnovuPasswordField1.getText().toString();
+        Pouzivatel p = new Pouzivatel();
+
+        if (pouzivatelia.contains(meno)) {
+            p = pouzivateldao.dajPouzivatela(meno);
+            heslopouzivatela = p.getHeslo().toCharArray();
+            pouzivateljeok = true;
+        } else {
+            pouzivateljeok = false;
+            JOptionPane.showMessageDialog(null, "Pouzivatel neexistuje");
+
         }
-        if(heslojeok){
-            if(noveHeslo.equals(noveHesloZnovu)){
-                noveheslasazhoduju= true;
-            }else{
-                noveheslasazhoduju= false;
-                JOptionPane.showMessageDialog(null, "Nove hesla sa nezhoduju");
-                
-            }if(noveheslasazhoduju){
-                if(noveHeslo.length()>4 && noveHeslo.length()<15){
-                    dlzkanovehoheslajeok=true;
-                }else{
-                    dlzkanovehoheslajeok = false;
-                    JOptionPane.showMessageDialog(null, "Heslo musi mat viac ako 4 znakov a menej ako 15");
+        if (pouzivateljeok) {
+            if (Arrays.equals(heslopouzivatela, stareHeslo)) {
+                heslojeok = true;
+            } else {
+                heslojeok = false;
+                JOptionPane.showMessageDialog(null, "Heslo nie je správne");
+
+            }
+            if (heslojeok) {
+                if (noveHeslo.equals(noveHesloZnovu)) {
+                    noveheslasazhoduju = true;
+                } else {
+                    noveheslasazhoduju = false;
+                    JOptionPane.showMessageDialog(null, "Nove hesla sa nezhoduju");
+
                 }
-                if(dlzkanovehoheslajeok){
-                    pouzivateldao.nastavHeslo(meno,noveHeslo);
-                    JOptionPane.showMessageDialog(null, "Heslo je uspesne zmenene");
-                    LoginScreen lc = new LoginScreen();
-                    lc.setVisible(true);
-                    this.setVisible(false);
-                    dispose();
+                if (noveheslasazhoduju) {
+                    if (noveHeslo.length() > 4 && noveHeslo.length() < 15) {
+                        dlzkanovehoheslajeok = true;
+                    } else {
+                        dlzkanovehoheslajeok = false;
+                        JOptionPane.showMessageDialog(null, "Heslo musi mat viac ako 4 znakov a menej ako 15");
+                    }
+                    if (dlzkanovehoheslajeok) {
+                        pouzivateldao.nastavHeslo(meno, noveHeslo);
+                        JOptionPane.showMessageDialog(null, "Heslo je uspesne zmenene");
+                        LoginScreen lc = new LoginScreen();
+                        lc.setVisible(true);
+                        this.setVisible(false);
+                        dispose();
+                    }
                 }
             }
         }
-    }
     }//GEN-LAST:event_jZmenitHesloButton1ActionPerformed
 
     /**

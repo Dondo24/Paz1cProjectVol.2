@@ -19,6 +19,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
     private Pouzivatel prihlaseny = new Pouzivatel();
+
     //  private String name ="Samo";
     // private char[] correctPassword = {'1', '2', '3'};
     /**
@@ -174,12 +175,12 @@ public class LoginScreen extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "zadaj heslo");
                 } else {
                     if (Arrays.equals(correctPassword, passwordFromField)) {
-                        MainScreen main = new MainScreen();                       
+                        MainScreen main = new MainScreen();
                         main.setVisible(true);
                         this.setVisible(false);
                         main.uzivatelLable.setText(nameFromTextField);
                         dispose();
-                        
+
                     } else {
                         JOptionPane.showMessageDialog(null, "nespravne heslo");
                     }
@@ -191,10 +192,10 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registrateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrateButtonActionPerformed
-       RegisterScreen register = new RegisterScreen();
-       register.setVisible(true);
-       this.setVisible(false);
-       dispose();
+        RegisterScreen register = new RegisterScreen();
+        register.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_registrateButtonActionPerformed
 
     private void jZmenaHeslaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZmenaHeslaButton1ActionPerformed
@@ -202,10 +203,9 @@ public class LoginScreen extends javax.swing.JFrame {
         ZHC.setVisible(true);
         this.setVisible(false);
         dispose();
-        
+
     }//GEN-LAST:event_jZmenaHeslaButton1ActionPerformed
 
-  
     /**
      * @param args the command line arguments
      */

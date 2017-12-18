@@ -105,6 +105,11 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
        
        return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
     }
+
+    @Override
+    public void ZmazVsetko() {
+        jdbcTemplate.update("truncate prijemka");
+    }
       private class PrijemkyRowMapper implements RowMapper<Prijemka> {
 
         @Override

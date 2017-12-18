@@ -20,25 +20,27 @@ import javax.swing.JOptionPane;
  * @author Daniel
  */
 public class RegisterScreen extends javax.swing.JFrame {
+
     private SkladDao skladDao = ObjectFactory.INSTANCE.getSkladDao();
     private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
-    private List <String> pouzivatelia = new ArrayList<>();
-    private List <String> vsetkySklady = new ArrayList<>();
+    private List<String> pouzivatelia = new ArrayList<>();
+    private List<String> vsetkySklady = new ArrayList<>();
     private boolean menojeok = false;
     private boolean menoniejenull = false;
     private boolean dlzkamena = false;
-    private boolean menosanepouziva = false ;
+    private boolean menosanepouziva = false;
     private boolean heslojeok = false;
     private boolean heslasazhoduju = false;
     private boolean dlzkahesla = false;
-   
+
     private boolean skladjeok = false;
+
     /**
      * Creates new form RegisterScreen
      */
     public RegisterScreen() {
         initComponents();
-       // jHesloPasswordField2.setText("");
+        // jHesloPasswordField2.setText("");
         //jHesloZnovuPasswordField1.setText("");
     }
 
@@ -51,7 +53,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jRegistraciaButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,11 +71,11 @@ public class RegisterScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jButton1.setText("Registruj");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRegistraciaButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jRegistraciaButton1.setText("Registruj");
+        jRegistraciaButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jRegistraciaButton1ActionPerformed(evt);
             }
         });
 
@@ -138,7 +140,7 @@ public class RegisterScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jspatButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jRegistraciaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,14 +150,11 @@ public class RegisterScreen extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jMenoTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jHesloPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jHesloZnovuPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jHesloPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jHesloZnovuPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,125 +204,133 @@ public class RegisterScreen extends javax.swing.JFrame {
                         .addComponent(jspatButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                         .addContainerGap(24, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRegistraciaButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    private void jRegistraciaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistraciaButton1ActionPerformed
         String meno = jMenoTextField1.getText();
         char[] heslo = jHesloPasswordField2.getPassword();
-        char[] hesloznovu  = jHesloZnovuPasswordField1.getPassword();
+        char[] hesloznovu = jHesloZnovuPasswordField1.getPassword();
         String nazovSkladu = jNazovSkladuTextField2.getText();
-       
-       
+
         pouzivatelia = pouzivatelDao.dajVsetkychMena();
         vsetkySklady = skladDao.dajVsetkySklady();
-        
-        if(meno == null){
-           JOptionPane.showMessageDialog(null, "zadaj meno");
-           menoniejenull = false;
-      }else{
+
+        if (meno == null) {
+            JOptionPane.showMessageDialog(null, "zadaj meno");
+            menoniejenull = false;
+        } else {
             menoniejenull = true;
         }
-        if(pouzivatelia.contains(meno)){
-            JOptionPane.showMessageDialog(null, "Použivatelske meno je už obsadene");
-            menosanepouziva=false;
-        }else{
-        menosanepouziva=true;
-    }
-        if(meno.length()<4){
-            JOptionPane.showMessageDialog(null,"pouzivatelske meno musi byt dlhsie ako 4 znaky");
-            dlzkamena =false;
-        }else{
-            dlzkamena = true;
+        if (menoniejenull) {
+            if (pouzivatelia.contains(meno)) {
+                JOptionPane.showMessageDialog(null, "Použivatelske meno je už obsadene");
+                menosanepouziva = false;
+            } else {
+                menosanepouziva = true;
+            }
+            if (menosanepouziva) {
+                if (meno.length() < 4) {
+                    JOptionPane.showMessageDialog(null, "pouzivatelske meno musi byt dlhsie ako 4 znaky");
+                    dlzkamena = false;
+                } else {
+                    dlzkamena = true;
+                }
+                if (dlzkamena) {
+                    if (meno.length() > 15) {
+                        JOptionPane.showMessageDialog(null, "Pouzivatelske meno musi byť kratšie ako 15 znakov");
+                        dlzkamena = false;
+                    } else {
+                        dlzkamena = true;
+                    }
+                    if (dlzkamena) {
+                        menojeok = true;
+                    } else {
+                        menojeok = false;
+                    }
+
+                }
+            }
         }
-        if(meno.length()>15){
-            JOptionPane.showMessageDialog(null,"Pouzivatelske meno musi byť kratšie ako 15 znakov");
-            dlzkamena= false;
-        }else{
-        dlzkamena = true;
-        }
-        if(dlzkamena && menosanepouziva&&menoniejenull){
-            menojeok = true;
-            
-        }else{
-            menojeok= false;
-        }
-        
-      if(heslo == null && hesloznovu == null){
+
+        if (heslo == null || hesloznovu == null) {
             JOptionPane.showMessageDialog(null, "zadaj heslo");
-            dlzkahesla= false;
-        }else{
-          dlzkahesla= true;
-      }
-      if(!Arrays.equals(heslo, hesloznovu)){
-          JOptionPane.showMessageDialog(null, "Hesla sa nezhoduju");
-          heslasazhoduju= false;
-      }else{
-          heslasazhoduju= true;
-      }
-      if(heslo.length<4){
-          JOptionPane.showMessageDialog(null, "heslo musi byť dlhsie ako 4 ");
-          dlzkahesla = false;
-      }else{
-          dlzkahesla = true;
-      }
-      if(heslo.length >15){
-          JOptionPane.showMessageDialog(null, "heslo nemože byť dlhsie ako 15 znakov");
             dlzkahesla = false;
-      }else{
-          dlzkahesla = true;
-      }
-      
-      if(dlzkahesla&&heslasazhoduju ){
-      heslojeok=true;
-      }else{
-          heslojeok=false;
-      }
-      
-      
-      if(vsetkySklady.contains(nazovSkladu)){
-          skladjeok=true;
-          
-      }else{
-          skladjeok=false;
-          JOptionPane.showMessageDialog(null, "Sklad neexistuje");
-      }
-      
-      
-       if(menojeok &&heslojeok&&skladjeok){
-      String heslozcharov = "";
-        for (int i = 0; i < heslo.length; i++) {
-            heslozcharov = heslozcharov + heslo[i];
+        } else {
+            dlzkahesla = true;
         }
-         Sklad sklad =skladDao.dajIdSkladu(nazovSkladu);
-      long idskladu = sklad.getId();
-      Pouzivatel p = new Pouzivatel();
-       p.setId_sklad(idskladu);
-       p.setMeno(meno);
-      p.setHeslo(heslozcharov);
-      pouzivatelDao.pridajPouzivatela(p);
-      
-      LoginScreen login = new LoginScreen();
-      login.setVisible(true);
-      this.setVisible(false);
-      }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (dlzkahesla) {
+
+            if (!Arrays.equals(heslo, hesloznovu)) {
+                JOptionPane.showMessageDialog(null, "Hesla sa nezhoduju");
+                heslasazhoduju = false;
+            } else {
+                heslasazhoduju = true;
+            }
+            if (heslasazhoduju) {
+                if (heslo.length < 5) {
+                    JOptionPane.showMessageDialog(null, "heslo musi byť dlhsie ako 4 ");
+                    dlzkahesla = false;
+                } else {
+                    dlzkahesla = true;
+                }
+                if (dlzkahesla) {
+                    if (heslo.length > 15) {
+                        JOptionPane.showMessageDialog(null, "heslo nemože byť dlhsie ako 15 znakov");
+                        dlzkahesla = false;
+                    } else {
+                        dlzkahesla = true;
+                    }
+                    if (dlzkahesla) {
+                        heslojeok = true;
+                    } else {
+                        heslojeok = false;
+                    }
+                }
+            }
+        }
+
+        if (vsetkySklady.contains(nazovSkladu)) {
+            skladjeok = true;
+
+        } else {
+            skladjeok = false;
+            JOptionPane.showMessageDialog(null, "Sklad neexistuje");
+        }
+
+        if (menojeok && heslojeok && skladjeok) {
+            String heslozcharov = "";
+            for (int i = 0; i < heslo.length; i++) {
+                heslozcharov = heslozcharov + heslo[i];
+            }
+            Sklad sklad = skladDao.dajIdSkladu(nazovSkladu);
+            long idskladu = sklad.getId();
+            Pouzivatel p = new Pouzivatel();
+            p.setId_sklad(idskladu);
+            p.setMeno(meno);
+            p.setHeslo(heslozcharov);
+            pouzivatelDao.pridajPouzivatela(p);
+
+            LoginScreen login = new LoginScreen();
+            login.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jRegistraciaButton1ActionPerformed
 
     private void jNazovSkladuTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNazovSkladuTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jNazovSkladuTextField2ActionPerformed
 
     private void jspatButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton2ActionPerformed
-       LoginScreen lc = new LoginScreen();
-       lc.setVisible(true);
-       this.setVisible(false);
-       dispose();
+        LoginScreen lc = new LoginScreen();
+        lc.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jspatButton2ActionPerformed
 
     /**
@@ -362,7 +369,6 @@ public class RegisterScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPasswordField jHesloPasswordField2;
     private javax.swing.JPasswordField jHesloZnovuPasswordField1;
     private javax.swing.JLabel jLabel1;
@@ -372,6 +378,7 @@ public class RegisterScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jMenoTextField1;
     private javax.swing.JTextField jNazovSkladuTextField2;
+    private javax.swing.JButton jRegistraciaButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

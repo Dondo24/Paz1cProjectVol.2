@@ -27,6 +27,5 @@ public interface PrijemkaDao  {
     public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok);
     public List<Prijemka> dajPrijemkyNaRok(int rok );
     public List<Prijemka> dajPrijemkuNaDatum(int rok , int mesiac , int den);
-    
-    
+    void ZmazVsetko();
 }
