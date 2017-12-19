@@ -13,8 +13,9 @@ import java.util.List;
  * @author Daniel
  */
 public interface PouzivatelDao {
-    void pridajPouzivatela(Pouzivatel pouzivatel);
+    void pridajPouzivatela(Pouzivatel pouzivatel);    
     Pouzivatel dajPouzivatela(String meno);
+    long dajPouzivateloveId(String meno);
     void nastavHeslo(String meno,String heslo);
     List<String> dajVsetkychMena();
     void vymazKazdeho();

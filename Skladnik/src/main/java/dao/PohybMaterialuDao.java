@@ -25,6 +25,7 @@ public interface PohybMaterialuDao {
     public List <PohybMaterialu> getAllPohybyByVydajkaId(long id);
     public List<PohybMaterialu> getPohybyByMaterialId(long id);
     void zmazVsetko();
+    public long getLastId();
    
 
     

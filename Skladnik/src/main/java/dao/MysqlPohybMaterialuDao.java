@@ -29,22 +29,25 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
     @Override
     public void pridajPohybMaterialuPrijem(PohybMaterialu pohybMaterialu) {
          String sql = "insert into PohybMaterialu(id,id_materialu,pocet,cena,prijemka_id,vydajka_id) values(?,?,?,?,?,?)";
-       jdbcTemplate.update(sql,null,pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),null);
+       jdbcTemplate.update(sql,null,pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),pohybMaterialu.getVydajka_id());
     }
      @Override
     public void pridajPohybMaterialuVydaj(PohybMaterialu pohybMaterialu) {
-         String sql = "insert into PohybMaterialu values(?,?,?,?,?,?)";
-       jdbcTemplate.update(sql,null,pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),null,pohybMaterialu.getVydajka_id());
+         String sql = "insert into PohybMaterialu(id,id_materialu,pocet,cena,prijemka_id,vydajka_id) values(?,?,?,?,?,?)";
+       jdbcTemplate.update(sql,null,pohybMaterialu.getId_materialu(),pohybMaterialu.getPocet(),pohybMaterialu.getCena(),pohybMaterialu.getPrijemka_id(),pohybMaterialu.getVydajka_id());
     }
 
     @Override
     public PohybMaterialu dajPohybMaterialuById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql = "select * from pohybmaterialu where id = ?";
+        BeanPropertyRowMapper<PohybMaterialu> mapper = BeanPropertyRowMapper.newInstance(PohybMaterialu.class);
+        return jdbcTemplate.queryForObject(sql, mapper, id);
     }
 
     @Override
     public void odstranPohybMaterialu(PohybMaterialu pohybMaterialu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql = "delete from pohybmaterialu where id = ?";
+        jdbcTemplate.update(sql,pohybMaterialu.getId());
     }
 
     @Override
@@ -79,6 +82,7 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
                p.setCena(rs.getDouble("cena"));
                p.setId_materialu(rs.getLong("id_materialu"));
                p.setPrijemka_id(rs.getLong("prijemka_id"));
+               p.setVydajka_id(rs.getLong("vydajka_id"));
                p.setPocet(rs.getLong("pocet"));
                
                
@@ -99,6 +103,7 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
                p.setId(rs.getLong("id"));
                p.setCena(rs.getDouble("cena"));
                p.setId_materialu(rs.getLong("id_materialu"));
+               p.setVydajka_id(rs.getLong("prijemka_id"));
                p.setVydajka_id(rs.getLong("vydajka_id"));
                p.setPocet(rs.getLong("pocet"));
                
@@ -135,6 +140,16 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
     @Override
     public void zmazVsetko() {
        jdbcTemplate.update("truncate pohybmaterialu");
+    }
+    
+    @Override
+     public long getLastId() {
+        if(getAll().size()==0){
+        return 1;
+        }
+        System.out.println(getAll().toString());
+       String sql = "select max(id) from pohybmaterialu";   
+        return jdbcTemplate.queryForObject(sql,Integer.class);
     }
     
 }

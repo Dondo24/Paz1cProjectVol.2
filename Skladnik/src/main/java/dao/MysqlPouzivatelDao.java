@@ -6,6 +6,7 @@
 package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import java.sql.ResultSet;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -55,6 +56,14 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
     @Override
     public void vymazKazdeho() {
         jdbcTemplate.update("truncate pouzivatel");
+    }
+
+    @Override
+    public long dajPouzivateloveId(String meno) {
+       String sql= "Select id from pouzivatel where meno = ?";
+       BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
+        return jdbcTemplate.queryForObject(sql, mapper, meno).getId();
+       
     }
 
    

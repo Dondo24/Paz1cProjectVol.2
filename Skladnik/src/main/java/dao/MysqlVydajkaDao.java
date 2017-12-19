@@ -69,6 +69,9 @@ public class MysqlVydajkaDao implements VydajkaDao{
     
     @Override
     public int getLastId() {
+        if(getAll().size()==0){
+        return 0;
+        }
        String sql = "select max(id) from vydajka";   
         return jdbcTemplate.queryForObject(sql,Integer.class);
     }
@@ -110,6 +113,25 @@ public class MysqlVydajkaDao implements VydajkaDao{
     @Override
     public void zmazVsetko() {
         jdbcTemplate.update("truncate vydajka");
+    }
+
+    @Override
+    public List<Vydajka> getAllByPouzivatelId(long id) {
+       String sql = "select * from Vydajka where pouzivatel_id = ?";
+        
+        List<Vydajka> vydajky = jdbcTemplate.query(sql, new RowMapper<Vydajka>() {
+            @Override
+            public Vydajka mapRow(ResultSet rs, int i) throws SQLException {
+              Vydajka v = new Vydajka();
+               v.setId(rs.getLong("id"));
+               v.setCena(rs.getDouble("cena"));
+               v.setId_pouzivatel(rs.getLong("pouzivatel_id"));
+               v.setDatum(rs.getString("datum"));
+               v.setTyp_pohybu(rs.getLong("typ_pohybu"));
+               return v;
+            }
+        }, id);   
+        return vydajky;
     }
 private class VydajkaRowMapper implements RowMapper<Vydajka> {
 

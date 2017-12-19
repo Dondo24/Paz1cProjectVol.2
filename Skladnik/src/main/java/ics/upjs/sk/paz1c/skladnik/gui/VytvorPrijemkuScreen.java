@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -73,6 +74,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         uzivatelLabel = new javax.swing.JLabel();
+        vymazPohybMaterialuButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +103,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID materialu", "Nazov materialu", "Cena", "Pocet"
+                "ID pohybu", "ID materialu", "Nazov materialu", "Cena", "Pocet"
             }
         ));
         jScrollPane1.setViewportView(materialTable);
@@ -123,6 +125,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         });
 
         pridajMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
+        pridajMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pridajMaterialuButton.setText("Pridaj material");
         pridajMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +148,15 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         uzivatelLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("Uzivatel");
+
+        vymazPohybMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
+        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        vymazPohybMaterialuButton.setText("Vymaz pohyb");
+        vymazPohybMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vymazPohybMaterialuButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,7 +183,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                                     .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(470, 470, 470)
@@ -226,7 +239,9 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
@@ -249,15 +264,17 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
        pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());  
-        int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
+        long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         double pocet = Double.parseDouble(pocetTextField.getText());
-        int idPrijemky = this.idPrijemky;
+        long idPrijemky = this.idPrijemky;
         double cena = Double.parseDouble(cenaTextField.getText());
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
         pohybMaterialu.setId_materialu(idMaterialu);
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setPrijemka_id(idPrijemky);
         pohybMaterialu.setCena(cena);
+        pohybMaterialu.setVydajka_id(0);
+        System.out.println(pohybMaterialu.getVydajka_id());
         
         materialDao.upravStavMaterial(idMaterialu, pocet, 1);
         double cenaUpravena = upravCenuMaterialu(idMaterialu, cena, pocet);
@@ -265,8 +282,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
                
         pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
-        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
-        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)));
+        model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
@@ -293,6 +310,16 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         this.setVisible(false);
         dispose();
     }//GEN-LAST:event_stornoButtonActionPerformed
+
+    private void vymazPohybMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazPohybMaterialuButtonActionPerformed
+        int row = materialTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) materialTable.getModel();
+        long id = (Long) model.getValueAt(row, 0);        
+        pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
+        model.removeRow(row);
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
+        
+    }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
 
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     double total = 0;
@@ -378,6 +405,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private javax.swing.JButton pridajMaterialuButton;
     private javax.swing.JButton stornoButton;
     public javax.swing.JLabel uzivatelLabel;
+    private javax.swing.JButton vymazPohybMaterialuButton;
     // End of variables declaration//GEN-END:variables
 
   

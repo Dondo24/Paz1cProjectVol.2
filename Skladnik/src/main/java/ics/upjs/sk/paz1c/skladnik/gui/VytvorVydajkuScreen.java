@@ -71,6 +71,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         uzivatelLabel = new javax.swing.JLabel();
+        vymazPohybMaterialuButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +99,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID materialu", "Nazov materialu", "Cena", "Pocet"
+                "ID pohybu", "ID materialu", "Nazov materialu", "Cena", "Pocet"
             }
         ));
         jScrollPane1.setViewportView(materialTable);
@@ -146,6 +147,15 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("Uzivatel");
 
+        vymazPohybMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
+        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        vymazPohybMaterialuButton.setText("Vymaz pohyb");
+        vymazPohybMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vymazPohybMaterialuButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,19 +163,24 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cenaLabel)
-                            .addComponent(pocetLabel)
-                            .addComponent(idMaterialuLabel))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cenaLabel)
+                                    .addComponent(pocetLabel)
+                                    .addComponent(idMaterialuLabel))
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                    .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -236,6 +251,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                 .addComponent(cenaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -261,8 +278,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         materialDao.upravStavMaterial(idMaterialu, pocet, 2);
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
-        model.addRow(new Object[]{idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),new DecimalFormat("##.##").format(cena).replace(',','.'),pocet});        
-        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,2,3)).replace(',','.'));
+        model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),new DecimalFormat("##.##").format(cena).replace(',','.'),pocet});        
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)).replace(',','.'));
         
         }
        
@@ -301,6 +318,16 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private void cenaSpoluTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenaSpoluTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cenaSpoluTextFieldActionPerformed
+
+    private void vymazPohybMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazPohybMaterialuButtonActionPerformed
+        int row = materialTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) materialTable.getModel();
+        long id = (Long) model.getValueAt(row, 0);
+        pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
+        model.removeRow(row);
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
+
+    }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
 
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     double total = 0;
@@ -368,5 +395,6 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private javax.swing.JButton pridajMaterialuButton;
     private javax.swing.JButton stornoButton;
     public javax.swing.JLabel uzivatelLabel;
+    private javax.swing.JButton vymazPohybMaterialuButton;
     // End of variables declaration//GEN-END:variables
 }

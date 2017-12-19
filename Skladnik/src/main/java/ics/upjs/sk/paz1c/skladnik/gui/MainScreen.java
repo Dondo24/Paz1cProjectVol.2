@@ -42,8 +42,9 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() {
         initComponents(); 
-        tableModel = (DefaultTableModel) mainTable.getModel();           
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAll());
+        tableModel = (DefaultTableModel) mainTable.getModel();  
+        //dokoncit pre inicializaciu aby sa zobrazilo nieco v tabulke
+        //naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
     
         
     }
@@ -71,6 +72,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        deleteSelectedButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -206,6 +208,14 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 7, Short.MAX_VALUE)
         );
 
+        deleteSelectedButton.setBackground(new java.awt.Color(0, 102, 0));
+        deleteSelectedButton.setText("Vymaz oznacene");
+        deleteSelectedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSelectedButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,17 +242,16 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(134, 134, 134)
+                                .addGap(48, 48, 48)
                                 .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(37, 37, 37)
+                                .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteSelectedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(247, 247, 247)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(247, 247, 247)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -271,10 +280,11 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jVypisyButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteSelectedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -312,7 +322,7 @@ public class MainScreen extends javax.swing.JFrame {
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAll());
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
     }//GEN-LAST:event_ukazPrijmiButtonActionPerformed
 
     private void ukazVydajebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazVydajebuttonActionPerformed
@@ -320,7 +330,7 @@ public class MainScreen extends javax.swing.JFrame {
         tableModel = (DefaultTableModel) mainTable.getModel();         
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuVydaje(tableModel, vydajkaDao.getAll());
+        naplnTabulkuVydaje(tableModel, vydajkaDao.getAllByPouzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
     }//GEN-LAST:event_ukazVydajebuttonActionPerformed
 
     private void ukazMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazMaterialButtonActionPerformed
@@ -380,6 +390,21 @@ public class MainScreen extends javax.swing.JFrame {
        dispose();
         
     }//GEN-LAST:event_jVypisyButton1ActionPerformed
+
+    private void deleteSelectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedButtonActionPerformed
+        int row = mainTable.getSelectedRow();
+        TableModel model = mainTable.getModel();
+        long id = (Long) model.getValueAt(row, 0);
+        long typPohybu = (Long) model.getValueAt(row, 4); 
+          if(typPohybu==1){
+              prijemkaDao.odstranPrijemku(prijemkaDao.dajPrijemkuById(id));
+              ukazPrijmiButtonActionPerformed(evt);
+          }
+          if(typPohybu==2){
+          vydajkaDao.odstranVydajku(vydajkaDao.dajVydajkaById(id));
+              ukazVydajebuttonActionPerformed(evt);
+          }
+    }//GEN-LAST:event_deleteSelectedButtonActionPerformed
 
      private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi){
     for(Prijemka prijemka : prijmi){
@@ -473,6 +498,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteSelectedButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

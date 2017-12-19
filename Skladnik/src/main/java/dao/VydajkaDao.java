@@ -20,6 +20,7 @@ void pridajVydajku(Vydajka vydajka);
     public Vydajka dajVydajkaById (Long id);
     void odstranVydajku(Vydajka vydajka);
     public List <Vydajka> getAll();
+      public List <Vydajka> getAllByPouzivatelId(long id);
     public int getLastId();
     void upravCenu(double cena, long id);
 public List<Vydajka> dajDnesneVydajky();

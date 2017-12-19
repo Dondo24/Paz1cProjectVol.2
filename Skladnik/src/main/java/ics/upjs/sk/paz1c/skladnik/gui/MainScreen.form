@@ -53,23 +53,20 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="vytvorPrijemkuButton" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="vytvorVydajkuButton" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Component id="jPridajKartuMaterialuButton5" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="deleteSelectedButton" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" pref="187" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jScrollPane2" alignment="0" min="-2" pref="688" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" pref="187" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane2" alignment="0" min="-2" pref="688" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -106,10 +103,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jVypisyButton1" min="-2" pref="75" max="-2" attributes="0"/>
+                  <Component id="vytvorPrijemkuButton" min="-2" pref="75" max="-2" attributes="0"/>
+                  <Component id="vytvorVydajkuButton" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="vytvorPrijemkuButton" alignment="3" min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="vytvorVydajkuButton" alignment="3" min="-2" pref="75" max="-2" attributes="0"/>
                       <Component id="jPridajKartuMaterialuButton5" alignment="3" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="deleteSelectedButton" alignment="3" min="-2" pref="75" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -348,5 +346,16 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="deleteSelectedButton">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Vymaz oznacene"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteSelectedButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

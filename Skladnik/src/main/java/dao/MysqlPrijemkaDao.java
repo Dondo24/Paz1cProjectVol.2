@@ -67,6 +67,10 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
     @Override
     public int getLastId() {
+        if(getAll().size()==0){
+        return 0;
+        }
+        System.out.println(getAll().toString());
        String sql = "select max(id) from Prijemka";   
         return jdbcTemplate.queryForObject(sql,Integer.class);
     }
@@ -109,6 +113,25 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
     @Override
     public void ZmazVsetko() {
         jdbcTemplate.update("truncate prijemka");
+    }
+
+    @Override
+    public List<Prijemka> getAllByUzivatelId(long id) {
+        String sql = "select * from Prijemka where pouzivatel_id = ? ";
+        
+        List<Prijemka> prijemky = jdbcTemplate.query(sql, new RowMapper<Prijemka>() {
+            @Override
+            public Prijemka mapRow(ResultSet rs, int i) throws SQLException {
+               Prijemka p = new Prijemka();
+               p.setId(rs.getLong("id"));
+               p.setCena(rs.getDouble("cena"));
+               p.setId_pouzivatel(rs.getLong("pouzivatel_id"));
+               p.setDatum(rs.getString("datum"));
+               p.setTypPohybu(rs.getLong("typ_pohybu"));
+               return p;
+            }
+        }, id);   
+        return prijemky;
     }
       private class PrijemkyRowMapper implements RowMapper<Prijemka> {
 

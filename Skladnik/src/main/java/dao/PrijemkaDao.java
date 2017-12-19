@@ -21,7 +21,8 @@ public interface PrijemkaDao  {
     public Prijemka dajPrijemkuById (Long id);
     void odstranPrijemku(Prijemka prijemka);
     public List <Prijemka> getAll();
-    public int getLastId();
+     public List <Prijemka> getAllByUzivatelId(long id);
+    public int getLastId();    
     void upravCenu(double cena, long id);
     public List<Prijemka> dajDnesneOPrijemky();
     public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok);
