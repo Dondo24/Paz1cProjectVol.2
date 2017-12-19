@@ -21,6 +21,7 @@ public interface MaterialDao {
     List<String> dajNazovVsetkychMaterialov();
     void upravStavMaterial(long idMaterialu, double pocet, long typPohybu);
     void upravCenuMaterialu(long idMaterialu, double cena);
+    public List<Material> getAllBySkladId(long idSkladu);
 
     
 }

@@ -27,13 +27,7 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
     }
     @Override
     public Pouzivatel dajPouzivatela(String meno) {
-       /* String sql = "SELECT * from pouzivatel where meno = ?";
-        System.out.println(meno);
-         BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
-        return jdbcTemplate.queryForObject(sql, mapper, meno);
-        */
-        
-        String sql = "select * from pouzivatel where meno = ?";
+       String sql = "select * from pouzivatel where meno = ?";
         
         Pouzivatel pouzivatel = jdbcTemplate.queryForObject(sql, new RowMapper<Pouzivatel>() {
             @Override
@@ -47,8 +41,8 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
             }
         },meno);   
         return pouzivatel;
+          
     }
-
     @Override
     public void nastavHeslo(String meno, String heslo) {
        jdbcTemplate.update("update pouzivatel set heslo = ? where meno =?",heslo , meno);

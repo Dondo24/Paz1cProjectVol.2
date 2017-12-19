@@ -7,9 +7,12 @@ package dao;
 
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -74,7 +77,26 @@ public class MysqlMaterialDao implements MaterialDao{
        String sql = "update material set cena = ? where id = ?";
         jdbcTemplate.update(sql,cena,idMaterialu);
     }
-   
+
+    @Override
+    public List<Material> getAllBySkladId(long idSkladu) {
+        String sql = "select * from material where sklad_id = ?";
+     /*   BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
+        return jdbcTemplate.query(sql, mapper);*/
+     List<Material> material = jdbcTemplate.query(sql, new RowMapper<Material>() {
+            @Override
+            public Material mapRow(ResultSet rs, int i) throws SQLException {
+               Material m = new Material();
+               m.setCena(rs.getDouble("cena"));
+               m.setId(rs.getLong("id"));
+               m.setId_sklad(rs.getLong("sklad_id"));
+               m.setNazov(rs.getString("nazov"));
+               m.setStav(rs.getDouble("stav"));
+               return m ;
+            }
+        },idSkladu);
+     return material;
+    }
 
   
 }
