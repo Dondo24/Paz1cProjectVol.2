@@ -83,29 +83,29 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
     }
 
     @Override
-    public List<Prijemka> dajDnesneOPrijemky() {
-       String sql = "Select id ,cena , datum from Prijemka WHERE DATE(datum) = DATE(NOW()) ORDER BY id DESC";
+    public List<Prijemka> dajDnesneOPrijemky(long idPouzivatela) {
+       String sql = "Select id ,cena , datum,pouzivatel_id from Prijemka WHERE DATE(datum) = DATE(NOW()) and pouzivatel_id= "+ idPouzivatela + " ORDER BY id DESC";
        
        return (jdbcTemplate.query(sql,new PrijemkyRowMapper()));
     }
 
      @Override
-    public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok) {
-       String sql = "Select id,cena ,datum from Prijemka where month(datum) = " + mesiac + " and year(datum)= " + rok + " order by id desc";
+    public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok,long idPouzivatela) {
+       String sql = "Select id,cena ,datum ,pouzivatel_id from Prijemka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela+ " order by id desc";
        
        return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
     }
 
     @Override
-    public List<Prijemka> dajPrijemkyNaRok(int rok) {
-       String sql = "Select id,cena ,datum from Prijemka where year(datum)= " + rok + " order by id desc";
+    public List<Prijemka> dajPrijemkyNaRok(int rok,long idPouzivatela) {
+       String sql = "Select id,cena ,datum,pouzivatel_id  from Prijemka where year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        
        return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
     }
 
     @Override
-    public List<Prijemka> dajPrijemkuNaDatum(int rok, int mesiac, int den) {
-           String sql = "Select id,cena ,datum from Prijemka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" order by id desc";
+    public List<Prijemka> dajPrijemkuNaDatum(int rok, int mesiac, int den,long idPouzivatela) {
+           String sql = "Select id,cena ,datum,pouzivatel_id from Prijemka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        
        return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
     }
@@ -141,6 +141,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
             prijemka.setId(rs.getLong("id"));
             prijemka.setCena(rs.getDouble("cena"));
             prijemka.setDatum(rs.getString("datum"));
+            prijemka.setId_pouzivatel(rs.getLong("pouzivatel_id"));
             
             return prijemka;
         }

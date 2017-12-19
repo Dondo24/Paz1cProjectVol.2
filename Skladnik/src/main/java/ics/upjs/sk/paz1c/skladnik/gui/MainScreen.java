@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -320,19 +321,31 @@ public class MainScreen extends javax.swing.JFrame {
     
    
     private void ukazPrijmiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazPrijmiButtonActionPerformed
+      Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
+         long idpouzivatela = p.getId(); 
+        Calendar cal = new GregorianCalendar();
+        int rok = cal.get(Calendar.YEAR);
+        
+        int mesiac = cal.get(Calendar.MONTH)+1;
         nastavModelDefault();
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaMesiac(mesiac, rok, idpouzivatela));
     }//GEN-LAST:event_ukazPrijmiButtonActionPerformed
 
     private void ukazVydajebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazVydajebuttonActionPerformed
+         Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
+         long idpouzivatela = p.getId(); 
+        Calendar cal = new GregorianCalendar();
+        int rok = cal.get(Calendar.YEAR);
+        
+        int mesiac = cal.get(Calendar.MONTH)+1;
         nastavModelDefault();
         tableModel = (DefaultTableModel) mainTable.getModel();         
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuVydaje(tableModel, vydajkaDao.getAllByPouzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
+        naplnTabulkuVydaje(tableModel, vydajkaDao.dajVydajkyNaMesiac(mesiac, rok, idpouzivatela));
     }//GEN-LAST:event_ukazVydajebuttonActionPerformed
 
     private void ukazMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazMaterialButtonActionPerformed

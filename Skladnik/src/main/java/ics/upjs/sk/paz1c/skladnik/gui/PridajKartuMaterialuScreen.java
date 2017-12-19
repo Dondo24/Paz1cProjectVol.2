@@ -7,7 +7,9 @@ package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
 import dao.MaterialDao;
+import dao.PouzivatelDao;
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
        private MaterialDao material = ObjectFactory.INSTANCE.getMaterialDao();
-       
+       private PouzivatelDao pouzivatel = ObjectFactory.INSTANCE.getPouzivatelDao();
     /**
      * Creates new form PridajKartuMaterialuScreen
      */
@@ -141,8 +143,12 @@ public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
          }else{
              novyMaterial.setNazov(nazovNovehoMaterialu);
              //toto som dal na tvrdo ptm sa to zmeni ak vyriesime toho pouzivatela
-             novyMaterial.setId_sklad(1);
+            
+             Pouzivatel p = new Pouzivatel();
+             p = pouzivatel.dajPouzivatela(uzivatelLabel.getText());
+             Long idskladu = p.getId_sklad();
              novyMaterial.setStav(0);
+              novyMaterial.setId_sklad(idskladu);
              material.pridajMaterial(novyMaterial);
              JOptionPane.showMessageDialog(null, "Pridanie bolo uspesne");
          
