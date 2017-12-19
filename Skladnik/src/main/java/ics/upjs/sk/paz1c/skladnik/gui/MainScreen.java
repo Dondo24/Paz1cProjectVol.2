@@ -338,7 +338,9 @@ public class MainScreen extends javax.swing.JFrame {
         tableModel = (DefaultTableModel) mainTable.getModel();         
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuMaterial(tableModel, materialDao.getAll());
+        Pouzivatel aktPouz = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
+        long id = aktPouz.getId_sklad();
+        naplnTabulkuMaterial(tableModel, materialDao.getAllBySkladId(id));
     }//GEN-LAST:event_ukazMaterialButtonActionPerformed
 
     private void jPridajKartuMaterialuButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPridajKartuMaterialuButton5ActionPerformed

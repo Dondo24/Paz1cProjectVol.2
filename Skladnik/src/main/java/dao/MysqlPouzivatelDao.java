@@ -8,9 +8,11 @@ package dao;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -25,12 +27,22 @@ public class MysqlPouzivatelDao implements PouzivatelDao{
     }
     @Override
     public Pouzivatel dajPouzivatela(String meno) {
-        String sql = "SELECT * from pouzivatel where meno = ?";
-        System.out.println(meno);
-         BeanPropertyRowMapper<Pouzivatel> mapper = BeanPropertyRowMapper.newInstance(Pouzivatel.class);
-        return jdbcTemplate.queryForObject(sql, mapper, meno);
+       String sql = "select * from pouzivatel where meno = ?";
+        
+        Pouzivatel pouzivatel = jdbcTemplate.queryForObject(sql, new RowMapper<Pouzivatel>() {
+            @Override
+            public Pouzivatel mapRow(ResultSet rs, int i) throws SQLException {
+               Pouzivatel p = new Pouzivatel();
+               p.setId(rs.getLong("id"));
+               p.setMeno(rs.getString("meno"));
+                p.setHeslo(rs.getString("heslo"));
+              p.setId_sklad(rs.getLong("sklad_id"));
+               return p;
+            }
+        },meno);   
+        return pouzivatel;
+          
     }
-
     @Override
     public void nastavHeslo(String meno, String heslo) {
        jdbcTemplate.update("update pouzivatel set heslo = ? where meno =?",heslo , meno);
