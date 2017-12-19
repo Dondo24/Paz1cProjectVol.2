@@ -11,6 +11,7 @@ import dao.MysqlPrijemkaDao;
 import dao.PohybMaterialuDao;
 import dao.PouzivatelDao;
 import dao.PrijemkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Material;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
@@ -18,6 +19,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -266,9 +268,14 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
        pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());         
         long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
+        Material pridavanyMaterial = materialDao.dajMaterialById(idMaterialu);
+        
+        long idSkladuPouzivatela = pouzivatel.getId_sklad();
+        long idSkladuMaterialu = pridavanyMaterial.getId_sklad();
         double pocet = Double.parseDouble(pocetTextField.getText());
         long idPrijemky = this.idPrijemky;
         double cena = Double.parseDouble(cenaTextField.getText());
+        if(idSkladuMaterialu==idSkladuPouzivatela){
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
         pohybMaterialu.setId_materialu(idMaterialu);
         pohybMaterialu.setPocet(pocet);
@@ -285,7 +292,9 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
-        
+        }else{
+             JOptionPane.showMessageDialog(null, "Material sa nenachadza na sklade");
+        }  
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
     private void potvrdPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdPrijemkuButtonActionPerformed

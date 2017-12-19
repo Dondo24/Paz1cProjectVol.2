@@ -12,6 +12,7 @@ import dao.PohybMaterialuDao;
 import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Material;
 import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
@@ -32,7 +33,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
        MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
        PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
         private int idVydajky = vydajkaDao.getLastId()+1;
-        Pouzivatel pouzivatel;
+        //Pouzivatel pouzivatel;
      
     /**
      * Creates new form VytvorPrijemkuScreen
@@ -260,10 +261,19 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
+       
+        long idMaterialu = Long.parseLong(idMaterualuTextField.getText());
         long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         double pocet = Double.parseDouble(pocetTextField.getText());
-        int idVydajky = this.idVydajky;
+         Material pridavanyMaterial = materialDao.dajMaterialById(idMaterialu);
+        Pouzivatel  p =  pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+       long idSkladuPouzivatela = p.getId_sklad();
+        long idSkladuMaterialu = pridavanyMaterial.getId_sklad();
+       // int idVydajky = this.idVydajky;
         double cena = materialDao.dajMaterialById(idMaterialu).getCena();
+       System.out.println(idSkladuMaterialu);
+         System.out.println(idSkladuPouzivatela);
+        if(idSkladuMaterialu==idSkladuPouzivatela){
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
         pohybMaterialu.setId_materialu(idMaterialu);
         pohybMaterialu.setPocet(pocet);
@@ -282,15 +292,17 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         
         }
        
-        
+        }else{
+            JOptionPane.showMessageDialog(null, "Material sa nenachadza na sklade");
+       }
         
     }//GEN-LAST:event_pridajMaterialuButtonActionPerformed
 
     private void potvrdVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdVydajkuButtonActionPerformed
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());       
-        pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+         Pouzivatel  p =  pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
         Vydajka vydajka = new Vydajka();        
-        vydajka.setId_pouzivatel(pouzivatel.getId());     
+        vydajka.setId_pouzivatel(p.getId());     
         vydajka.setDatum(timeStamp);  
         vydajka.setTyp_pohybu(2L);
         vydajka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));

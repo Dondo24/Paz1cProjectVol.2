@@ -31,11 +31,22 @@ public class MysqlMaterialDao implements MaterialDao{
    }
    public Material dajMaterialById (long id){
        String sql = "SELECT * FROM Material where id=?";
-        BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
-        return jdbcTemplate.queryForObject(sql, mapper, id);
-       
+         Material material = jdbcTemplate.queryForObject(sql, new RowMapper<Material>() {
+            @Override
+            public Material mapRow(ResultSet rs, int i) throws SQLException {
+               Material m = new Material();
+               m.setCena(rs.getDouble("cena"));
+               m.setId(rs.getLong("id"));
+               m.setId_sklad(rs.getLong("sklad_id"));
+               m.setNazov(rs.getString("nazov"));
+               m.setStav(rs.getDouble("stav"));
+               return m ;
+            }
+        },id);
+     return material;
+    }
      
-   }
+   
    public void odstranMaterial(Material material){
        jdbcTemplate.update("DELETE FROM material where id = ?",material.getId());
        

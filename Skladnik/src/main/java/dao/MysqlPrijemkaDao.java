@@ -91,7 +91,7 @@ public class MysqlPrijemkaDao implements PrijemkaDao {
 
      @Override
     public List<Prijemka> dajPrijemkyNaMesiac(int mesiac, int rok,long idPouzivatela) {
-       String sql = "Select id,cena ,datum ,pouzivatel_id from Prijemka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela+ " order by id desc";
+       String sql = "Select id,cena ,datum ,pouzivatel_id,typ_pohybu from Prijemka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela+ " order by id desc";
        
        return (jdbcTemplate.query(sql, new PrijemkyRowMapper()));
     }

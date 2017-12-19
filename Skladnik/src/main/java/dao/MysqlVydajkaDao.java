@@ -92,7 +92,7 @@ public class MysqlVydajkaDao implements VydajkaDao{
 
     @Override
     public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok,long idPouzivatela) {
-        String sql = "Select id,cena ,datum,pouzivatel_id from Vydajka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela + " order by id desc";
+        String sql = "Select id,cena ,datum,pouzivatel_id,typ_pohybu from Vydajka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        
        return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
     }
