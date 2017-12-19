@@ -109,5 +109,24 @@ public class MysqlMaterialDao implements MaterialDao{
      return material;
     }
 
+    @Override
+    public Material dajMaterialByNazov(String nazov) {
+        String sql = "SELECT * FROM Material where nazov=?";
+         Material material = jdbcTemplate.queryForObject(sql, new RowMapper<Material>() {
+            @Override
+            public Material mapRow(ResultSet rs, int i) throws SQLException {
+               Material m = new Material();
+               m.setCena(rs.getDouble("cena"));
+               m.setId(rs.getLong("id"));
+               m.setId_sklad(rs.getLong("sklad_id"));
+               m.setNazov(rs.getString("nazov"));
+               m.setStav(rs.getDouble("stav"));
+               return m ;
+            }
+        },nazov);
+     return material;
+    }
+    }
+
   
-}
+

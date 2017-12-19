@@ -96,6 +96,17 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         idMaterialuLabel.setForeground(new java.awt.Color(51, 51, 51));
         idMaterialuLabel.setText("ID materialu:");
 
+        idMaterualuTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                idMaterualuTextFieldMouseClicked(evt);
+            }
+        });
+        idMaterualuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idMaterualuTextFieldActionPerformed(evt);
+            }
+        });
+
         cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
         cenaLabel.setText("Cena:");
@@ -335,6 +346,23 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
         
     }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
+
+    private void idMaterualuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldActionPerformed
+       
+    }//GEN-LAST:event_idMaterualuTextFieldActionPerformed
+
+    private void idMaterualuTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldMouseClicked
+        if(evt.getClickCount()==2){
+           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen();
+           VMS.uzivatelLabel.setText(this.uzivatelLabel.getText());
+           VMS.jLabel3.setText("Prijemka");
+           VMS.setVisible(true);
+           this.setVisible(false);
+           dispose();
+                 
+            
+        }
+    }//GEN-LAST:event_idMaterualuTextFieldMouseClicked
  
     
     
@@ -434,7 +462,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private javax.swing.JTextField cenaTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idMaterialuLabel;
-    private javax.swing.JTextField idMaterualuTextField;
+    public javax.swing.JTextField idMaterualuTextField;
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;

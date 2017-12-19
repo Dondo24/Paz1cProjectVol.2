@@ -91,6 +91,12 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         idMaterialuLabel.setForeground(new java.awt.Color(51, 51, 51));
         idMaterialuLabel.setText("ID materialu:");
 
+        idMaterualuTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                idMaterualuTextFieldMouseClicked(evt);
+            }
+        });
+
         cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -343,6 +349,16 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
 
+    private void idMaterualuTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldMouseClicked
+       if(evt.getClickCount()==2){
+           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen();
+           VMS.uzivatelLabel.setText(this.uzivatelLabel.getText());
+           VMS.jLabel3.setText("Vydajka");
+           VMS.setVisible(true);
+           this.setVisible(false);
+           dispose();
+    }//GEN-LAST:event_idMaterualuTextFieldMouseClicked
+    }
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     double total = 0;
     // iterate over all columns
@@ -413,7 +429,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private javax.swing.JTextField cenaSpoluTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idMaterialuLabel;
-    private javax.swing.JTextField idMaterualuTextField;
+    public javax.swing.JTextField idMaterualuTextField;
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
