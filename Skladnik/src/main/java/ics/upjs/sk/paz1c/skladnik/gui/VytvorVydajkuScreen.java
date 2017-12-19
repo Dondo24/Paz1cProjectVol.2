@@ -260,7 +260,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
-        int idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
+        long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         double pocet = Double.parseDouble(pocetTextField.getText());
         int idVydajky = this.idVydajky;
         double cena = materialDao.dajMaterialById(idMaterialu).getCena();
@@ -273,9 +273,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         
         if(pohybMaterialu.getPocet() > materialDao.dajMaterialById(idMaterialu).getStav()){
          JOptionPane.showMessageDialog(null, "Nie je dostatok materiálu na sklade!");
-        }else{
-         
-        materialDao.upravStavMaterial(idMaterialu, pocet, 2);
+        }else{   
+        
         pohybMaterialuDao.pridajPohybMaterialuVydaj(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),new DecimalFormat("##.##").format(cena).replace(',','.'),pocet});        
@@ -295,6 +294,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         vydajka.setDatum(timeStamp);  
         vydajka.setTyp_pohybu(2L);
         vydajka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
+        upravStavMaterialu((DefaultTableModel)materialTable.getModel());
         vydajkaDao.pridajVydajku(vydajka); 
         int idVydajky =vydajkaDao.getLastId();
        
@@ -324,8 +324,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) materialTable.getModel();
         long id = (Long) model.getValueAt(row, 0);
         long idMaterialu = (Long) model.getValueAt(row, 1);
-        double pocet = (Double) model.getValueAt(row, 4);
-        materialDao.upravStavMaterial(idMaterialu, pocet, 1);
+        double pocet = (Double) model.getValueAt(row, 4);      
         pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
         model.removeRow(row);
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
@@ -343,6 +342,23 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     return total;
 }
     
+    public void upravStavMaterialu(DefaultTableModel mdl){
+      long idMaterialu;
+     double pocet;         
+     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
+        idMaterialu =  (Long) mdl.getValueAt(i,1);
+        pocet = (Double) mdl.getValueAt(i, 4);      
+        if(pocet > materialDao.dajMaterialById(idMaterialu).getStav()){
+         JOptionPane.showMessageDialog(null, "Nie je dostatok materiálu na sklade!");
+        }else{
+         
+        materialDao.upravStavMaterial(idMaterialu, pocet, 2);
+              
+        }
+    } 
+    
+  
+    }
     
     /**
      * @param args the command line arguments

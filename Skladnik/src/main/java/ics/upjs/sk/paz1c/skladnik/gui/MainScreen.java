@@ -7,6 +7,7 @@ package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
 import dao.MaterialDao;
+import dao.PohybMaterialuDao;
 import dao.PouzivatelDao;
 import dao.PrijemkaDao;
 import dao.VydajkaDao;
@@ -14,6 +15,7 @@ import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
+import ics.upjs.sk.paz1c.skladnik.entity.PohybMaterialu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,6 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
     PouzivatelDao pouzivatelDao =ObjectFactory.INSTANCE.getPouzivatelDao();
     VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
     MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
+    PohybMaterialuDao pohybMaterialuDao=ObjectFactory.INSTANCE.getPohybMaterialuDao();
     DefaultTableModel tableModel; 
 
     
@@ -399,10 +402,13 @@ public class MainScreen extends javax.swing.JFrame {
         long typPohybu = (Long) model.getValueAt(row, 4); 
           if(typPohybu==1){
               prijemkaDao.odstranPrijemku(prijemkaDao.dajPrijemkuById(id));
+              upravCenyMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id));
+              upravStavMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id), 2);
               ukazPrijmiButtonActionPerformed(evt);
           }
           if(typPohybu==2){
           vydajkaDao.odstranVydajku(vydajkaDao.dajVydajkaById(id));
+           upravStavMaterialu(pohybMaterialuDao.getAllPohybyByVydajkaId(id), 1);
               ukazVydajebuttonActionPerformed(evt);
           }
     }//GEN-LAST:event_deleteSelectedButtonActionPerformed
@@ -457,11 +463,56 @@ public class MainScreen extends javax.swing.JFrame {
           
           };
             mainTable.setModel(model); 
-            
-           
-
       }
+      
+      public void upravStavMaterialu(List<PohybMaterialu> pohyby,int typPohybu){
+      long idMaterialu;
+     double pocet;         
+     for (int i = 0 ; i < pohyby.size() ; i++) {
+        idMaterialu =  pohyby.get(i).getId_materialu();
+        pocet = pohyby.get(i).getPocet();
+           materialDao.upravStavMaterial(idMaterialu, pocet,typPohybu);    
+          
+    } 
     
+  
+    }
+      
+      
+      
+      public void upravCenyMaterialu(List<PohybMaterialu> pohyby){ 
+      long idMaterialu;
+      double pocet;
+      double cena;
+    for (int i = 0 ; i < pohyby.size() ; i++) {
+        idMaterialu =  pohyby.get(i).getId_materialu();
+        pocet = pohyby.get(i).getPocet();
+        cena = pohyby.get(i).getCena();
+        materialDao.upravCenuMaterialu(idMaterialu, upravCenuMaterialu(idMaterialu, cena, pocet));       
+    }  
+    }
+      
+      public double upravCenuMaterialu(long idMaterialu, double cena, double pocet){    
+    double cenaPoUprave =0;
+    double sucetPoctov = 0;
+    double sucetSucinov = 0;
+    List<PohybMaterialu> pohyby = pohybMaterialuDao.getPohybyByMaterialId(idMaterialu);
+    for(PohybMaterialu pohyb : pohyby){
+        System.out.println(pohyb.toString());
+       sucetSucinov += (pohyb.getCena()*pohyb.getPocet());
+       sucetPoctov += pohyb.getPocet();    
+    }
+    sucetSucinov += cena*pocet;
+    sucetPoctov +=pocet;
+    
+    cenaPoUprave=sucetSucinov/sucetPoctov;
+    
+    
+    return cenaPoUprave;
+    
+    }
+      
+      
     /**
      * @param args the command line arguments
      */

@@ -67,6 +67,11 @@ public class PohybMaterialu {
     public void setVydajka_id(long vydajka_id) {
         this.vydajka_id = vydajka_id;
     }
+
+    @Override
+    public String toString() {
+        return "PohybMaterialu{" + "id=" + id + ", id_materialu=" + id_materialu + ", pocet=" + pocet + ", cena=" + cena + ", prijemka_id=" + prijemka_id + ", vydajka_id=" + vydajka_id + '}';
+    }
     
 
     

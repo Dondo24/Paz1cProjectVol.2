@@ -33,6 +33,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
        PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
        private int idPrijemky=prijemkaDao.getLastId()+1;
        private Pouzivatel pouzivatel;
+       private List<PohybMaterialu> pohyby;
     
       
       
@@ -263,7 +264,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
-       pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());  
+       pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());         
         long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
         double pocet = Double.parseDouble(pocetTextField.getText());
         long idPrijemky = this.idPrijemky;
@@ -275,11 +276,11 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         pohybMaterialu.setCena(cena);
         pohybMaterialu.setVydajka_id(0);
         System.out.println(pohybMaterialu.getVydajka_id());
-        
+        /*
         materialDao.upravStavMaterial(idMaterialu, pocet, 1);
         double cenaUpravena = upravCenuMaterialu(idMaterialu, cena, pocet);
         materialDao.upravCenuMaterialu(idMaterialu, cenaUpravena);
-               
+             */  
         pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
@@ -294,6 +295,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         prijemka.setDatum(timeStamp);
         prijemka.setTypPohybu(1L);
         prijemka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
+        upravCenyMaterialu((DefaultTableModel)materialTable.getModel());
+        upravStavMaterialu((DefaultTableModel)materialTable.getModel());
         prijemkaDao.pridajPrijemka(prijemka);         
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
@@ -317,11 +320,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         long id = (Long) model.getValueAt(row, 0); 
         long idMaterialu = (Long) model.getValueAt(row, 1);
         double pocet = (Double) model.getValueAt(row, 4);
-        materialDao.upravStavMaterial(idMaterialu, pocet, 2);
-        Double cena = upravCenuMaterialu(idMaterialu, 0, 0);
-        materialDao.upravCenuMaterialu(idMaterialu, cena);
-        
-        pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
+       pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
        
         model.removeRow(row);
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
@@ -329,10 +328,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
 
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
-    double total = 0;
-    // iterate over all columns
-    for (int i = 0 ; i < mdl.getRowCount() ; i++) {
-        // null or not Integer will throw exception
+    double total = 0;  
+    for (int i = 0 ; i < mdl.getRowCount() ; i++) {       
          total += (Double) mdl.getValueAt(i, columnCena) * (Double) mdl.getValueAt(i, columnPocet);
     }
     return total;
@@ -340,21 +337,46 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     
     public double upravCenuMaterialu(long idMaterialu, double cena, double pocet){    
     double cenaPoUprave =0;
-    double sucetCien = 0;
+    double sucetPoctov = 0;
     double sucetSucinov = 0;
     List<PohybMaterialu> pohyby = pohybMaterialuDao.getPohybyByMaterialId(idMaterialu);
     for(PohybMaterialu pohyb : pohyby){
-       sucetSucinov += pohyb.getCena()*pohyb.getPocet();
-       sucetCien += pohyb.getCena();    
+        System.out.println(pohyb.toString());
+       sucetSucinov += (pohyb.getCena()*pohyb.getPocet());
+       sucetPoctov += pohyb.getPocet();    
     }
     sucetSucinov += cena*pocet;
-    sucetCien +=cena;
+    sucetPoctov +=pocet;
     
-    cenaPoUprave=sucetSucinov/sucetCien;
+    cenaPoUprave=sucetSucinov/sucetPoctov;
     
     
     return cenaPoUprave;
     
+    }
+    public void upravCenyMaterialu(DefaultTableModel mdl){ 
+      long idMaterialu;
+      double pocet;
+      double cena;
+    for (int i = 0 ; i < mdl.getRowCount() ; i++) {
+        idMaterialu =  (Long) mdl.getValueAt(i,1 );
+        pocet = (Double) mdl.getValueAt(i, 4);
+        cena = (Double) mdl.getValueAt(i, 3);        
+        materialDao.upravCenuMaterialu(idMaterialu, upravCenuMaterialu(idMaterialu, cena, pocet));       
+    }  
+    }
+    
+    public void upravStavMaterialu(DefaultTableModel mdl){
+      long idMaterialu;
+     double pocet;         
+     for (int i = 0 ; i < mdl.getRowCount() ; i++) {
+        idMaterialu =  (Long) mdl.getValueAt(i,1);
+        pocet = (Double) mdl.getValueAt(i, 4);
+           materialDao.upravStavMaterial(idMaterialu, pocet, 1);    
+          
+    } 
+    
+  
     }
     
     /**
