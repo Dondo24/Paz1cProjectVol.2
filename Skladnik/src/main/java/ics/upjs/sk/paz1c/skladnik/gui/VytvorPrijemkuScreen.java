@@ -335,7 +335,12 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
         
     }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
-
+ 
+    
+    
+    
+    
+    
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     double total = 0;  
     for (int i = 0 ; i < mdl.getRowCount() ; i++) {       

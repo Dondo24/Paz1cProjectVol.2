@@ -263,7 +263,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
        
         long idMaterialu = Long.parseLong(idMaterualuTextField.getText());
-        long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
+       
         double pocet = Double.parseDouble(pocetTextField.getText());
          Material pridavanyMaterial = materialDao.dajMaterialById(idMaterialu);
         Pouzivatel  p =  pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
