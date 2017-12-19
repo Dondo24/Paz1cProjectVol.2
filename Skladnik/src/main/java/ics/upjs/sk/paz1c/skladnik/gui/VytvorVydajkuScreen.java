@@ -323,6 +323,9 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         int row = materialTable.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) materialTable.getModel();
         long id = (Long) model.getValueAt(row, 0);
+        long idMaterialu = (Long) model.getValueAt(row, 1);
+        double pocet = (Double) model.getValueAt(row, 4);
+        materialDao.upravStavMaterial(idMaterialu, pocet, 1);
         pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
         model.removeRow(row);
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));

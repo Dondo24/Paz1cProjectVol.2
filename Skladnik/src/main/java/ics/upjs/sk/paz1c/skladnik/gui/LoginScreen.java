@@ -171,6 +171,8 @@ public class LoginScreen extends javax.swing.JFrame {
 
                 Pouzivatel pouzivatel = pouzivatelDao.dajPouzivatela(nameFromTextField);
                 char[] correctPassword = pouzivatel.getHeslo().toCharArray();
+                System.out.println(Arrays.toString(correctPassword));
+                
 
                 if (passwordFromField == null) {
                     JOptionPane.showMessageDialog(null, "zadaj heslo");

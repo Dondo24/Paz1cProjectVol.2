@@ -45,7 +45,7 @@ public class MainScreen extends javax.swing.JFrame {
         tableModel = (DefaultTableModel) mainTable.getModel();  
         //dokoncit pre inicializaciu aby sa zobrazilo nieco v tabulke
         //naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
-    
+       
         
     }
 
@@ -298,8 +298,7 @@ public class MainScreen extends javax.swing.JFrame {
         vytvorPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorPrijemkuScreen.setVisible(true);
         this.setVisible(false);
-       
-       
+         
         
       
         

@@ -314,8 +314,15 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     private void vymazPohybMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazPohybMaterialuButtonActionPerformed
         int row = materialTable.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) materialTable.getModel();
-        long id = (Long) model.getValueAt(row, 0);        
+        long id = (Long) model.getValueAt(row, 0); 
+        long idMaterialu = (Long) model.getValueAt(row, 1);
+        double pocet = (Double) model.getValueAt(row, 4);
+        materialDao.upravStavMaterial(idMaterialu, pocet, 2);
+        Double cena = upravCenuMaterialu(idMaterialu, 0, 0);
+        materialDao.upravCenuMaterialu(idMaterialu, cena);
+        
         pohybMaterialuDao.odstranPohybMaterialu(pohybMaterialuDao.dajPohybMaterialuById(id));
+       
         model.removeRow(row);
         cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
         
