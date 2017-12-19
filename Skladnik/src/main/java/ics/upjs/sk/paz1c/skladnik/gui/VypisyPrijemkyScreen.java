@@ -6,7 +6,9 @@
 package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
+import dao.PouzivatelDao;
 import dao.PrijemkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -19,8 +21,11 @@ import javax.swing.table.TableModel;
  * @author Daniel
  */
 public class VypisyPrijemkyScreen extends javax.swing.JFrame {
- DefaultTableModel tableModel; 
- PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
+
+    DefaultTableModel tableModel;
+    PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
+    PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+
     /**
      * Creates new form VypisyPrijemkyScreen
      */
@@ -62,6 +67,10 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         uzivatelLabel = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jZobrazVsetkyPríjemkyButton1 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,7 +199,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jSeparator1.setBackground(new java.awt.Color(51, 51, 51));
@@ -205,12 +214,35 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("Uzivatel");
 
+        jSeparator4.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator4.setForeground(new java.awt.Color(51, 51, 51));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setText("Všetky príjemky:");
+
+        jZobrazVsetkyPríjemkyButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVsetkyPríjemkyButton1.setText("Zobraz");
+        jZobrazVsetkyPríjemkyButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jZobrazVsetkyPríjemkyButton1ActionPerformed(evt);
+            }
+        });
+
+        jSeparator5.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator5.setForeground(new java.awt.Color(51, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(uzivatelLabel)
+                .addGap(176, 176, 176)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +255,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                                 .addComponent(jZobrazPrijemkyZamesiacButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator2)
                             .addGroup(layout.createSequentialGroup()
@@ -252,177 +284,201 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jZobrazPrijenkyNaDenButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(uzivatelLabel)
-                                .addGap(176, 176, 176)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jspatButton1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jspatButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator5)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jZobrazVsetkyPríjemkyButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jZobrazdnesneprijemkyButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jZobrazPrijemkyZamesiacButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jZobrazdnesneprijemkyButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jROKComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jZobrazPrijemkyZamesiacButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jROKComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jZobrazPrijemkyRokButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jPrijemkyNaDenMesiacComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPrijemkyNaDenDenComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPrijemkyNaDenRokComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jZobrazPrijenkyNaDenButton1)
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jZobrazVsetkyPríjemkyButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jspatButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jZobrazPrijemkyRokButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPrijemkyNaDenMesiacComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPrijemkyNaDenDenComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPrijemkyNaDenRokComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jZobrazPrijenkyNaDenButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspatButton1)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(uzivatelLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(uzivatelLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-                                    
-       
-    
+
+
     private void jZobrazPrijemkyRokButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazPrijemkyRokButton1ActionPerformed
-          int rok = Integer.parseInt(jROKComboBox1.getSelectedItem().toString());
-        
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+        long idpouzivatela = p.getId();
+        int rok = Integer.parseInt(jROKComboBox1.getSelectedItem().toString());
+
         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaRok(rok));
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaRok(rok, idpouzivatela));
     }//GEN-LAST:event_jZobrazPrijemkyRokButton1ActionPerformed
 
     private void jZobrazdnesneprijemkyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazdnesneprijemkyButton1ActionPerformed
-         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+        long idpouzivatela = p.getId();
+        nastavModelDefault();
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajDnesneOPrijemky());
-    
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajDnesneOPrijemky(idpouzivatela));
+
     }//GEN-LAST:event_jZobrazdnesneprijemkyButton1ActionPerformed
 
     private void jZobrazPrijenkyNaDenButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazPrijenkyNaDenButton1ActionPerformed
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+        long idpouzivatela = p.getId();
         int rok = Integer.parseInt(jPrijemkyNaDenRokComboBox2.getSelectedItem().toString());
         int mesiac = Integer.parseInt(jPrijemkyNaDenMesiacComboBox3.getSelectedItem().toString());
         int den = Integer.parseInt(jPrijemkyNaDenDenComboBox1.getSelectedItem().toString());
-        
+
         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkuNaDatum(rok, mesiac, den));
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkuNaDatum(rok, mesiac, den, idpouzivatela));
     }//GEN-LAST:event_jZobrazPrijenkyNaDenButton1ActionPerformed
 
     private void jZobrazPrijemkyZamesiacButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazPrijemkyZamesiacButton1ActionPerformed
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+        long idpouzivatela = p.getId();
         Calendar cal = new GregorianCalendar();
         int rok = cal.get(Calendar.YEAR);
-        
+
         int mesiac = Integer.parseInt(jMesiacComboBox1.getSelectedItem().toString());
-        
-        
+
         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaMesiac(mesiac,rok));
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaMesiac(mesiac, rok, idpouzivatela));
     }//GEN-LAST:event_jZobrazPrijemkyZamesiacButton1ActionPerformed
 
     private void jspatButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton1ActionPerformed
-       MainScreen ms = new MainScreen();
-       ms.uzivatelLable.setText(this.uzivatelLabel.getText());
-       ms.setVisible(true);
-       this.setVisible(false);
-       dispose();
+        MainScreen ms = new MainScreen();
+        ms.uzivatelLable.setText(this.uzivatelLabel.getText());
+        ms.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jspatButton1ActionPerformed
 
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
-       if(evt.getClickCount()==2){
-       int row = mainTable.getSelectedRow();      
-       TableModel model = mainTable.getModel();
-       String id = model.getValueAt(row, 0).toString();         
-       
-       
-       ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
-       zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLabel.getText());
-       zobrazPrijemkuScreen.idScreenTextField.setText(id);
-       zobrazPrijemkuScreen.naplnTabulkuPrijmi();
-       zobrazPrijemkuScreen.setVisible(true);
-       this.setVisible(false);
-       dispose();
-       }
-       
+        if (evt.getClickCount() == 2) {
+            int row = mainTable.getSelectedRow();
+            TableModel model = mainTable.getModel();
+            String id = model.getValueAt(row, 0).toString();
+
+            ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
+            zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLabel.getText());
+            zobrazPrijemkuScreen.idScreenTextField.setText(id);
+            zobrazPrijemkuScreen.naplnTabulkuPrijmi();
+            zobrazPrijemkuScreen.setVisible(true);
+            this.setVisible(false);
+            dispose();
+        }
+
     }//GEN-LAST:event_mainTableMouseClicked
 
-     private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi){
-    for(Prijemka prijemka : prijmi){
-       model.addRow(new Object[]{prijemka.getId(),prijemka.getCena(),prijemka.getDatum()});
-    }
-    }
-    
-    
-    private void nastavModelDefault(){
-          String[] columns = {"id","cena","datum",};
-            DefaultTableModel model = new DefaultTableModel(columns,0){
-          @Override
-          public boolean isCellEditable(int row, int column){
-          return false;
-          }
-          
-          };
-            mainTable.setModel(model); 
-            
-           
+    private void jZobrazVsetkyPríjemkyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazVsetkyPríjemkyButton1ActionPerformed
+        nastavModelDefault();
+        tableModel = (DefaultTableModel) mainTable.getModel();
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLabel.getText())));
+    }//GEN-LAST:event_jZobrazVsetkyPríjemkyButton1ActionPerformed
 
-      }
+    private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi) {
+        for (Prijemka prijemka : prijmi) {
+            model.addRow(new Object[]{prijemka.getId(), prijemka.getCena(), prijemka.getDatum()});
+        }
+    }
+
+    private void nastavModelDefault() {
+        String[] columns = {"id", "cena", "datum",};
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+        mainTable.setModel(model);
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -467,6 +523,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jMesiacComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jPrijemkyNaDenDenComboBox1;
@@ -477,9 +534,12 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JButton jZobrazPrijemkyRokButton1;
     private javax.swing.JButton jZobrazPrijemkyZamesiacButton1;
     private javax.swing.JButton jZobrazPrijenkyNaDenButton1;
+    private javax.swing.JButton jZobrazVsetkyPríjemkyButton1;
     private javax.swing.JButton jZobrazdnesneprijemkyButton1;
     private javax.swing.JButton jspatButton1;
     private javax.swing.JTable mainTable;

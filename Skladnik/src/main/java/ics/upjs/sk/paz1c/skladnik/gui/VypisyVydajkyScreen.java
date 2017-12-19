@@ -6,7 +6,9 @@
 package ics.upjs.sk.paz1c.skladnik.gui;
 
 import Factory.ObjectFactory;
+import dao.PouzivatelDao;
 import dao.VydajkaDao;
+import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
 import ics.upjs.sk.paz1c.skladnik.entity.Vydajka;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,12 +22,15 @@ import javax.swing.table.TableModel;
  */
 public class VypisyVydajkyScreen extends javax.swing.JFrame {
 DefaultTableModel tableModel; 
- VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
+  VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
+  PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
+
     /**
      * Creates new form VypisyVydajkyScreen
      */
     public VypisyVydajkyScreen() {
         initComponents();
+         
     }
 
     /**
@@ -62,6 +67,10 @@ DefaultTableModel tableModel;
         jSeparator3 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         uzivatelLabel = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jZobrazVsetkoButton1 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,6 +203,24 @@ DefaultTableModel tableModel;
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("Uzivatel");
 
+        jSeparator4.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator4.setForeground(new java.awt.Color(51, 51, 51));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setText("Vsetky výdajky :");
+
+        jZobrazVsetkoButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVsetkoButton1.setText("Zobraz");
+        jZobrazVsetkoButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jZobrazVsetkoButton1ActionPerformed(evt);
+            }
+        });
+
+        jSeparator5.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator5.setForeground(new java.awt.Color(51, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,11 +236,7 @@ DefaultTableModel tableModel;
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                                         .addGap(59, 59, 59))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jVydajkyNaDenRokComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(22, 22, 22)))
+                                        .addComponent(jVydajkyNaDenRokComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(37, 37, 37)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
@@ -243,20 +266,34 @@ DefaultTableModel tableModel;
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(157, 157, 157))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(134, 134, 134))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jMesiacComboBox1, 0, 99, Short.MAX_VALUE)
-                                        .addGap(68, 68, 68)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(15, 15, 15))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(68, 68, 68)))
                                         .addComponent(jZobrazVydajkyZaMesiacButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(158, 158, 158)
-                                        .addComponent(jZobrazVydajkyNaDenButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jRokComboBox1, 0, 99, Short.MAX_VALUE)
-                                        .addGap(68, 68, 68)
-                                        .addComponent(jZobrazVydajkyZaRokButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
-                                .addGap(10, 10, 10)))
+                                        .addGap(69, 69, 69)
+                                        .addComponent(jZobrazVydajkyZaRokButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(10, 10, 10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jZobrazVsetkoButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jZobrazVydajkyNaDenButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
@@ -276,37 +313,48 @@ DefaultTableModel tableModel;
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jZobrazVydajkyZaMesiacButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jZobrazVydajkyZaMesiacButton1))
-                .addGap(9, 9, 9)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRokComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jZobrazVydajkyZaRokButton1))
-                .addGap(18, 18, 18)
+                    .addComponent(jZobrazVydajkyZaRokButton1)
+                    .addComponent(jRokComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jVydajkyNaDenRokComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVydajkyNaDenDenComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jVydajkyNaDedMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jVydajkyNaDenDenComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jVydajkyNaDenRokComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jZobrazVydajkyNaDenButton1)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jZobrazVsetkoButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jspatButton1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -316,25 +364,29 @@ DefaultTableModel tableModel;
                     .addComponent(uzivatelLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(57, 57, 57))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jZobrazDnesneVydajkyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazDnesneVydajkyButton1ActionPerformed
-             nastavModelDefault();
+            Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+         long idpouzivatela = p.getId();
+        nastavModelDefault();
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, vydajkaDao.dajDnesneVydajky());
+        naplnTabulkuVydaje(tableModel, vydajkaDao.dajDnesneVydajky(idpouzivatela));
     }//GEN-LAST:event_jZobrazDnesneVydajkyButton1ActionPerformed
 
     private void jZobrazVydajkyZaMesiacButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazVydajkyZaMesiacButton1ActionPerformed
-         Calendar cal = new GregorianCalendar();
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+         long idpouzivatela = p.getId(); 
+        Calendar cal = new GregorianCalendar();
         int rok = cal.get(Calendar.YEAR);
         
         int mesiac = Integer.parseInt(jMesiacComboBox1.getSelectedItem().toString());
@@ -344,22 +396,26 @@ DefaultTableModel tableModel;
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, vydajkaDao.dajVydajkyNaMesiac(mesiac,rok));
+        naplnTabulkuVydaje(tableModel, vydajkaDao.dajVydajkyNaMesiac(mesiac,rok,idpouzivatela));
         
     }//GEN-LAST:event_jZobrazVydajkyZaMesiacButton1ActionPerformed
 
     private void jZobrazVydajkyZaRokButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazVydajkyZaRokButton1ActionPerformed
-         int rok = Integer.parseInt(jRokComboBox1.getSelectedItem().toString());
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+         long idpouzivatela = p.getId();
+        int rok = Integer.parseInt(jRokComboBox1.getSelectedItem().toString());
         
         nastavModelDefault();
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, vydajkaDao.dajVydajkyNaRok(rok));
+        naplnTabulkuVydaje(tableModel, vydajkaDao.dajVydajkyNaRok(rok,idpouzivatela));
     }//GEN-LAST:event_jZobrazVydajkyZaRokButton1ActionPerformed
 
     private void jZobrazVydajkyNaDenButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazVydajkyNaDenButton1ActionPerformed
-       int rok = Integer.parseInt(jVydajkyNaDenRokComboBox2.getSelectedItem().toString());
+       Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
+         long idpouzivatela = p.getId();
+        int rok = Integer.parseInt(jVydajkyNaDenRokComboBox2.getSelectedItem().toString());
         int mesiac = Integer.parseInt(jVydajkyNaDedMesiacComboBox1.getSelectedItem().toString());
         int den = Integer.parseInt(jVydajkyNaDenDenComboBox1.getSelectedItem().toString());
         
@@ -367,7 +423,7 @@ DefaultTableModel tableModel;
         tableModel = (DefaultTableModel) mainTable.getModel(); 
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        naplnTabulkuPrijmi(tableModel, vydajkaDao.dajVydajkuNaDatum(rok, mesiac, den));
+        naplnTabulkuVydaje(tableModel, vydajkaDao.dajVydajkuNaDatum(rok, mesiac, den,idpouzivatela));
     }//GEN-LAST:event_jZobrazVydajkyNaDenButton1ActionPerformed
 
     private void jspatButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jspatButton1ActionPerformed
@@ -395,7 +451,15 @@ DefaultTableModel tableModel;
        }
        
     }//GEN-LAST:event_mainTableMouseClicked
-    private void naplnTabulkuPrijmi(DefaultTableModel model, List<Vydajka> vydaje){
+
+    private void jZobrazVsetkoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jZobrazVsetkoButton1ActionPerformed
+    nastavModelDefault();
+        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        naplnTabulkuVydaje(tableModel, vydajkaDao.getAllByPouzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLabel.getText())));
+    }//GEN-LAST:event_jZobrazVsetkoButton1ActionPerformed
+    private void naplnTabulkuVydaje(DefaultTableModel model, List<Vydajka> vydaje){
     for(Vydajka vydajka : vydaje){
        model.addRow(new Object[]{vydajka.getId(),vydajka.getCena(),vydajka.getDatum()});
     }
@@ -460,6 +524,7 @@ DefaultTableModel tableModel;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jMesiacComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jRokComboBox1;
@@ -467,10 +532,13 @@ DefaultTableModel tableModel;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JComboBox<String> jVydajkyNaDedMesiacComboBox1;
     private javax.swing.JComboBox<String> jVydajkyNaDenDenComboBox1;
     private javax.swing.JComboBox<String> jVydajkyNaDenRokComboBox2;
     private javax.swing.JButton jZobrazDnesneVydajkyButton1;
+    private javax.swing.JButton jZobrazVsetkoButton1;
     private javax.swing.JButton jZobrazVydajkyNaDenButton1;
     private javax.swing.JButton jZobrazVydajkyZaMesiacButton1;
     private javax.swing.JButton jZobrazVydajkyZaRokButton1;

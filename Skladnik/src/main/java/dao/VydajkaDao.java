@@ -23,10 +23,10 @@ void pridajVydajku(Vydajka vydajka);
       public List <Vydajka> getAllByPouzivatelId(long id);
     public int getLastId();
     void upravCenu(double cena, long id);
-public List<Vydajka> dajDnesneVydajky();
-    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok);
-    public List<Vydajka> dajVydajkyNaRok(int rok );
-    public List<Vydajka> dajVydajkuNaDatum(int rok , int mesiac , int den);
+public List<Vydajka> dajDnesneVydajky(long idPouzivatela);
+    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok,long idPouzivatela);
+    public List<Vydajka> dajVydajkyNaRok(int rok,long idPouzivatela );
+    public List<Vydajka> dajVydajkuNaDatum(int rok , int mesiac , int den,long idPouzivatela);
     void zmazVsetko();
     
 }

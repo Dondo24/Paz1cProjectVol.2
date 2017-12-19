@@ -84,29 +84,29 @@ public class MysqlVydajkaDao implements VydajkaDao{
     }
 
     @Override
-    public List<Vydajka> dajDnesneVydajky() {
-         String sql = "Select id ,cena , datum from Vydajka WHERE DATE(datum) = DATE(NOW()) ORDER BY id DESC";
+    public List<Vydajka> dajDnesneVydajky(long idPouzivatela) {
+         String sql = "Select id ,cena , datum,pouzivatel_id from Vydajka WHERE DATE(datum) = DATE(NOW()) and pouzivatel_id= "+ idPouzivatela + " ORDER BY id DESC";
        
        return (jdbcTemplate.query(sql,new VydajkaRowMapper()));
     }
 
     @Override
-    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok) {
-        String sql = "Select id,cena ,datum from Vydajka where month(datum) = " + mesiac + " and year(datum)= " + rok + " order by id desc";
+    public List<Vydajka> dajVydajkyNaMesiac(int mesiac, int rok,long idPouzivatela) {
+        String sql = "Select id,cena ,datum,pouzivatel_id from Vydajka where month(datum) = " + mesiac + " and year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        
        return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
     }
 
     @Override
-    public List<Vydajka> dajVydajkyNaRok(int rok) {
-       String sql = "Select id,cena ,datum from Vydajka where year(datum)= " + rok + " order by id desc";
+    public List<Vydajka> dajVydajkyNaRok(int rok,long idPouzivatela) {
+       String sql = "Select id,cena ,datum,pouzivatel_id from Vydajka where year(datum)= " + rok + " and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        
        return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
     }
 
     @Override
-    public List<Vydajka> dajVydajkuNaDatum(int rok, int mesiac, int den) {
-         String sql = "Select id,cena ,datum from Vydajka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" order by id desc";
+    public List<Vydajka> dajVydajkuNaDatum(int rok, int mesiac, int den,long idPouzivatela) {
+         String sql = "Select id,cena ,datum,pouzivatel_id from Vydajka where year(datum)= " + rok + " and month(datum) = " + mesiac +" and day(datum)= "+ den +" and pouzivatel_id= "+ idPouzivatela + " order by id desc";
        return (jdbcTemplate.query(sql, new VydajkaRowMapper()));
     }
 
@@ -141,6 +141,7 @@ private class VydajkaRowMapper implements RowMapper<Vydajka> {
             vydajka.setId(rs.getLong("id"));
             vydajka.setCena(rs.getDouble("cena"));
             vydajka.setDatum(rs.getString("datum"));
+            vydajka.setId_pouzivatel(rs.getLong("pouzivatel_id"));
             
             return vydajka;
         }
