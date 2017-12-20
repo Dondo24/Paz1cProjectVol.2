@@ -20,10 +20,14 @@ public interface PohybMaterialuDao {
     void pridajPohybMaterialuVydaj(PohybMaterialu pohybMaterialu);
     public PohybMaterialu dajPohybMaterialuById (Long id);
     void odstranPohybMaterialu(PohybMaterialu pohybMaterialu);
+    void odstranPohybMaterialuByPrijemkaId(long id);
+    void odstranPohybMaterialuByVydajkaId(long id);
     public List <PohybMaterialu> getAll();
     public List <PohybMaterialu> getAllPohybyByPrijemkaId(long id);
     public List <PohybMaterialu> getAllPohybyByVydajkaId(long id);
     public List<PohybMaterialu> getPohybyByMaterialId(long id);
+    public List<PohybMaterialu> getAllPohybyByMaterialIdPrijemky(long id);
+     public List<PohybMaterialu> getAllPohybyByMaterialIdVydajky(long id);
     void zmazVsetko();
     public long getLastId();
    

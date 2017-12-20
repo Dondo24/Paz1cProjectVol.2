@@ -110,6 +110,11 @@ public class MysqlMaterialDao implements MaterialDao{
     }
 
     @Override
+    public List<Long> dajVsetkyId() {
+         String sql = "Select id from material ";
+      BeanPropertyRowMapper<Material> mapper = BeanPropertyRowMapper.newInstance(Material.class);
+         List<Long> idsMaterialov = (List<Long>) jdbcTemplate.queryForList(sql,Long.class);
+        return idsMaterialov;
     public Material dajMaterialByNazov(String nazov) {
         String sql = "SELECT * FROM Material where nazov=?";
          Material material = jdbcTemplate.queryForObject(sql, new RowMapper<Material>() {

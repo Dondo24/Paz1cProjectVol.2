@@ -23,6 +23,7 @@ public interface MaterialDao {
     void upravCenuMaterialu(long idMaterialu, double cena);
     public List<Material> getAllBySkladId(long idSkladu);
     public Material dajMaterialByNazov (String nazov);
+   List<Long> dajVsetkyId();
 
     
 }

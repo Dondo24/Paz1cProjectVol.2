@@ -267,21 +267,31 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
-       
+        if(idMaterualuTextField.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "Prosim zadajte id materialu");
+        return;
+        }
         long idMaterialu = Long.parseLong(idMaterualuTextField.getText());
-       
+       if(pocetTextField.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "Prosim zadajte pocet");
+        return;
+        }
         double pocet = Double.parseDouble(pocetTextField.getText());
          Material pridavanyMaterial = materialDao.dajMaterialById(idMaterialu);
         Pouzivatel  p =  pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());
        long idSkladuPouzivatela = p.getId_sklad();
         long idSkladuMaterialu = pridavanyMaterial.getId_sklad();
-       // int idVydajky = this.idVydajky;
+      
         double cena = materialDao.dajMaterialById(idMaterialu).getCena();
        System.out.println(idSkladuMaterialu);
          System.out.println(idSkladuPouzivatela);
         if(idSkladuMaterialu==idSkladuPouzivatela){
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
+       if(materialDao.dajVsetkyId().contains(idMaterialu)){
         pohybMaterialu.setId_materialu(idMaterialu);
+        }else{
+        JOptionPane.showMessageDialog(null, "Material neexistuje");
+        }
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setVydajka_id(idVydajky);
         pohybMaterialu.setCena(cena);

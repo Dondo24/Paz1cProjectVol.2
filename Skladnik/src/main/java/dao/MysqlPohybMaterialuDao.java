@@ -127,7 +127,9 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
                p.setCena(rs.getDouble("cena"));
                p.setId_materialu(rs.getLong("id_materialu"));
                p.setVydajka_id(rs.getLong("vydajka_id"));
+               p.setPrijemka_id(rs.getLong("prijemka_id"));
                p.setPocet(rs.getLong("pocet"));
+               
                
                
                return p;
@@ -150,6 +152,64 @@ public class MysqlPohybMaterialuDao implements PohybMaterialuDao {
         System.out.println(getAll().toString());
        String sql = "select max(id) from pohybmaterialu";   
         return jdbcTemplate.queryForObject(sql,Integer.class);
+    }
+
+    @Override
+    public List<PohybMaterialu> getAllPohybyByMaterialIdPrijemky(long id) {
+          String sql = "select * from pohybmaterialu where id_materialu = ? and not prijemka_id = 0";
+        
+        List<PohybMaterialu> pohyby = jdbcTemplate.query(sql, new RowMapper<PohybMaterialu>() {
+            @Override
+            public PohybMaterialu mapRow(ResultSet rs, int i) throws SQLException {
+               PohybMaterialu p = new PohybMaterialu();
+               p.setId(rs.getLong("id"));
+               p.setCena(rs.getDouble("cena"));
+               p.setId_materialu(rs.getLong("id_materialu"));
+               p.setVydajka_id(rs.getLong("vydajka_id"));
+               p.setPrijemka_id(rs.getLong("prijemka_id"));
+               p.setPocet(rs.getLong("pocet"));
+               
+               
+               
+               return p;
+            }
+        }, id);   
+        return pohyby;
+    }
+
+    @Override
+    public List<PohybMaterialu> getAllPohybyByMaterialIdVydajky(long id) {
+        String sql = "select * from pohybmaterialu where id_materialu = ? and not vydajka_id = 0";
+        
+        List<PohybMaterialu> pohyby = jdbcTemplate.query(sql, new RowMapper<PohybMaterialu>() {
+            @Override
+            public PohybMaterialu mapRow(ResultSet rs, int i) throws SQLException {
+               PohybMaterialu p = new PohybMaterialu();
+               p.setId(rs.getLong("id"));
+               p.setCena(rs.getDouble("cena"));
+               p.setId_materialu(rs.getLong("id_materialu"));
+               p.setVydajka_id(rs.getLong("vydajka_id"));
+               p.setPrijemka_id(rs.getLong("prijemka_id"));
+               p.setPocet(rs.getLong("pocet"));
+               
+               
+               
+               return p;
+            }
+        }, id);   
+        return pohyby;
+    }
+
+    @Override
+    public void odstranPohybMaterialuByPrijemkaId(long id) {
+       String sql = "delete from pohybmaterialu where prijemka_id = ?";
+        jdbcTemplate.update(sql,id);
+    }
+
+    @Override
+    public void odstranPohybMaterialuByVydajkaId(long id) {
+        String sql = "delete from pohybmaterialu where vydajka_id = ?";
+        jdbcTemplate.update(sql,id);
     }
     
 }

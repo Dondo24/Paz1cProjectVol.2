@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -42,6 +43,7 @@ public class MainScreen extends javax.swing.JFrame {
     MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
     PohybMaterialuDao pohybMaterialuDao=ObjectFactory.INSTANCE.getPohybMaterialuDao();
     DefaultTableModel tableModel; 
+    String model="";
 
     
     public MainScreen() {
@@ -371,9 +373,14 @@ public class MainScreen extends javax.swing.JFrame {
        if(evt.getClickCount()==2){
        int row = mainTable.getSelectedRow();      
        TableModel model = mainTable.getModel();
-       String id = model.getValueAt(row, 0).toString();         
-       String typPohybu = model.getValueAt(row, 4).toString(); 
+       String id = model.getValueAt(row, 0).toString();  
+           System.out.println(this.model); 
+      
        
+                      
+       
+       if(this.model.equals("default")){
+       String typPohybu = model.getValueAt(row, 4).toString(); 
        if(typPohybu.equals("1")){
        ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
        zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
@@ -385,7 +392,7 @@ public class MainScreen extends javax.swing.JFrame {
        }
 
        
-         if(typPohybu.equals("2")){
+        if(typPohybu.equals("2")){
        ZobrazPohybScreen zobrazVydajkuScreen = new ZobrazPohybScreen();
        zobrazVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
        zobrazVydajkuScreen.idScreenTextField.setText(id);
@@ -394,6 +401,18 @@ public class MainScreen extends javax.swing.JFrame {
        this.setVisible(false);
      
        }
+      }
+         if(this.model.equals("material")){
+         long idMaterialu= (Long) model.getValueAt(row, 0);
+         zobrazKartuMaterialu zobrazKartuMaterialu = new zobrazKartuMaterialu();
+         zobrazKartuMaterialu.idMaterialuTextField.setText(idMaterialu+"");
+         zobrazKartuMaterialu.uzivatelLabel.setText(this.uzivatelLable.getText());
+         zobrazKartuMaterialu.naplnPohybyTable();
+      
+         zobrazKartuMaterialu.setVisible(true);
+         this.setVisible(false);
+         
+         }
 
        
        }
@@ -409,18 +428,24 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jVypisyButton1ActionPerformed
 
     private void deleteSelectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedButtonActionPerformed
-        int row = mainTable.getSelectedRow();
+        int row = mainTable.getSelectedRow();        
         TableModel model = mainTable.getModel();
+         if(row==-1){
+          JOptionPane.showMessageDialog(null, "Nic nie je oznacene");
+          return;
+        }
         long id = (Long) model.getValueAt(row, 0);
         long typPohybu = (Long) model.getValueAt(row, 4); 
           if(typPohybu==1){
               prijemkaDao.odstranPrijemku(prijemkaDao.dajPrijemkuById(id));
+               pohybMaterialuDao.odstranPohybMaterialuByPrijemkaId(id);
               upravCenyMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id));
               upravStavMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id), 2);
               ukazPrijmiButtonActionPerformed(evt);
           }
           if(typPohybu==2){
           vydajkaDao.odstranVydajku(vydajkaDao.dajVydajkaById(id));
+            pohybMaterialuDao.odstranPohybMaterialuByVydajkaId(id);
            upravStavMaterialu(pohybMaterialuDao.getAllPohybyByVydajkaId(id), 1);
               ukazVydajebuttonActionPerformed(evt);
           }
@@ -451,6 +476,7 @@ public class MainScreen extends javax.swing.JFrame {
       
      
       private void nastavModelMaterial(){
+          model="material";
           String[] columns = {"id","nazov","stav","cena","id_sklad"};
           DefaultTableModel model = new DefaultTableModel(columns,0){
           @Override
@@ -467,6 +493,7 @@ public class MainScreen extends javax.swing.JFrame {
       }
       
       private void nastavModelDefault(){
+          model="default";
           String[] columns = {"id","cena","id_pouzivatela","datum","typ_pohybu"};
             DefaultTableModel model = new DefaultTableModel(columns,0){
           @Override
@@ -572,7 +599,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jVypisyButton1;
     private javax.swing.JTable mainTable;
-    private javax.swing.JButton ukazMaterialButton;
+    public javax.swing.JButton ukazMaterialButton;
     private javax.swing.JButton ukazPrijmiButton;
     private javax.swing.JButton ukazVydajebutton;
     public javax.swing.JLabel uzivatelLable;

@@ -277,18 +277,36 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridajMaterialuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajMaterialuButtonActionPerformed
-       pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());         
+       pouzivatel = pouzivatelDao.dajPouzivatela(uzivatelLabel.getText());   
+       if(idMaterualuTextField.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "Prosim zadajte id materialu");
+        return;
+        }
         long idMaterialu = Integer.parseInt(idMaterualuTextField.getText());
-        Material pridavanyMaterial = materialDao.dajMaterialById(idMaterialu);
-        
+        Material pridavanyMaterial;
+        if(materialDao.dajVsetkyId().contains(idMaterialu)){
+        pridavanyMaterial = materialDao.dajMaterialById(idMaterialu); 
+        }else{
+        JOptionPane.showMessageDialog(null, "Material neexistuje");
+        return;
+        }
+               
         long idSkladuPouzivatela = pouzivatel.getId_sklad();
         long idSkladuMaterialu = pridavanyMaterial.getId_sklad();
+        
+        if(pocetTextField.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "Prosim zadajte pocet");
+        return;
+        }
         double pocet = Double.parseDouble(pocetTextField.getText());
         long idPrijemky = this.idPrijemky;
+          if(cenaTextField.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "Prosim zadajte cenu");
+        return;
+        }
         double cena = Double.parseDouble(cenaTextField.getText());
         if(idSkladuMaterialu==idSkladuPouzivatela){
-        PohybMaterialu pohybMaterialu = new PohybMaterialu();
-        pohybMaterialu.setId_materialu(idMaterialu);
+        PohybMaterialu pohybMaterialu = new PohybMaterialu();        
         pohybMaterialu.setPocet(pocet);
         pohybMaterialu.setPrijemka_id(idPrijemky);
         pohybMaterialu.setCena(cena);
