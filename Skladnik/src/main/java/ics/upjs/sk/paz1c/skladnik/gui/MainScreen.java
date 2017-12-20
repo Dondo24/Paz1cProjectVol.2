@@ -44,6 +44,7 @@ public class MainScreen extends javax.swing.JFrame {
     PohybMaterialuDao pohybMaterialuDao=ObjectFactory.INSTANCE.getPohybMaterialuDao();
     DefaultTableModel tableModel; 
     String model="";
+    
 
     
     public MainScreen() {
@@ -304,7 +305,7 @@ public class MainScreen extends javax.swing.JFrame {
         vytvorPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorPrijemkuScreen.setVisible(true);
         this.setVisible(false);
-         
+         dispose();
         
       
         

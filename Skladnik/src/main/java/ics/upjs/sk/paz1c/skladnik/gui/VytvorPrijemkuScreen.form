@@ -199,6 +199,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="pocetTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pocetTextFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="cenaLabel">
       <Properties>

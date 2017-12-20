@@ -36,7 +36,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
        private int idPrijemky=prijemkaDao.getLastId()+1;
        private Pouzivatel pouzivatel;
        private List<PohybMaterialu> pohyby;
-    
+   
       
       
     /**
@@ -104,6 +104,12 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         idMaterualuTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idMaterualuTextFieldActionPerformed(evt);
+            }
+        });
+
+        pocetTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pocetTextFieldActionPerformed(evt);
             }
         });
 
@@ -365,22 +371,30 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_vymazPohybMaterialuButtonActionPerformed
 
+    
     private void idMaterualuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldActionPerformed
        
     }//GEN-LAST:event_idMaterualuTextFieldActionPerformed
 
     private void idMaterualuTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldMouseClicked
         if(evt.getClickCount()==2){
-           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen();
+           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen(this,null,1);
            VMS.uzivatelLabel.setText(this.uzivatelLabel.getText());
            VMS.jLabel3.setText("Prijemka");
            VMS.setVisible(true);
            this.setVisible(false);
-           dispose();
+         //  VMS.IDLabel2.getText();
+     
+           //this.
+          //dispose();
                  
             
         }
     }//GEN-LAST:event_idMaterualuTextFieldMouseClicked
+
+    private void pocetTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pocetTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pocetTextFieldActionPerformed
  
     
     

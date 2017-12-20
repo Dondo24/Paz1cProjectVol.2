@@ -11,11 +11,14 @@ import dao.PouzivatelDao;
 import dao.SkladDao;
 import ics.upjs.sk.paz1c.skladnik.entity.Material;
 import ics.upjs.sk.paz1c.skladnik.entity.Pouzivatel;
+import ics.upjs.sk.paz1c.skladnik.entity.Prijemka;
+
 import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -29,12 +32,23 @@ DefaultTableModel tableModel;
 private PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
 private MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
 private SkladDao skladDao = ObjectFactory.INSTANCE.getSkladDao();
+public static VytvorPrijemkuScreen prijemkaP;
+public static VytvorVydajkuScreen vydajkaP;
+public static String uzivatel;
+public static int cislo;
+public static String id;
 
     /**
      * Creates new form VyhliadavanieMaterialScreen
      */
-    public VyhliadavanieMaterialScreen() {
-          
+    public VyhliadavanieMaterialScreen(VytvorPrijemkuScreen prijemka,VytvorVydajkuScreen vydajka,int cislo) {
+       if(cislo ==1){
+           prijemkaP = prijemka;
+       }
+       if(cislo ==2){
+           vydajkaP =vydajka;
+       }
+     
         initComponents();
      
     }
@@ -219,18 +233,17 @@ private void nastavModelMaterial(){
 
     private void jSpatButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSpatButton2ActionPerformed
        if(jLabel3.getText()=="Prijemka"){
-        VytvorPrijemkuScreen VPS = new VytvorPrijemkuScreen();
-      VPS.uzivatelLabel.setText(this.uzivatelLabel.getText());
-      VPS.setVisible(true);
-      this.setVisible(false);
-      dispose();
+       
+     prijemkaP.setVisible(true);
+     this.setVisible(false);
+     dispose();
+          
        }
        if(jLabel3.getText()=="Vydajka"){
-           VytvorVydajkuScreen VVS = new VytvorVydajkuScreen();
-           VVS.uzivatelLabel.setText(this.uzivatelLabel.getText());
-           VVS.setVisible(true);
+           vydajkaP.setVisible(true);
            this.setVisible(false);
            dispose();
+        
        }
     }//GEN-LAST:event_jSpatButton2ActionPerformed
 
@@ -240,18 +253,18 @@ private void nastavModelMaterial(){
             JOptionPane.showMessageDialog(null, "Vyberte material");
         }else{
         if(jLabel3.getText()=="Prijemka"){
-           VytvorPrijemkuScreen VPS = new VytvorPrijemkuScreen();
-           VPS.idMaterualuTextField.setText(IDLabel2.getText());
-           VPS.uzivatelLabel.setText(this.uzivatelLabel.getText());
-           VPS.setVisible(true);
-           this.setVisible(false);
+          
+     
+          id = IDLabel2.getText();
+          prijemkaP.idMaterualuTextField.setText(id);
+          prijemkaP.setVisible(true);
+         this.setVisible(false);
            dispose();
        }
        if(jLabel3.getText()=="Vydajka"){
-           VytvorVydajkuScreen VVP = new VytvorVydajkuScreen();
-           VVP.idMaterualuTextField.setText(IDLabel2.getText());
-           VVP.uzivatelLabel.setText(this.uzivatelLabel.getText());
-           VVP.setVisible(true);
+          id= IDLabel2.getText();
+          vydajkaP.idMaterualuTextField.setText(id);
+          vydajkaP.setVisible(true);
            this.setVisible(false);
            dispose();
            
@@ -327,7 +340,7 @@ private void nastavModelMaterial(){
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VyhliadavanieMaterialScreen().setVisible(true);
+                new VyhliadavanieMaterialScreen(prijemkaP,vydajkaP,cislo).setVisible(true);
             }
         });
     }

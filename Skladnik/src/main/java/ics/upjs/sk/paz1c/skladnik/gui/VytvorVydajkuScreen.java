@@ -96,6 +96,11 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
                 idMaterualuTextFieldMouseClicked(evt);
             }
         });
+        idMaterualuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idMaterualuTextFieldActionPerformed(evt);
+            }
+        });
 
         cenaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cenaLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -361,14 +366,18 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
 
     private void idMaterualuTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldMouseClicked
        if(evt.getClickCount()==2){
-           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen();
+           VyhliadavanieMaterialScreen VMS = new VyhliadavanieMaterialScreen(null,this,2);
            VMS.uzivatelLabel.setText(this.uzivatelLabel.getText());
            VMS.jLabel3.setText("Vydajka");
            VMS.setVisible(true);
            this.setVisible(false);
-           dispose();
+      //     dispose();
     }//GEN-LAST:event_idMaterualuTextFieldMouseClicked
-    }
+
+    private void idMaterualuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idMaterualuTextFieldActionPerformed
+        
+    }//GEN-LAST:event_idMaterualuTextFieldActionPerformed
+    
     public double sumaSpolu(DefaultTableModel mdl, int columnCena, int columnPocet) {
     double total = 0;
     // iterate over all columns
