@@ -79,6 +79,7 @@ DefaultTableModel tableModel;
         jLabel1.setText("Dnešné výdajky :");
 
         jZobrazDnesneVydajkyButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazDnesneVydajkyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazDnesneVydajkyButton1.setText("Zobraz");
         jZobrazDnesneVydajkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +92,7 @@ DefaultTableModel tableModel;
         jLabel2.setText("Výdajky za mesiac :");
 
         jZobrazVydajkyZaMesiacButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVydajkyZaMesiacButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVydajkyZaMesiacButton1.setText("Zobraz");
         jZobrazVydajkyZaMesiacButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +108,7 @@ DefaultTableModel tableModel;
         jLabel3.setText("Vydajky za rok :");
 
         jZobrazVydajkyZaRokButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVydajkyZaRokButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVydajkyZaRokButton1.setText("Zobraz");
         jZobrazVydajkyZaRokButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +164,7 @@ DefaultTableModel tableModel;
         jScrollPane1.setViewportView(mainTable);
 
         jZobrazVydajkyNaDenButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVydajkyNaDenButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVydajkyNaDenButton1.setText("Zobraz");
         jZobrazVydajkyNaDenButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +173,8 @@ DefaultTableModel tableModel;
         });
 
         jspatButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jspatButton1.setText("Spat");
+        jspatButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jspatButton1.setText("Späť");
         jspatButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jspatButton1ActionPerformed(evt);
@@ -211,6 +216,7 @@ DefaultTableModel tableModel;
         jLabel9.setText("Vsetky výdajky :");
 
         jZobrazVsetkoButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVsetkoButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVsetkoButton1.setText("Zobraz");
         jZobrazVsetkoButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

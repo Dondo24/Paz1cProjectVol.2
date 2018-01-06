@@ -79,6 +79,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jLabel1.setText("Dnešné príjemky :");
 
         jZobrazdnesneprijemkyButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazdnesneprijemkyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazdnesneprijemkyButton1.setText("Zobraz ");
         jZobrazdnesneprijemkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +95,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jMesiacComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         jZobrazPrijemkyZamesiacButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazPrijemkyZamesiacButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazPrijemkyZamesiacButton1.setText("Zobraz");
         jZobrazPrijemkyZamesiacButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +111,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jROKComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017" }));
 
         jZobrazPrijemkyRokButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazPrijemkyRokButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazPrijemkyRokButton1.setText("Zobraz");
         jZobrazPrijemkyRokButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +145,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jPrijemkyNaDenDenComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         jZobrazPrijenkyNaDenButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazPrijenkyNaDenButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazPrijenkyNaDenButton1.setText("Zobraz");
         jZobrazPrijenkyNaDenButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +181,8 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jScrollPane2.setViewportView(mainTable);
 
         jspatButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jspatButton1.setText("Spat");
+        jspatButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jspatButton1.setText("Späť");
         jspatButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jspatButton1ActionPerformed(evt);
@@ -222,6 +227,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
         jLabel9.setText("Všetky príjemky:");
 
         jZobrazVsetkyPríjemkyButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVsetkyPríjemkyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVsetkyPríjemkyButton1.setText("Zobraz");
         jZobrazVsetkyPríjemkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +261,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jMesiacComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                                 .addComponent(jZobrazPrijemkyZamesiacButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator2)
                             .addGroup(layout.createSequentialGroup()
@@ -300,7 +306,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +361,7 @@ public class VypisyPrijemkyScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jZobrazVsetkyPríjemkyButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jspatButton1))

@@ -83,7 +83,7 @@ public class zobrazKartuMaterialu extends javax.swing.JFrame {
    {
       DefaultTableModel model = (DefaultTableModel) table.getModel();
      Integer typPohybu = (Integer) model.getValueAt(row,4);
-       System.out.println(typPohybu);
+      // System.out.println(typPohybu);
   
       if (typPohybu == 1) {
          setBackground(new Color(92,255,158));
@@ -146,6 +146,8 @@ public class zobrazKartuMaterialu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pohybyMaterialuTable);
 
+        stornoButton.setBackground(new java.awt.Color(0, 102, 0));
+        stornoButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         stornoButton.setText("Storno");
         stornoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +171,8 @@ public class zobrazKartuMaterialu extends javax.swing.JFrame {
         uzivatelLabel.setForeground(new java.awt.Color(0, 204, 0));
         uzivatelLabel.setText("uzivatel");
 
+        zobrazPohybyPrijemkyButton.setBackground(new java.awt.Color(0, 102, 0));
+        zobrazPohybyPrijemkyButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         zobrazPohybyPrijemkyButton.setText("Zobraz prijemky");
         zobrazPohybyPrijemkyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +180,8 @@ public class zobrazKartuMaterialu extends javax.swing.JFrame {
             }
         });
 
+        zobrazVydajkyPohybyButton.setBackground(new java.awt.Color(0, 102, 0));
+        zobrazVydajkyPohybyButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         zobrazVydajkyPohybyButton.setText("Zobraz vydajky");
         zobrazVydajkyPohybyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

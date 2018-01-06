@@ -116,7 +116,7 @@ public VydajkaDao vydajkaDao;
         jLabel2.setText("Typ pohybu:");
 
         spatButton.setBackground(new java.awt.Color(0, 102, 0));
-        spatButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        spatButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         spatButton.setText("Späť");
         spatButton.setToolTipText("");
         spatButton.addActionListener(new java.awt.event.ActionListener() {

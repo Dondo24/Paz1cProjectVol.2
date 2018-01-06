@@ -129,7 +129,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(materialTable);
 
         potvrdPrijemkuButton.setBackground(new java.awt.Color(0, 102, 0));
-        potvrdPrijemkuButton.setText("Potvrdit");
+        potvrdPrijemkuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        potvrdPrijemkuButton.setText("Potvrdiť");
         potvrdPrijemkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 potvrdPrijemkuButtonActionPerformed(evt);
@@ -137,6 +138,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         });
 
         stornoButton.setBackground(new java.awt.Color(0, 102, 0));
+        stornoButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         stornoButton.setText("Storno");
         stornoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +147,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         });
 
         pridajMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
-        pridajMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pridajMaterialuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         pridajMaterialuButton.setText("Pridaj material");
         pridajMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,8 +172,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         uzivatelLabel.setText("Uzivatel");
 
         vymazPohybMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
-        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        vymazPohybMaterialuButton.setText("Vymaz pohyb");
+        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        vymazPohybMaterialuButton.setText("Vymaž pohyb");
         vymazPohybMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vymazPohybMaterialuButtonActionPerformed(evt);
@@ -317,7 +319,11 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         pohybMaterialu.setPrijemka_id(idPrijemky);
         pohybMaterialu.setCena(cena);
         pohybMaterialu.setVydajka_id(0);
-        System.out.println(pohybMaterialu.getVydajka_id());
+     //   Long idMat
+        pohybMaterialu.setId_materialu(idMaterialu);
+        pohybMaterialu.setId(pohybMaterialuDao.getLastId());
+       // System.out.println(pohybMaterialu.getVydajka_id());
+            System.out.println("Ahoj"+pohybMaterialu.toString());
         /*
         materialDao.upravStavMaterial(idMaterialu, pocet, 1);
         double cenaUpravena = upravCenuMaterialu(idMaterialu, cena, pocet);
@@ -326,7 +332,7 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         pohybMaterialuDao.pridajPohybMaterialuPrijem(pohybMaterialu);        
         DefaultTableModel model= (DefaultTableModel) materialTable.getModel();        
         model.addRow(new Object[]{pohybMaterialuDao.getLastId(),idMaterialu,materialDao.dajMaterialById(idMaterialu).getNazov(),cena,pocet});
-        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)));
+        cenaSpoluTextField.setText(new DecimalFormat("##.##").format(sumaSpolu(model,3,4)).replace(',', '.'));
         }else{
              JOptionPane.showMessageDialog(null, "Material sa nenachadza na sklade");
         }  
@@ -339,9 +345,11 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
         prijemka.setDatum(timeStamp);
         prijemka.setTypPohybu(1L);
         prijemka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
+     //   prijemka.setId(prijemkaDao.getLastId());
         upravCenyMaterialu((DefaultTableModel)materialTable.getModel());
         upravStavMaterialu((DefaultTableModel)materialTable.getModel());
-        prijemkaDao.pridajPrijemka(prijemka);         
+        prijemkaDao.pridajPrijemka(prijemka);     
+        
         MainScreen main = new MainScreen();                       
         main.setVisible(true);
         main.uzivatelLable.setText(this.uzivatelLabel.getText());
@@ -351,6 +359,8 @@ public class VytvorPrijemkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_potvrdPrijemkuButtonActionPerformed
 
     private void stornoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stornoButtonActionPerformed
+        prijemkaDao.odstranPrijemku(prijemkaDao.dajPrijemkuById((long)prijemkaDao.getLastId()));
+//pohybMaterialuDao.odstranPohybMaterialuByPrijemkaId(pohybMaterialuDao.getLastId());
         MainScreen main = new MainScreen();
         main.setVisible(true);
         main.uzivatelLable.setText(this.uzivatelLabel.getText());

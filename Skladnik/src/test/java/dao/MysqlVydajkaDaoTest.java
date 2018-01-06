@@ -92,7 +92,8 @@ public class MysqlVydajkaDaoTest {
     public void testDajDnesneVydajky() {
          test.zmazVsetko();
        test.pridajVydajku(testVydajka);
-        List<Vydajka> vsetky = test.dajDnesneVydajky();
+         long idpouzivatela = testVydajka.getId_pouzivatel();
+        List<Vydajka> vsetky = test.dajDnesneVydajky(idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
     }
 
@@ -102,7 +103,8 @@ public class MysqlVydajkaDaoTest {
         int rok = cal.get(Calendar.YEAR);
         int mesiac = cal.get(Calendar.MONTH)+1;
         test.pridajVydajku(testVydajka);
-        List<Vydajka> vsetky = test.dajVydajkyNaMesiac(mesiac, rok);
+         long idpouzivatela = testVydajka.getId_pouzivatel();
+        List<Vydajka> vsetky = test.dajVydajkyNaMesiac(mesiac, rok,idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
     }
 
@@ -111,7 +113,8 @@ public class MysqlVydajkaDaoTest {
            test.zmazVsetko();
          int rok = cal.get(Calendar.YEAR);
          test.pridajVydajku(testVydajka);
-        List<Vydajka> vsetky = test.dajVydajkyNaRok(rok);
+          long idpouzivatela = testVydajka.getId_pouzivatel();
+        List<Vydajka> vsetky = test.dajVydajkyNaRok(rok,idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
     }
 
@@ -123,7 +126,8 @@ public class MysqlVydajkaDaoTest {
         int den = cal.get(Calendar.DAY_OF_MONTH);
         
         test.pridajVydajku(testVydajka);
-        List<Vydajka> vsetky = test.dajVydajkuNaDatum(rok, mesiac, den);
+         long idpouzivatela = testVydajka.getId_pouzivatel();
+        List<Vydajka> vsetky = test.dajVydajkuNaDatum(rok, mesiac, den,idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
     }
 

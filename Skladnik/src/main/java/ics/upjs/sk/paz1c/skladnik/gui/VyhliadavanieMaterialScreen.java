@@ -102,6 +102,7 @@ private void nastavModelMaterial(){
         NázovMaterialuLabel1.setText("Názov :");
 
         jHladajButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jHladajButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jHladajButton1.setText("Hladaj");
         jHladajButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +114,7 @@ private void nastavModelMaterial(){
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
 
         jSpatButton2.setBackground(new java.awt.Color(0, 102, 0));
+        jSpatButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jSpatButton2.setText("Späť");
         jSpatButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +123,7 @@ private void nastavModelMaterial(){
         });
 
         jPotvrditButton3.setBackground(new java.awt.Color(0, 102, 0));
+        jPotvrditButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPotvrditButton3.setText("Potvrdiť");
         jPotvrditButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +160,7 @@ private void nastavModelMaterial(){
         jLabel3.setText("jLabel3");
 
         jZobrazVšetkyButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jZobrazVšetkyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZobrazVšetkyButton1.setText("Zobraz všetky");
         jZobrazVšetkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +178,7 @@ private void nastavModelMaterial(){
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jSpatButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,8 +257,6 @@ private void nastavModelMaterial(){
             JOptionPane.showMessageDialog(null, "Vyberte material");
         }else{
         if(jLabel3.getText()=="Prijemka"){
-          
-     
           id = IDLabel2.getText();
           prijemkaP.idMaterualuTextField.setText(id);
           prijemkaP.setVisible(true);

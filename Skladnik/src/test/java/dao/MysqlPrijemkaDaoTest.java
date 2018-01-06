@@ -93,7 +93,8 @@ public class MysqlPrijemkaDaoTest {
     public void testDajDnesneOPrijemky() {
         test.ZmazVsetko();
         test.pridajPrijemka(testPrijemka);
-        List<Prijemka> vsetky = test.dajDnesneOPrijemky();
+        long idpouzivatela = testPrijemka.getId_pouzivatel();
+        List<Prijemka> vsetky = test.dajDnesneOPrijemky(idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
 
     }
@@ -104,7 +105,8 @@ public class MysqlPrijemkaDaoTest {
         int rok = cal.get(Calendar.YEAR);
         int mesiac = cal.get(Calendar.MONTH) + 1;
         test.pridajPrijemka(testPrijemka);
-        List<Prijemka> vsetky = test.dajPrijemkyNaMesiac(mesiac, rok);
+           long idpouzivatela = testPrijemka.getId_pouzivatel();
+        List<Prijemka> vsetky = test.dajPrijemkyNaMesiac(mesiac, rok,idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
 
     }
@@ -114,7 +116,8 @@ public class MysqlPrijemkaDaoTest {
         test.ZmazVsetko();
         int rok = cal.get(Calendar.YEAR);
         test.pridajPrijemka(testPrijemka);
-        List<Prijemka> vsetky = test.dajPrijemkyNaRok(rok);
+           long idpouzivatela = testPrijemka.getId_pouzivatel();
+        List<Prijemka> vsetky = test.dajPrijemkyNaRok(rok,idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
 
     }
@@ -127,7 +130,8 @@ public class MysqlPrijemkaDaoTest {
         int den = cal.get(Calendar.DAY_OF_MONTH);
 
         test.pridajPrijemka(testPrijemka);
-        List<Prijemka> vsetky = test.dajPrijemkuNaDatum(rok, mesiac, den);
+           long idpouzivatela = testPrijemka.getId_pouzivatel();
+        List<Prijemka> vsetky = test.dajPrijemkuNaDatum(rok, mesiac, den, idpouzivatela);
         Assert.assertEquals(vsetky.size(), 1);
 
     }

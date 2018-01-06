@@ -39,7 +39,8 @@ public class VypisyScreen extends javax.swing.JFrame {
         jLabel1.setText("Zobrazenie vypisov pre :");
 
         jVydajkyButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jVydajkyButton1.setText("Vydajky");
+        jVydajkyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jVydajkyButton1.setText("Výdajky");
         jVydajkyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVydajkyButton1ActionPerformed(evt);
@@ -47,7 +48,8 @@ public class VypisyScreen extends javax.swing.JFrame {
         });
 
         jPrijemkyButton2.setBackground(new java.awt.Color(0, 102, 0));
-        jPrijemkyButton2.setText("Prijemky");
+        jPrijemkyButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPrijemkyButton2.setText("Príjemky");
         jPrijemkyButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPrijemkyButton2ActionPerformed(evt);
@@ -55,7 +57,8 @@ public class VypisyScreen extends javax.swing.JFrame {
         });
 
         jSpatButton3.setBackground(new java.awt.Color(0, 102, 0));
-        jSpatButton3.setText("Spat");
+        jSpatButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jSpatButton3.setText("Späť");
         jSpatButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSpatButton3ActionPerformed(evt);

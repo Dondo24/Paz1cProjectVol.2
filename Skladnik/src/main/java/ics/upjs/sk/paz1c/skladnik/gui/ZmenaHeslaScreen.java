@@ -61,7 +61,8 @@ public class ZmenaHeslaScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jSpatButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jSpatButton1.setText("Spat");
+        jSpatButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jSpatButton1.setText("Spať");
         jSpatButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSpatButton1ActionPerformed(evt);
@@ -69,7 +70,8 @@ public class ZmenaHeslaScreen extends javax.swing.JFrame {
         });
 
         jZmenitHesloButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jZmenitHesloButton1.setText("Zmenit Heslo");
+        jZmenitHesloButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jZmenitHesloButton1.setText("Zmeniť heslo");
         jZmenitHesloButton1.setPreferredSize(new java.awt.Dimension(75, 33));
         jZmenitHesloButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

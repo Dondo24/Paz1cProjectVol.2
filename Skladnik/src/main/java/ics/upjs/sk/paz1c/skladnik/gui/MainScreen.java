@@ -38,22 +38,19 @@ import javax.swing.table.TableModel;
 public class MainScreen extends javax.swing.JFrame {
 
     PrijemkaDao prijemkaDao = ObjectFactory.INSTANCE.getPrijemkadDao();
-    PouzivatelDao pouzivatelDao =ObjectFactory.INSTANCE.getPouzivatelDao();
+    PouzivatelDao pouzivatelDao = ObjectFactory.INSTANCE.getPouzivatelDao();
     VydajkaDao vydajkaDao = ObjectFactory.INSTANCE.getVydajkaDao();
     MaterialDao materialDao = ObjectFactory.INSTANCE.getMaterialDao();
-    PohybMaterialuDao pohybMaterialuDao=ObjectFactory.INSTANCE.getPohybMaterialuDao();
-    DefaultTableModel tableModel; 
-    String model="";
-    
+    PohybMaterialuDao pohybMaterialuDao = ObjectFactory.INSTANCE.getPohybMaterialuDao();
+    DefaultTableModel tableModel;
+    String model = "";
 
-    
     public MainScreen() {
-        initComponents(); 
-        tableModel = (DefaultTableModel) mainTable.getModel();  
+        initComponents();
+        tableModel = (DefaultTableModel) mainTable.getModel();
         //dokoncit pre inicializaciu aby sa zobrazilo nieco v tabulke
         //naplnTabulkuPrijmi(tableModel, prijemkaDao.getAllByUzivatelId(pouzivatelDao.dajPouzivateloveId(uzivatelLable.getText())));
-       
-        
+
     }
 
     /**
@@ -79,13 +76,13 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        deleteSelectedButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         ukazPrijmiButton.setBackground(new java.awt.Color(0, 102, 0));
-        ukazPrijmiButton.setText("Prijmy");
+        ukazPrijmiButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukazPrijmiButton.setText("Príjmy");
         ukazPrijmiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ukazPrijmiButtonActionPerformed(evt);
@@ -117,6 +114,7 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane2.setViewportView(mainTable);
 
         ukazMaterialButton.setBackground(new java.awt.Color(0, 102, 0));
+        ukazMaterialButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ukazMaterialButton.setText("Material");
         ukazMaterialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +123,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         ukazVydajebutton.setBackground(new java.awt.Color(0, 102, 0));
-        ukazVydajebutton.setText("Vydaje");
+        ukazVydajebutton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukazVydajebutton.setText("Výdaje");
         ukazVydajebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ukazVydajebuttonActionPerformed(evt);
@@ -133,7 +132,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         vytvorVydajkuButton.setBackground(new java.awt.Color(0, 102, 0));
-        vytvorVydajkuButton.setText("Vytvorit vydajku");
+        vytvorVydajkuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        vytvorVydajkuButton.setText("Vytvoriť výdajku");
         vytvorVydajkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vytvorVydajkuButtonActionPerformed(evt);
@@ -141,7 +141,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jPridajKartuMaterialuButton5.setBackground(new java.awt.Color(0, 102, 0));
-        jPridajKartuMaterialuButton5.setText("Pridat kartu materialu");
+        jPridajKartuMaterialuButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPridajKartuMaterialuButton5.setText("Pridať kartu materialu");
         jPridajKartuMaterialuButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPridajKartuMaterialuButton5ActionPerformed(evt);
@@ -149,7 +150,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         vytvorPrijemkuButton.setBackground(new java.awt.Color(0, 102, 0));
-        vytvorPrijemkuButton.setText("Vytvorit prijemku");
+        vytvorPrijemkuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        vytvorPrijemkuButton.setText("Vytvoriť príjemku");
         vytvorPrijemkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vytvorPrijemkuButtonActionPerformed(evt);
@@ -169,7 +171,8 @@ public class MainScreen extends javax.swing.JFrame {
         uzivatelLable.setText("Uzivatel");
 
         jVypisyButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jVypisyButton1.setText("Vypisy");
+        jVypisyButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jVypisyButton1.setText("Výpisy");
         jVypisyButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVypisyButton1ActionPerformed(evt);
@@ -215,14 +218,6 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 7, Short.MAX_VALUE)
         );
 
-        deleteSelectedButton.setBackground(new java.awt.Color(0, 102, 0));
-        deleteSelectedButton.setText("Vymaz oznacene");
-        deleteSelectedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteSelectedButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,17 +243,18 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteSelectedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(247, 247, 247)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(247, 247, 247)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(114, 114, 114)
+                                .addComponent(jPridajKartuMaterialuButton5)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -287,65 +283,60 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jVypisyButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteSelectedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(vytvorPrijemkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(vytvorVydajkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPridajKartuMaterialuButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //TO DO pouzivatel ktory je prihlaseny
     private void vytvorPrijemkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorPrijemkuButtonActionPerformed
-        VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();  
+        VytvorPrijemkuScreen vytvorPrijemkuScreen = new VytvorPrijemkuScreen();
         vytvorPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorPrijemkuScreen.setVisible(true);
         this.setVisible(false);
-         dispose();
-        
-      
-        
+        dispose();
+
+
     }//GEN-LAST:event_vytvorPrijemkuButtonActionPerformed
 
     private void vytvorVydajkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vytvorVydajkuButtonActionPerformed
-        VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();    
+        VytvorVydajkuScreen vytvorVydajkuScreen = new VytvorVydajkuScreen();
         vytvorVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
         vytvorVydajkuScreen.setVisible(true);
         this.setVisible(false);
-     
-       
+
+
     }//GEN-LAST:event_vytvorVydajkuButtonActionPerformed
 
-    
-    
-   
+
     private void ukazPrijmiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazPrijmiButtonActionPerformed
-      Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
-         long idpouzivatela = p.getId(); 
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
+        long idpouzivatela = p.getId();
         Calendar cal = new GregorianCalendar();
         int rok = cal.get(Calendar.YEAR);
-        
-        int mesiac = cal.get(Calendar.MONTH)+1;
+
+        int mesiac = cal.get(Calendar.MONTH) + 1;
         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel(); 
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         naplnTabulkuPrijmi(tableModel, prijemkaDao.dajPrijemkyNaMesiac(mesiac, rok, idpouzivatela));
     }//GEN-LAST:event_ukazPrijmiButtonActionPerformed
 
     private void ukazVydajebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazVydajebuttonActionPerformed
-         Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
-         long idpouzivatela = p.getId(); 
+        Pouzivatel p = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
+        long idpouzivatela = p.getId();
         Calendar cal = new GregorianCalendar();
         int rok = cal.get(Calendar.YEAR);
-        
-        int mesiac = cal.get(Calendar.MONTH)+1;
+
+        int mesiac = cal.get(Calendar.MONTH) + 1;
         nastavModelDefault();
-        tableModel = (DefaultTableModel) mainTable.getModel();         
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         naplnTabulkuVydaje(tableModel, vydajkaDao.dajVydajkyNaMesiac(mesiac, rok, idpouzivatela));
@@ -353,7 +344,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void ukazMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukazMaterialButtonActionPerformed
         nastavModelMaterial();
-        tableModel = (DefaultTableModel) mainTable.getModel();         
+        tableModel = (DefaultTableModel) mainTable.getModel();
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         Pouzivatel aktPouz = pouzivatelDao.dajPouzivatela(uzivatelLable.getText());
@@ -367,193 +358,152 @@ public class MainScreen extends javax.swing.JFrame {
         PKMS.setVisible(true);
         this.setVisible(false);
         //tu asi dispose netreba nie ? 
-      //  dispose();
+        //  dispose();
     }//GEN-LAST:event_jPridajKartuMaterialuButton5ActionPerformed
 
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
-       if(evt.getClickCount()==2){
-       int row = mainTable.getSelectedRow();      
-       TableModel model = mainTable.getModel();
-       String id = model.getValueAt(row, 0).toString();  
-           System.out.println(this.model); 
-      
-       
-                      
-       
-       if(this.model.equals("default")){
-       String typPohybu = model.getValueAt(row, 4).toString(); 
-       if(typPohybu.equals("1")){
-       ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
-       zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
-       zobrazPrijemkuScreen.idScreenTextField.setText(id);
-       zobrazPrijemkuScreen.naplnTabulkuPrijmi();
-       zobrazPrijemkuScreen.setVisible(true);
-       this.setVisible(false);
-      
-       }
+        if (evt.getClickCount() == 2) {
+            int row = mainTable.getSelectedRow();
+            TableModel model = mainTable.getModel();
+            String id = model.getValueAt(row, 0).toString();
+            System.out.println(this.model);
 
-       
-        if(typPohybu.equals("2")){
-       ZobrazPohybScreen zobrazVydajkuScreen = new ZobrazPohybScreen();
-       zobrazVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
-       zobrazVydajkuScreen.idScreenTextField.setText(id);
-       zobrazVydajkuScreen.naplnTabulkuVydaje();
-       zobrazVydajkuScreen.setVisible(true);
-       this.setVisible(false);
-     
-       }
-      }
-         if(this.model.equals("material")){
-         long idMaterialu= (Long) model.getValueAt(row, 0);
-         zobrazKartuMaterialu zobrazKartuMaterialu = new zobrazKartuMaterialu();
-         zobrazKartuMaterialu.idMaterialuTextField.setText(idMaterialu+"");
-         zobrazKartuMaterialu.uzivatelLabel.setText(this.uzivatelLable.getText());
-         zobrazKartuMaterialu.naplnPohybyTable();
-      
-         zobrazKartuMaterialu.setVisible(true);
-         this.setVisible(false);
-         
-         }
+            if (this.model.equals("default")) {
+                String typPohybu = model.getValueAt(row, 4).toString();
+                if (typPohybu.equals("1")) {
+                    ZobrazPohybScreen zobrazPrijemkuScreen = new ZobrazPohybScreen();
+                    zobrazPrijemkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
+                    zobrazPrijemkuScreen.idScreenTextField.setText(id);
+                    zobrazPrijemkuScreen.naplnTabulkuPrijmi();
+                    zobrazPrijemkuScreen.setVisible(true);
+                    this.setVisible(false);
 
-       
-       }
+                }
+
+                if (typPohybu.equals("2")) {
+                    ZobrazPohybScreen zobrazVydajkuScreen = new ZobrazPohybScreen();
+                    zobrazVydajkuScreen.uzivatelLabel.setText(this.uzivatelLable.getText());
+                    zobrazVydajkuScreen.idScreenTextField.setText(id);
+                    zobrazVydajkuScreen.naplnTabulkuVydaje();
+                    zobrazVydajkuScreen.setVisible(true);
+                    this.setVisible(false);
+
+                }
+            }
+            if (this.model.equals("material")) {
+                long idMaterialu = (Long) model.getValueAt(row, 0);
+                zobrazKartuMaterialu zobrazKartuMaterialu = new zobrazKartuMaterialu();
+                zobrazKartuMaterialu.idMaterialuTextField.setText(idMaterialu + "");
+                zobrazKartuMaterialu.uzivatelLabel.setText(this.uzivatelLable.getText());
+                zobrazKartuMaterialu.naplnPohybyTable();
+
+                zobrazKartuMaterialu.setVisible(true);
+                this.setVisible(false);
+
+            }
+
+        }
     }//GEN-LAST:event_mainTableMouseClicked
 
     private void jVypisyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVypisyButton1ActionPerformed
         VypisyScreen VS = new VypisyScreen();
         VS.uzivatelLabel.setText(this.uzivatelLable.getText());
         VS.setVisible(true);
-       this.setVisible(false);
-       dispose();
-        
+        this.setVisible(false);
+        dispose();
+
     }//GEN-LAST:event_jVypisyButton1ActionPerformed
 
-    private void deleteSelectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedButtonActionPerformed
-        int row = mainTable.getSelectedRow();        
-        TableModel model = mainTable.getModel();
-         if(row==-1){
-          JOptionPane.showMessageDialog(null, "Nic nie je oznacene");
-          return;
+    private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi) {
+        for (Prijemka prijemka : prijmi) {
+            model.addRow(new Object[]{prijemka.getId(), prijemka.getCena(), prijemka.getId_pouzivatel(), prijemka.getDatum(), prijemka.getTypPohybu()});
         }
-        long id = (Long) model.getValueAt(row, 0);
-        long typPohybu = (Long) model.getValueAt(row, 4); 
-          if(typPohybu==1){
-              prijemkaDao.odstranPrijemku(prijemkaDao.dajPrijemkuById(id));
-               pohybMaterialuDao.odstranPohybMaterialuByPrijemkaId(id);
-              upravCenyMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id));
-              upravStavMaterialu(pohybMaterialuDao.getAllPohybyByPrijemkaId(id), 2);
-              ukazPrijmiButtonActionPerformed(evt);
-          }
-          if(typPohybu==2){
-          vydajkaDao.odstranVydajku(vydajkaDao.dajVydajkaById(id));
-            pohybMaterialuDao.odstranPohybMaterialuByVydajkaId(id);
-           upravStavMaterialu(pohybMaterialuDao.getAllPohybyByVydajkaId(id), 1);
-              ukazVydajebuttonActionPerformed(evt);
-          }
-    }//GEN-LAST:event_deleteSelectedButtonActionPerformed
+    }
 
-     private void naplnTabulkuPrijmi(DefaultTableModel model, List<Prijemka> prijmi){
-    for(Prijemka prijemka : prijmi){
-       model.addRow(new Object[]{prijemka.getId(),prijemka.getCena(),prijemka.getId_pouzivatel(),prijemka.getDatum(),prijemka.getTypPohybu()});
+    private void naplnTabulkuVydaje(DefaultTableModel model, List<Vydajka> vydajky) {
+        for (Vydajka vydajka : vydajky) {
+            model.addRow(new Object[]{vydajka.getId(), vydajka.getCena(), vydajka.getId_pouzivatel(), vydajka.getDatum(), vydajka.getTyp_pohybu()});
+        }
     }
-    }
-    
- 
-   
-    
-    
-      private void naplnTabulkuVydaje(DefaultTableModel model, List<Vydajka> vydajky){
-    for(Vydajka vydajka : vydajky){
-       model.addRow(new Object[]{vydajka.getId(),vydajka.getCena(),vydajka.getId_pouzivatel(),vydajka.getDatum(),vydajka.getTyp_pohybu()});
-    }
-    }
-  
-       private void naplnTabulkuMaterial(DefaultTableModel model, List<Material> materials){
-          
-        for(Material material : materials){
-      model.addRow(new Object[]{material.getId(),material.getNazov(),material.getStav(),new DecimalFormat("##.##").format(material.getCena()),material.getId_sklad()});
-    }
-    }
-      
-     
-      private void nastavModelMaterial(){
-          model="material";
-          String[] columns = {"id","nazov","stav","cena","id_sklad"};
-          DefaultTableModel model = new DefaultTableModel(columns,0){
-          @Override
-          public boolean isCellEditable(int row, int column){
-          return false;
-          }
-          
-          };  
-          
-            mainTable.setModel(model ); 
-         
-            
 
-      }
-      
-      private void nastavModelDefault(){
-          model="default";
-          String[] columns = {"id","cena","id_pouzivatela","datum","typ_pohybu"};
-            DefaultTableModel model = new DefaultTableModel(columns,0){
-          @Override
-          public boolean isCellEditable(int row, int column){
-          return false;
-          }
-          
-          };
-            mainTable.setModel(model); 
-      }
-      
-      public void upravStavMaterialu(List<PohybMaterialu> pohyby,int typPohybu){
-      long idMaterialu;
-     double pocet;         
-     for (int i = 0 ; i < pohyby.size() ; i++) {
-        idMaterialu =  pohyby.get(i).getId_materialu();
-        pocet = pohyby.get(i).getPocet();
-           materialDao.upravStavMaterial(idMaterialu, pocet,typPohybu);    
-          
-    } 
-    
-  
+    private void naplnTabulkuMaterial(DefaultTableModel model, List<Material> materials) {
+
+        for (Material material : materials) {
+            model.addRow(new Object[]{material.getId(), material.getNazov(), material.getStav(), new DecimalFormat("##.##").format(material.getCena()), material.getId_sklad()});
+        }
     }
-      
-      
-      
-      public void upravCenyMaterialu(List<PohybMaterialu> pohyby){ 
-      long idMaterialu;
-      double pocet;
-      double cena;
-    for (int i = 0 ; i < pohyby.size() ; i++) {
-        idMaterialu =  pohyby.get(i).getId_materialu();
-        pocet = pohyby.get(i).getPocet();
-        cena = pohyby.get(i).getCena();
-        materialDao.upravCenuMaterialu(idMaterialu, upravCenuMaterialu(idMaterialu, cena, pocet));       
-    }  
+
+    private void nastavModelMaterial() {
+        model = "material";
+        String[] columns = {"id", "nazov", "stav", "cena", "id_sklad"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+
+        mainTable.setModel(model);
+
     }
-      
-      public double upravCenuMaterialu(long idMaterialu, double cena, double pocet){    
-    double cenaPoUprave =0;
-    double sucetPoctov = 0;
-    double sucetSucinov = 0;
-    List<PohybMaterialu> pohyby = pohybMaterialuDao.getPohybyByMaterialId(idMaterialu);
-    for(PohybMaterialu pohyb : pohyby){
-        System.out.println(pohyb.toString());
-       sucetSucinov += (pohyb.getCena()*pohyb.getPocet());
-       sucetPoctov += pohyb.getPocet();    
+
+    private void nastavModelDefault() {
+        model = "default";
+        String[] columns = {"id", "cena", "id_pouzivatela", "datum", "typ_pohybu"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+        mainTable.setModel(model);
     }
-    sucetSucinov += cena*pocet;
-    sucetPoctov +=pocet;
-    
-    cenaPoUprave=sucetSucinov/sucetPoctov;
-    
-    
-    return cenaPoUprave;
-    
+
+    public void upravStavMaterialu(List<PohybMaterialu> pohyby, int typPohybu) {
+        long idMaterialu;
+        double pocet;
+        for (int i = 0; i < pohyby.size(); i++) {
+            idMaterialu = pohyby.get(i).getId_materialu();
+            pocet = pohyby.get(i).getPocet();
+            materialDao.upravStavMaterial(idMaterialu, pocet, typPohybu);
+
+        }
+
     }
-      
-      
+
+    public void upravCenyMaterialu(List<PohybMaterialu> pohyby) {
+        long idMaterialu;
+        double pocet;
+        double cena;
+        for (int i = 0; i < pohyby.size(); i++) {
+            idMaterialu = pohyby.get(i).getId_materialu();
+            pocet = pohyby.get(i).getPocet();
+            cena = pohyby.get(i).getCena();
+            materialDao.upravCenuMaterialu(idMaterialu, upravCenuMaterialu(idMaterialu, cena, pocet));
+        }
+    }
+
+    public double upravCenuMaterialu(long idMaterialu, double cena, double pocet) {
+        double cenaPoUprave = 0;
+        double sucetPoctov = 0;
+        double sucetSucinov = 0;
+        List<PohybMaterialu> pohyby = pohybMaterialuDao.getPohybyByMaterialId(idMaterialu);
+        for (PohybMaterialu pohyb : pohyby) {
+            System.out.println(pohyb.toString());
+            sucetSucinov += (pohyb.getCena() * pohyb.getPocet());
+            sucetPoctov += pohyb.getPocet();
+        }
+        sucetSucinov += cena * pocet;
+        sucetPoctov += pocet;
+
+        cenaPoUprave = sucetSucinov / sucetPoctov;
+
+        return cenaPoUprave;
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -591,7 +541,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deleteSelectedButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

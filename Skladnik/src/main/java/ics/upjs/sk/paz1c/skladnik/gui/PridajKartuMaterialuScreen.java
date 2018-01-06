@@ -47,6 +47,7 @@ public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPridajMaterialButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jPridajMaterialButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPridajMaterialButton1.setText("Pridaj material");
         jPridajMaterialButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +56,7 @@ public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
         });
 
         jZrusitPridavanieButton2.setBackground(new java.awt.Color(0, 102, 0));
+        jZrusitPridavanieButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jZrusitPridavanieButton2.setText("Zrušiť");
         jZrusitPridavanieButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +98,7 @@ public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(jPridajMaterialButton1)))
                     .addComponent(uzivatelLabel))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +149,7 @@ public class PridajKartuMaterialuScreen extends javax.swing.JFrame {
              Pouzivatel p = new Pouzivatel();
              p = pouzivatel.dajPouzivatela(uzivatelLabel.getText());
              Long idskladu = p.getId_sklad();
-             novyMaterial.setStav(0);
+             novyMaterial.setStav(1);
               novyMaterial.setId_sklad(idskladu);
              material.pridajMaterial(novyMaterial);
              JOptionPane.showMessageDialog(null, "Pridanie bolo uspesne");

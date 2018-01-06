@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.runtime.regexp.joni.EncodingHelper;
 
 /**
  *
@@ -117,7 +118,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(materialTable);
 
         potvrdVydajkuButton.setBackground(new java.awt.Color(0, 102, 0));
-        potvrdVydajkuButton.setText("Potvrdit");
+        potvrdVydajkuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        potvrdVydajkuButton.setText("Potvrdiť");
         potvrdVydajkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 potvrdVydajkuButtonActionPerformed(evt);
@@ -125,6 +127,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         });
 
         stornoButton.setBackground(new java.awt.Color(0, 102, 0));
+        stornoButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         stornoButton.setText("Storno");
         stornoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +136,9 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         });
 
         pridajMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
+        pridajMaterialuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         pridajMaterialuButton.setText("Pridaj material");
+        pridajMaterialuButton.setActionCommand("Pridať material");
         pridajMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pridajMaterialuButtonActionPerformed(evt);
@@ -160,8 +165,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         uzivatelLabel.setText("Uzivatel");
 
         vymazPohybMaterialuButton.setBackground(new java.awt.Color(0, 102, 0));
-        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        vymazPohybMaterialuButton.setText("Vymaz pohyb");
+        vymazPohybMaterialuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        vymazPohybMaterialuButton.setText("Vymaž pohyb");
         vymazPohybMaterialuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vymazPohybMaterialuButtonActionPerformed(evt);
@@ -175,24 +180,20 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cenaLabel)
-                                    .addComponent(pocetLabel)
-                                    .addComponent(idMaterialuLabel))
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                    .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(cenaLabel)
+                            .addComponent(pocetLabel)
+                            .addComponent(idMaterialuLabel))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(idMaterualuTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(pocetTextField, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(pridajMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vymazPohybMaterialuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -288,8 +289,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         long idSkladuMaterialu = pridavanyMaterial.getId_sklad();
       
         double cena = materialDao.dajMaterialById(idMaterialu).getCena();
-       System.out.println(idSkladuMaterialu);
-         System.out.println(idSkladuPouzivatela);
+    
         if(idSkladuMaterialu==idSkladuPouzivatela){
         PohybMaterialu pohybMaterialu = new PohybMaterialu();
        if(materialDao.dajVsetkyId().contains(idMaterialu)){
@@ -326,6 +326,8 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
         vydajka.setId_pouzivatel(p.getId());     
         vydajka.setDatum(timeStamp);  
         vydajka.setTyp_pohybu(2L);
+       // vydajka.setId(vydajkaDao.getLastId());
+      
         vydajka.setCena(Double.parseDouble(cenaSpoluTextField.getText()));
         upravStavMaterialu((DefaultTableModel)materialTable.getModel());
         vydajkaDao.pridajVydajku(vydajka); 
@@ -341,6 +343,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_potvrdVydajkuButtonActionPerformed
 
     private void stornoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stornoButtonActionPerformed
+        vydajkaDao.odstranVydajku(vydajkaDao.dajVydajkaById((long)vydajkaDao.getLastId()));
         MainScreen main = new MainScreen();
         main.setVisible(true);
         main.uzivatelLable.setText(this.uzivatelLabel.getText());
@@ -371,6 +374,7 @@ public class VytvorVydajkuScreen extends javax.swing.JFrame {
            VMS.jLabel3.setText("Vydajka");
            VMS.setVisible(true);
            this.setVisible(false);
+       }
       //     dispose();
     }//GEN-LAST:event_idMaterualuTextFieldMouseClicked
 
